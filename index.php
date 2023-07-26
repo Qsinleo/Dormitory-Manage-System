@@ -19,14 +19,12 @@
         <h1 class="title">
             DMS 宿舍管理系统
         </h1>
-        <table>
-            <?php
-            $con = mysqli_connect("localhost", "root", database: "dms-data");
-            echo mysqli_num_rows(mysqli_query($con, "SELECT * FROM `rooms` WHERE status='empty'"));
-            ?>
-        </table>
-        <button>登录</button>
-        <button>注册</button>
+        <?php
+        $con = mysqli_connect("localhost", "root", database: "dms-data");
+        echo mysqli_num_rows(mysqli_query($con, "SELECT * FROM `rooms` WHERE status='empty'"));
+        ?>
+        <button onclick="location.href = 'login.php'">登录</button>
+        <button onclick="location.href = 'register.php'">注册</button>
     </div>
     <script src="./js/isNotSupportedBrower.js"></script>
 </body>
