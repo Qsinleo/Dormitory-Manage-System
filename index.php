@@ -29,11 +29,32 @@ require_once "mysqlConnect.php";
         <h1 class="title">
             DMS 宿舍管理系统
         </h1>
-        <?php
-        echo mysqli_num_rows(mysqli_query($con, "SELECT * FROM `rooms` WHERE status='empty'"));
-        ?>
         <button onclick="location.href = 'login.php'">登录</button>
         <button onclick="location.href = 'register.php'">注册</button>
+        <div id="rooms">
+            <div id="remain">
+                <div style="text-align:center;margin-top:70px;">
+                    剩余房间:
+                    <div id="remainNum">
+                        <?php
+                        $con = mysqli_connect("localhost", "root", password: "123456", database: "dms-data");
+                        echo mysqli_num_rows(mysqli_query($con, "SELECT * FROM `rooms` WHERE status='empty'"));
+                        ?>
+                    </div>
+                </div>
+
+            </div>
+            <div id="total">
+                <div style="text-align:center;margin-top:70px;">
+                    房间总数:
+                    <div id="totalNum">
+                        <?php
+                        echo mysqli_num_rows(mysqli_query($con, "SELECT * FROM `rooms`"));
+                        ?>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <script>
         var remain = document.getElementById("remainNum");
