@@ -7,3 +7,9 @@ h1 {
     font-size: 2.5em;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+
+table,
+td {
+    border: 1px solid;
+    border-collapse: collapse;
+}
