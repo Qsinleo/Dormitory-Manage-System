@@ -9,15 +9,17 @@ require_once "mysqlConnect.php";
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DMS - 宿舍管理系统</title>
+    <!--- Link CSS --->
     <link rel="stylesheet" href="./css/homepage.css">
     <link rel="stylesheet" href="./css/notSupportedBrowserAlert.css">
     <link rel="stylesheet" href="./css/nav.css">
 </head>
 
 <body>
+    <!--- Nav --->
     <iframe src="/nav/index.html" frameborder="0" style="height:48px;width:100vw;" id="main-nav" scrolling="no"></iframe>
     <div id="main">
-
+        <!--- NSBA --->
         <div id="notSupportedBrowerAlert">
             <h1 id="NSBA-title">警告:您正在使用不被支持的浏览器</h1>
             <div id="NSBA-SupportedBrowsersList">请使用IE9+,Firefox3.5+,Chrome4+,Safari3+,Opera10+,iOS Mobile
@@ -53,6 +55,7 @@ require_once "mysqlConnect.php";
             </div>
         </div>
     </div>
+    <!--- Scripts Below --->
     <script>
         var remain = document.getElementById("remainNum");
         var total = document.getElementById("totalNum");
