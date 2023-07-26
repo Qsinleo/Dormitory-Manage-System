@@ -18,12 +18,15 @@ require_once "mysqlConnect.php";
             <label>真实姓名：<input name="real-name" maxlength="8" /></label>
             <label>邮箱：<input name="email" type="email" maxlength="40" required />
             </label>
-            <label>密码：<input name="password" type="password" placeholder="留空以使用无密码账户"></label>
+            <label>密码：<input name="password" type="password" required /></label>
         </fieldset>
         <fieldset>
             <label>工作部门：
                 <!-- 长度100% -->
                 <input name="department" />
+            </label>
+            <label>工号：
+                <input name="workid" type="number" />
             </label>
         </fieldset>
         <input type="hidden" name="type" value="register" />

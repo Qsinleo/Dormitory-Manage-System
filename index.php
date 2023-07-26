@@ -42,7 +42,6 @@ require_once "mysqlConnect.php";
                         ?>
                     </div>
                 </div>
-
             </div>
             <div id="total">
                 <div style="text-align:center;margin-top:70px;">
