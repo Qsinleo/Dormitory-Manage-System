@@ -1,0 +1,118 @@
+* {
+  margin: 0;
+  padding: 0;
+  /* 去掉默认的内外边距 */
+  box-sizing: border-box;
+  /* 告诉浏览器：你想要设置的边框的值包含在width内的*/
+}
+body {
+  width: 100vw;
+  height: 100vh;
+  /* body铺满整个视口 */
+  background-color: #333;
+  /* 设置一个背景颜色防止图片加载不出来导致没有背景 */
+  background-image: var(--bground-url);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  /* 图片位置居中，大小适应宽高，不重复 */
+}
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,500;1,400&display=swap");
+/* 引入谷歌字体 */
+html {
+  font-size: 62.5%;
+  font-size: "Roboto", sans-serif, Arial, Helvetica; /*设置字体*/
+}
+li {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+  /* 去掉a标签默认样式 */
+}
+.header {
+  border-bottom: 1px solid #e2e8f0;
+}
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  background-color: #fff;
+}
+.hamburger {
+  display: none;
+}
+.bar {
+  display: block;
+  width: 25px;
+  height: 3px;
+  margin: 5px auto;
+  transition: all 0.3s ease-in-out;
+  /*设置个过渡动画*/background-color: #101010;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+}
+.nav-menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.nav-item {
+  margin-left: 5rem;
+}
+.nav-link {
+  font-size: 1.6rem;
+  font-weight: 400;
+  color: #475569;
+}
+.nav-link:hover {
+  color: #482ff7;
+}
+.nav-logo {
+  font-size: 2.1rem;
+  font-weight: 500;
+  color: #482ff7;
+}
+@media only screen and (max-width:600px) {
+  /* 媒体查询用于根据宽度匹配布局 */
+  .hamburger{
+    display: block;
+    cursor: pointer;
+  }
+  .nav-menu{
+    position: fixed;
+    left: -100%;
+    top: 5rem;
+    flex-direction: column;
+    /* 纵向布局 */
+    background-color: #fff;
+    width: 100%;
+    border-radius: 10px;
+    text-align: center;
+    /* 文本居中 */
+    transition: all .3s;
+    /* 过渡 */
+    box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+
+  }
+  .nav-menu.active{
+    left: 0;
+  }
+  .nav-item{
+    margin: 2.5rem 0;
+  }
+
+}
+.hamburger.active .bar:nth-child(2){
+opacity: 0;
+}
+.hamburger.active .bar:nth-child(1){
+transform: translateY(8px) rotate(45deg);
+}
+.hamburger.active .bar:nth-child(3){
+transform: translateY(-8px) rotate(-45deg);
+
+}
