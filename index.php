@@ -14,9 +14,9 @@
         <div id="notSupportedBrowerAlert">
             <h1 id="NSBA-title">警告:您正在使用不被支持的浏览器</h1>
             <div id="NSBA-SupportedBrowsersList">请使用IE9+,Firefox3.5+,Chrome4+,Safari3+,Opera10+,iOS Mobile Safari4.2+</div>
-            <button id="NSBA-canel">忽略警告</button>
+            <div style="text-align: center;"><button id="NSBA-canel">忽略警告</button></div>
         </div>
-        <h1>
+        <h1 class="title">
             DMS 宿舍管理系统
         </h1>
         <table>
@@ -25,8 +25,8 @@
             echo mysqli_num_rows(mysqli_query($con, "SELECT * FROM `rooms` WHERE status='empty'"));
             ?>
         </table>
-        <a href="login.php">登录</a>
-        <a href="register.php">注册</a>
+        <button>登录</button>
+        <button>注册</button>
     </div>
     <script src="./js/isNotSupportedBrower.js"></script>
 </body>
