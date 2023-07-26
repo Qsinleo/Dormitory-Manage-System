@@ -1,3 +1,7 @@
+<?php
+require_once "mysqlConnect.php";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,7 +30,6 @@
             DMS 宿舍管理系统
         </h1>
         <?php
-        $con = mysqli_connect("localhost", "root", database: "dms-data");
         echo mysqli_num_rows(mysqli_query($con, "SELECT * FROM `rooms` WHERE status='empty'"));
         ?>
         <button onclick="location.href = 'login.php'">登录</button>
