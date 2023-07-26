@@ -1,0 +1,20 @@
+#notSupportedBrowerAlert{
+    /* display: none; */
+    left: 0px;
+    top:20%;
+    width: 100%;
+    height: 350px;
+    background-color: rgb(156, 26, 26);
+    position: absolute;
+}
+
+#NSBA-title{
+    margin-top: 75px;
+    text-align: center;
+    font-size: 250%;
+}
+
+#NSBA-SupportedBrowsersList{
+    text-align: center;
+    margin-top: 50px;
+}
