@@ -1,18 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
-
-header{
-    height: 20%;
+#main-nav{
     position: absolute;
-    margin: 0;
-    top:0;
+    top: 0;
     left: 0;
-    width: 100%;
-    background-color: rgb(113, 165, 255);
-}
-header div{
-    font-family: "Montserrat",sans-serif;
-    top:25%;
-    font-size: 3em;
-    position: absolute;
-    left: 50px;
 }
