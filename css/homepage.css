@@ -2,14 +2,52 @@ body {
     background-color: rgb(139, 195, 255);
 }
 
+#main{
+    margin-top: 8.5%;
+}
+
 h1 {
     text-align: center;
     font-size: 2.5em;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-table,
-td {
-    border: 1px solid;
-    border-collapse: collapse;
+#rooms {
+    margin-top: 100px;
+    text-align: center;
+    margin: auto;
+}
+
+#remain {
+    margin-top: 100px;
+    display: inline-block;
+    text-align: center;
+    width: 150px;
+    background-color: rgb(186, 255, 181);
+    height: 150px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    padding: auto;
+    -o-border-radius: 5px;
+    vertical-align: top;
+}
+
+#total {
+    margin-top: 100px;
+    display: inline-block;
+    text-align: center;
+    width: 150px;
+    background-color: rgb(186, 255, 181);
+    /* background-color: rgb(255, 222, 181);
+    background-color: rgb(255, 181, 181); */
+    height: 150px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    padding: auto;
+    -o-border-radius: 5px;
+    vertical-align: top;
 }
