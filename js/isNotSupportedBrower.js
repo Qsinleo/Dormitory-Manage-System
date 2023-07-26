@@ -56,5 +56,11 @@ if (
     document.getElementById("notSupportedBrowerAlert").style.display="";
 }
 
-console.log("浏览器版本: " + browserVersion);
-console.log("浏览器内核: " + browserEngine);
+// console.log("浏览器版本: " + browserVersion);
+// console.log("浏览器内核: " + browserEngine);
+
+var buttonCanel=document.getElementById("NSBA-canel");
+// console.log(buttonCanel);
+buttonCanel.onclick=() => {
+  document.getElementById("notSupportedBrowerAlert").style.display="none";
+}
