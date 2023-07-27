@@ -9,35 +9,52 @@ require_once "mysqlConnect.php";
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="css/register.css">
 </head>
 
 <body>
     <h1>注册</h1>
     <form action="proceed.php" method="post">
-        <fieldset>
-            <label>真实姓名：<input name="real-name" maxlength="8" /></label>
-            <label>邮箱：<input name="email" type="email" maxlength="40" required />
-            </label>
-            <label>密码：<input name="password" type="password" required /></label>
-        </fieldset>
-        <fieldset>
-            <label>工作部门：
-                <!-- 长度100% -->
-                <input name="department" />
-            </label>
-            <label>工号：
-                <input name="workid" type="number" />
-            </label>
-        </fieldset>
-        <fieldset>
-            <select>
-                <option value="staff" selected>员工</option>
-                <option value="admin">中级管理员</option>
-            </select>
-        </fieldset>
+        <table>
+            <tr>
+                <td>真实姓名：</td>
+                <td><input name="real-name" maxlength="8" /></td>
+            </tr>
+            <tr>
+                <td>邮箱：</td>
+                <td><input name="email" type="email" maxlength="40" required /></td>
+            </tr>
+            <tr>
+                <td>密码：</td>
+                <td><input name="password" type="password" required /></td>
+            </tr>
+            <tr>
+                <td>工作部门：</td>
+                <td><input name="department" /></td>
+            </tr>
+            <tr>
+                <td>工号：</td>
+                <td><input name="workid" type="number" /></td>
+            </tr>
+            <tr>
+                <td>
+                    身份：
+                </td>
+                <td><select>
+                        <option value="staff" selected>员工</option>
+                        <option value="admin">中级管理员</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="submit" />
+                </td>
+            </tr>
+        </table>
         <input type="hidden" name="type" value="register" />
-        <input type="submit" />
     </form>
 </body>
+<script src="js/required.js"></script>
 
 </html>
