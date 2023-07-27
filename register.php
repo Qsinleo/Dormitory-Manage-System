@@ -40,7 +40,7 @@ require_once "mysqlConnect.php";
                 <td>
                     身份：
                 </td>
-                <td><select>
+                <td><select name="access">
                         <option value="staff" selected>员工</option>
                         <option value="admin">中级管理员</option>
                     </select>

@@ -14,7 +14,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 ($_REQUEST["workid"] == "" ? "NULL" : $_REQUEST["workid"]) .
                 ",'" .
                 $_REQUEST["department"] .
-                "','staff',NULL,NULL)"
+                "','" .
+                $_REQUEST["access"] .
+                "',NULL,NULL)"
         );
     }
 }
