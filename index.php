@@ -1,5 +1,6 @@
 <?php
 require_once "mysqlConnect.php";
+session_start();
 ?>
 
 <!DOCTYPE html>
@@ -51,12 +52,33 @@ require_once "mysqlConnect.php";
                     </div>
                 </div>
             </div>
-            <div id="book" class="buttons">
-                预定房间
-            </div>
-            <div id="checkout" class="buttons">
-                退还房间
-            </div>
+            <?php
+            /*
+            0：访客
+            1：员工
+            2：中级管理员
+            3：系统管理员
+            */
+            if ($_SESSION["loginas"] != 0) {
+            ?>
+                <div id="book" class="buttons">
+                    预定房间
+                </div>
+                <div id="checkout" class="buttons">
+                    退还房间
+                </div>
+            <?php
+            } else {
+            ?>
+                <div id="login" class="buttons">
+                    登录
+                </div>
+                <div id="register" class="buttons">
+                    注册
+                </div>
+            <?php
+            }
+            ?>
         </div>
     </div>
     <!--- Scripts Below --->
