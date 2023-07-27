@@ -36,7 +36,6 @@ require_once "mysqlConnect.php";
                     剩余房间:
                     <div id="remainNum">
                         <?php
-                        $con = mysqli_connect("localhost", "root", password: "123456", database: "dms-data");
                         echo mysqli_num_rows(mysqli_query($con, "SELECT * FROM `rooms` WHERE status='empty'"));
                         ?>
                     </div>
