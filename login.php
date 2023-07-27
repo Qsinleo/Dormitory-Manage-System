@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,13 +13,19 @@
 
 <body>
     <h1>登录</h1>
-    <form action="manage.php" method="post" target="_blank">
-        <label>邮箱：
-            <input type="email" required />
-        </label>
-        <label>密码：
-            <input type="password" required />
-        </label>
+    <div class="error"><?php if ($_SESSION["loginas"] != null && $_SESSION["loginas"] == "failed") echo "登录失败，账号或密码错误"; ?></div>
+    <form action="proceed.php" method="post">
+        <table>
+            <tr>
+                <td>邮箱：</td>
+                <td><input type="email" required name="mail" /></td>
+            </tr>
+            <tr>
+                <td>密码：</td>
+                <td><input type="password" required name="password" /></td>
+            </tr>
+        </table>
+        <input type="hidden" value="login" name="type" />
         <input type="submit" />
     </form>
 </body>
