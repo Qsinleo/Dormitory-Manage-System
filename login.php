@@ -10,12 +10,17 @@
 <body>
     <h1>登录</h1>
     <form action="manage.php" method="post" target="_blank">
-        <label>邮箱：
-            <input type="email" required />
-        </label>
-        <label>密码：
-            <input type="password" required />
-        </label>
+        <table>
+            <tr>
+                <td>邮箱：</td>
+                <td><input type="email" required name="mail" /></td>
+            </tr>
+            <tr>
+                <td>密码：</td>
+                <td><input type="password" required name="password" /></td>
+            </tr>
+        </table>
+        <input type="hidden" value="login" name="type" />
         <input type="submit" />
     </form>
 </body>

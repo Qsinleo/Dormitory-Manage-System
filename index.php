@@ -54,12 +54,12 @@ session_start();
             </div>
             <?php
             /*
-            0：访客
+            null：访客
             1：员工
             2：中级管理员
             3：系统管理员
             */
-            if ($_SESSION["loginas"] != 0) {
+            if (array_key_exists("loginas", $_SESSION)) {
             ?>
                 <div id="book" class="buttons">
                     预定房间
