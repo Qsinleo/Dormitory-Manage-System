@@ -9,7 +9,7 @@ body {
   width: 100vw;
   height: 100vh;
   /* body铺满整个视口 */
-  background-color: #333;
+  background-color: rgba(0, 0, 0, 0);
   /* 设置一个背景颜色防止图片加载不出来导致没有背景 */
   background-image: var(--bground-url);
   background-position: center;
@@ -109,8 +109,7 @@ a {
 .hamburger.active .bar:nth-child(2){
 opacity: 0;
 }
-.hamburger.active .bar:nth-child(1){
-transform: translateY(8px) rotate(45deg);
+.hamburger.active .bar:nth-child(1){ transform: translateY(8px) rotate(45deg); -webkit-transform: translateY(8px) rotate(45deg); -moz-transform: translateY(8px) rotate(45deg); -ms-transform: translateY(8px) rotate(45deg); -o-transform: translateY(8px) rotate(45deg);
 }
 .hamburger.active .bar:nth-child(3){
 transform: translateY(-8px) rotate(-45deg);

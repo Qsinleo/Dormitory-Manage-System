@@ -18,7 +18,18 @@ session_start();
 
 <body>
     <!--- Nav --->
-    <iframe src="/nav/index.html" frameborder="0" style="height:48px;width:100vw;" id="main-nav" scrolling="no"></iframe>
+    <?php
+    if ($_SESSION["loginas"] != 0) {
+    ?>
+    <iframe src="/nav/index-login.html" frameborder="0" style="height:48px;width:100vw;" id="main-nav" scrolling="no"></iframe>
+    <?php
+    }else{
+    ?>
+    <iframe src="/nav/index-logout.html" frameborder="0" style="height:48px;width:100vw;" id="main-nav" scrolling="no"></iframe>
+    <?php
+    }
+    ?>
+    
     <div id="main">
         <!--- NSBA --->
         <div id="notSupportedBrowerAlert">
@@ -70,10 +81,10 @@ session_start();
             <?php
             } else {
             ?>
-                <div id="login" class="buttons">
+                <div id="login" onclick='document.location="/login.php"' class="buttons">
                     登录
                 </div>
-                <div id="register" class="buttons">
+                <div id="register" onclick='document.location="/register.php"' class="buttons">
                     注册
                 </div>
             <?php

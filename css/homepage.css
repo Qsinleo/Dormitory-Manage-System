@@ -17,7 +17,6 @@ h1 {
     margin-top: 100px;
     text-align: center;
     margin: auto;
-    scale:1.15;
 }
 
 #remain {
@@ -59,7 +58,7 @@ h1 {
     place-items: center;
     width: 300px;
     height: 50px;
-    background-color: #55c9ff;
+    background-color: #e1f1ef;
     font-family: "Roboto", sans-serif, Arial, Helvetica;
     text-align: center;
     margin-left: auto;
@@ -71,5 +70,25 @@ h1 {
     -moz-border-radius: 10px;
     -ms-border-radius: 10px;
     -o-border-radius: 10px;
-    
+    transition: .25s ;
+    -webkit-transition: .25s ;
+    -moz-transition: .25s ;
+    -ms-transition: .25s ;
+    -o-transition: .25s ;
+}
+
+.buttons:hover{
+    background-color: #408d86;
+}
+
+.buttons:active{
+    transform: scale(0.95);
+    -webkit-transform: scale(0.95);
+    -moz-transform: scale(0.95);
+    -ms-transform: scale(0.95);
+    -o-transform: scale(0.95);
+}
+
+body{
+    overflow: hidden;
 }
