@@ -29,6 +29,12 @@ require_once "mysqlConnect.php";
                 <input name="workid" type="number" />
             </label>
         </fieldset>
+        <fieldset>
+            <select>
+                <option value="staff" selected>员工</option>
+                <option value="admin">中级管理员</option>
+            </select>
+        </fieldset>
         <input type="hidden" name="type" value="register" />
         <input type="submit" />
     </form>

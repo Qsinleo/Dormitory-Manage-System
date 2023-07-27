@@ -1,2 +1,2 @@
 <?php
-$con = mysqli_connect("localhost", "root", password:"123456", database: "dms-data");
+$con = mysqli_connect("72.44.78.124", "dms", password: "dms", database: "dms-data");
