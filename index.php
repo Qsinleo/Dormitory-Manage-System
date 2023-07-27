@@ -1,6 +1,12 @@
 <?php
 require_once "mysqlConnect.php";
 session_start();
+if (!array_key_exists("loginas", $_SESSION)) {
+    $_SESSION["loginas"] = null;
+}
+if (!array_key_exists("loginid", $_SESSION)) {
+    $_SESSION["loginid"] = null;
+}
 ?>
 
 <!DOCTYPE html>
@@ -55,11 +61,8 @@ session_start();
             <?php
             /*
             null：访客
-            1：员工
-            2：中级管理员
-            3：系统管理员
             */
-            if (array_key_exists("loginas", $_SESSION)) {
+            if ($_SESSION["loginas"] != null) {
             ?>
                 <div id="book" class="buttons">
                     预定房间

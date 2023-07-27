@@ -1,5 +1,8 @@
 <?php
 session_start();
+if (!(array_key_exists("loginas", $_SESSION)) || $_SESSION["loginas"] == "failed") {
+    header("Location: index.php");
+}
 require_once "mysqlConnect.php";
 function data_uri($contents, $mime)
 {
@@ -20,9 +23,7 @@ function data_uri($contents, $mime)
     <div>
         <h2>我的账号</h2>
         <?php
-        var_dump($_SESSION);
         $userinfo = mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM `users` where id=" . $_SESSION["loginid"]));
-        var_dump($userinfo);
         if ($userinfo["actived"] == 0) {
         ?>
             <div class="non-actived">您的帐户尚未被批准！</div>
@@ -38,10 +39,18 @@ function data_uri($contents, $mime)
                             echo "<img src='" . data_uri($userinfo["header"], "image/png") . "' />";
                         }
                         ?></td>
-                    <td><?php echo $userinfo["name"] ?></td>
+                    <td><?php echo $userinfo["realname"] ?></td>
                 </tr>
                 <tr>
-                    <td><?php ?></td>
+                    <td><?php
+                        if ($_SESSION["loginas"] == "staff") {
+                            echo "员工";
+                        } elseif ($_SESSION["loginas"] == "admin") {
+                            echo "管理员";
+                        } else {
+                            echo "系统管理员";
+                        }
+                        ?></td>
                     <td><?php ?></td>
                 </tr>
                 <tr>
@@ -52,6 +61,9 @@ function data_uri($contents, $mime)
         <?php
         }
         ?>
+        <form action="proceed.php" method="post">
+            <input type="submit" name="delete-account" value="删除账户" />
+        </form>
     </div>
 </body>
 
