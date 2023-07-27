@@ -52,6 +52,12 @@ require_once "mysqlConnect.php";
                     </div>
                 </div>
             </div>
+            <div id="book" class="buttons">
+                预定房间
+            </div>
+            <div id="checkout" class="buttons">
+                退还房间
+            </div>
         </div>
     </div>
     <!--- Scripts Below --->
