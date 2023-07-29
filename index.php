@@ -38,10 +38,15 @@ if (!array_key_exists("loginid", $_SESSION)) {
     ?>
 
     <div id="main">
-        <h1 class="title">
-            DMS 宿舍管理系统
-        </h1>
-        <div id="rooms">
+        <section id="title">
+            <div style="scale:0.5;"><span class="st">D</span>ormitory
+                &nbsp;<span class="st">M</span>anage
+                &nbsp;<span class="st">S</span>ystem</div>
+
+        </section>
+        <section id="rooms">
+            <span
+                style="text-align:center;display:block;font-size:2em;font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">房间</span>
             <div id="remain">
                 <div style="text-align:center;margin-top:70px;">
                     剩余房间:
@@ -62,31 +67,32 @@ if (!array_key_exists("loginid", $_SESSION)) {
                     </div>
                 </div>
             </div>
-        </div>
-        <?php
-        /*
-        null：访客
-        */
-        if ($_SESSION["loginas"] != null) {
+            <?php
+            /*
+            null：访客
+            */
+            if ($_SESSION["loginas"] != null) {
+                ?>
+            <div id="book" class="buttons">
+                预定房间
+            </div>
+            <div id="checkout" class="buttons">
+                退还房间
+            </div>
+            <?php
+            } else {
+                ?>
+            <div id="login" onclick='document.location="/login.php"' class="buttons">
+                登录
+            </div>
+            <div id="register" onclick='document.location="/register.php"' class="buttons">
+                注册
+            </div>
+            <?php
+            }
             ?>
-        <div id="book" class="buttons">
-            预定房间
-        </div>
-        <div id="checkout" class="buttons">
-            退还房间
-        </div>
-        <?php
-        } else {
-            ?>
-        <div id="login" onclick='document.location="/login.php"' class="buttons">
-            登录
-        </div>
-        <div id="register" onclick='document.location="/register.php"' class="buttons">
-            注册
-        </div>
-        <?php
-        }
-        ?>
+        </section>
+
     </div>
     <!--- Scripts Below --->
     <script>

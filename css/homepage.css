@@ -1,22 +1,35 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,500;1,400&display=swap");
 body {
     background-color: rgb(139, 195, 255);
+    scroll-behavior: smooth;
 }
 
 #main{
     margin-top: 8.5%;
 }
 
-h1 {
-    text-align: center;
-    font-size: 4em;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+#title{
+    display: grid;
+    place-items: center;
+    font-size: 7em;
+}
+
+.st{
+    font-size: 3em;
 }
 
 #rooms {
-    margin-top: 100px;
     text-align: center;
     margin: auto;
+    margin-top: 50vh;
+    padding: 20px 20px 20px 20px;
+    background-color: #b0e9ff;
+    border-radius: 30px;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    -ms-border-radius: 30px;
+    -o-border-radius: 30px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
 #remain {
@@ -87,8 +100,4 @@ h1 {
     -moz-transform: scale(0.95);
     -ms-transform: scale(0.95);
     -o-transform: scale(0.95);
-}
-
-body{
-    overflow: hidden;
 }
