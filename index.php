@@ -18,33 +18,26 @@ if (!array_key_exists("loginid", $_SESSION)) {
     <title>DMS - 宿舍管理系统</title>
     <!--- Link CSS --->
     <link rel="stylesheet" href="./css/homepage.css">
-    <link rel="stylesheet" href="./css/notSupportedBrowserAlert.css">
     <link rel="stylesheet" href="./css/nav.css">
 </head>
 
 <body>
     <!--- Nav --->
     <?php
-    if ($_SESSION["loginas"] != 0) {
-    ?>
-    <iframe src="/nav/index-login.html" frameborder="0" style="height:48px;width:100vw;" id="main-nav" scrolling="no"></iframe>
+    if ($_SESSION["loginas"] != null) {
+        ?>
+    <iframe src="/nav/index-login.html" frameborder="0" style="height:48px;width:100vw;" id="main-nav"
+        scrolling="no"></iframe>
     <?php
-    }else{
-    ?>
-    <iframe src="/nav/index-logout.html" frameborder="0" style="height:48px;width:100vw;" id="main-nav" scrolling="no"></iframe>
+    } else {
+        ?>
+    <iframe src="/nav/index-logout.html" frameborder="0" style="height:48px;width:100vw;" id="main-nav"
+        scrolling="no"></iframe>
     <?php
     }
     ?>
-    
+
     <div id="main">
-        <!--- NSBA --->
-        <div id="notSupportedBrowerAlert">
-            <h1 id="NSBA-title">警告:您正在使用不被支持的浏览器</h1>
-            <div id="NSBA-SupportedBrowsersList">请使用IE9+,Firefox3.5+,Chrome4+,Safari3+,Opera10+,iOS Mobile
-                Safari4.2+
-            </div>
-            <div style="text-align: center;"><button id="NSBA-canel">忽略警告</button></div>
-        </div>
         <h1 class="title">
             DMS 宿舍管理系统
         </h1>
@@ -69,31 +62,31 @@ if (!array_key_exists("loginid", $_SESSION)) {
                     </div>
                 </div>
             </div>
-            <?php
-            /*
-            null：访客
-            */
-            if ($_SESSION["loginas"] != null) {
-            ?>
-                <div id="book" class="buttons">
-                    预定房间
-                </div>
-                <div id="checkout" class="buttons">
-                    退还房间
-                </div>
-            <?php
-            } else {
-            ?>
-                <div id="login" onclick='document.location="/login.php"' class="buttons">
-                    登录
-                </div>
-                <div id="register" onclick='document.location="/register.php"' class="buttons">
-                    注册
-                </div>
-            <?php
-            }
-            ?>
         </div>
+        <?php
+        /*
+        null：访客
+        */
+        if ($_SESSION["loginas"] != null) {
+            ?>
+        <div id="book" class="buttons">
+            预定房间
+        </div>
+        <div id="checkout" class="buttons">
+            退还房间
+        </div>
+        <?php
+        } else {
+            ?>
+        <div id="login" onclick='document.location="/login.php"' class="buttons">
+            登录
+        </div>
+        <div id="register" onclick='document.location="/register.php"' class="buttons">
+            注册
+        </div>
+        <?php
+        }
+        ?>
     </div>
     <!--- Scripts Below --->
     <script>
@@ -113,5 +106,70 @@ if (!array_key_exists("loginid", $_SESSION)) {
     </script>
     <script src="./js/isNotSupportedBrower.js"></script>
 </body>
+<!--- NSBA SCRIPT --->
+<script>
+    function getBrowserVersion() {
+        var userAgent = window.navigator.userAgent;
+
+        // IE
+        if (/MSIE|Trident/.test(userAgent)) {
+            window.location.href = 'error_browser.html';//遇到IE 就放弃
+        }
+
+        // Chrome
+        if (/Chrome\/(\d+)/.test(userAgent)) {
+            var chromeVersion = parseInt(RegExp.$1);
+            var minimumChromeVersion = 70; // 设置最低支持的版本
+
+            if (chromeVersion < minimumChromeVersion) {
+                window.location.href = 'error_browser.html';
+            }
+        }
+
+        // Firefox
+        if (/Firefox\/(\d+)/.test(userAgent)) {
+            var firefoxVersion = parseInt(RegExp.$1);
+            var minimumFirefoxVersion = 60; // 设置最低支持的版本
+
+            if (firefoxVersion < minimumFirefoxVersion) {
+                window.location.href = 'error_browser.html';
+            }
+        }
+
+        // Safari
+        if (/Safari\/(\d+)/.test(userAgent)) {
+            var safariVersion = parseInt(RegExp.$1);
+            var minimumSafariVersion = 12;// 设置最低支持的版本
+            if (safariVersion < minimumSafariVersion) {
+                window.location.href = 'error_browser.html';
+            }
+        }
+
+        // Edge
+        if (/Edg\/(\d+)/.test(userAgent)) {
+            var edgeVersion = parseInt(RegExp.$1);
+            var minimumEdgeVersion = 80; // 设置最低支持的版本
+
+            if (edgeVersion < minimumEdgeVersion) {
+                window.location.href = 'error_browser.html';
+            }
+        }
+
+        // Opera
+        if (/OPR\/(\d+)/.test(userAgent)) {
+            var operaVersion = parseInt(RegExp.$1);
+            var minimumOperaVersion = 60; // 设置最低支持的版本
+
+            if (operaVersion < minimumOperaVersion) {
+                window.location.href = 'error_browser.html';
+            }
+        }
+    }
+
+    window.onload = function () {
+        getBrowserVersion();
+
+    };
+</script>
 
 </html>
