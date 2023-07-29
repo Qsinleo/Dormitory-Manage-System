@@ -22,21 +22,6 @@ if (!array_key_exists("loginid", $_SESSION)) {
 </head>
 
 <body>
-    <!--- Nav --->
-    <?php
-    if ($_SESSION["loginas"] != null) {
-        ?>
-    <iframe src="/nav/index-login.html" frameborder="0" style="height:48px;width:100vw;" id="main-nav"
-        scrolling="no"></iframe>
-    <?php
-    } else {
-        ?>
-    <iframe src="/nav/index-logout.html" frameborder="0" style="height:48px;width:100vw;" id="main-nav"
-        scrolling="no"></iframe>
-    <?php
-    }
-    ?>
-
     <div id="main">
         <section id="title">
             <div style="scale:0.5;"><span class="st">D</span>ormitory
