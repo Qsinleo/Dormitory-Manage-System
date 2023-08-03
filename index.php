@@ -140,7 +140,6 @@ if (!array_key_exists("loginid", $_SESSION)) {
             document.getElementById("remain").style.background = "rgb(255, 181, 181)"
         }
     </script>
-    <script src="./js/isNotSupportedBrower.js"></script>
 </body>
 <!--- NSBA SCRIPT --->
 <script>
@@ -204,7 +203,6 @@ if (!array_key_exists("loginid", $_SESSION)) {
 
     window.onload = function() {
         getBrowserVersion();
-
     };
 </script>
 
