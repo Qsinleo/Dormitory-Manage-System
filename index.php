@@ -30,8 +30,7 @@ if (!array_key_exists("loginid", $_SESSION)) {
 
         </section>
         <section id="rooms">
-            <span
-                style="text-align:center;display:block;font-size:2em;font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">房间</span>
+            <span style="text-align:center;display:block;font-size:2em;font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">房间</span>
             <div id="remain">
                 <div style="text-align:center;margin-top:70px;">
                     剩余房间:
@@ -56,23 +55,23 @@ if (!array_key_exists("loginid", $_SESSION)) {
             /*
             null：访客
             */
-            if ($_SESSION["loginas"] != null) {
-                ?>
-            <div id="book" class="buttons">
-                预定房间
-            </div>
-            <div id="checkout" class="buttons">
-                退还房间
-            </div>
+            if ($_SESSION["loginas"] != null && $_SESSION["loginas"] != "failed") {
+            ?>
+                <div id="book" class="buttons">
+                    预定房间
+                </div>
+                <div id="checkout" class="buttons">
+                    退还房间
+                </div>
             <?php
             } else {
-                ?>
-            <div id="login" onclick='document.location="/login.php"' class="buttons">
-                登录
-            </div>
-            <div id="register" onclick='document.location="/register.php"' class="buttons">
-                注册
-            </div>
+            ?>
+                <div id="login" onclick='document.location="/login.php"' class="buttons">
+                    登录
+                </div>
+                <div id="register" onclick='document.location="/register.php"' class="buttons">
+                    注册
+                </div>
             <?php
             }
             ?>
@@ -104,7 +103,7 @@ if (!array_key_exists("loginid", $_SESSION)) {
 
         // IE
         if (/MSIE|Trident/.test(userAgent)) {
-            window.location.href = 'error_browser.html';//遇到IE 就放弃
+            window.location.href = 'error_browser.html'; //遇到IE 就放弃
         }
 
         // Chrome
@@ -130,7 +129,7 @@ if (!array_key_exists("loginid", $_SESSION)) {
         // Safari
         if (/Safari\/(\d+)/.test(userAgent)) {
             var safariVersion = parseInt(RegExp.$1);
-            var minimumSafariVersion = 12;// 设置最低支持的版本
+            var minimumSafariVersion = 12; // 设置最低支持的版本
             if (safariVersion < minimumSafariVersion) {
                 window.location.href = 'error_browser.html';
             }
@@ -157,7 +156,7 @@ if (!array_key_exists("loginid", $_SESSION)) {
         }
     }
 
-    window.onload = function () {
+    window.onload = function() {
         getBrowserVersion();
 
     };
