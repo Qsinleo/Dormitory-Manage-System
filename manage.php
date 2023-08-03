@@ -1,4 +1,10 @@
 <?php
+/*
+
+loginas:以……登录（null=访客）
+loginid:登录id（null=访客）
+
+*/
 session_start();
 if (!(array_key_exists("loginas", $_SESSION)) || $_SESSION["loginas"] == "failed") {
     header("Location: index.php");
@@ -15,7 +21,7 @@ function data_uri($contents, $mime)
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="initial-scale=1.0">
-    <title>Document</title>
+    <title>管理</title>
 </head>
 
 <body>
@@ -51,11 +57,25 @@ function data_uri($contents, $mime)
                             echo "系统管理员";
                         }
                         ?></td>
-                    <td><?php ?></td>
+                    <td><?php echo $userinfo["workid"]; ?></td>
                 </tr>
                 <tr>
-                    <td><?php ?></td>
-                    <td><?php ?></td>
+                    <td><?php echo $userinfo["department"]; ?></td>
+                    <td>住在房间号：<?php
+                                echo is_null($userinfo["liveinroom"]) ? "无" : mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM `rooms` where id=" . $userinfo["liveinroom"]))["number"];
+                                ?></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <?php
+                        if (is_null($userinfo["managepartid"]))
+                            echo "无";
+                        else
+                            foreach (explode(",", $userinfo["managepartid"]) as $key => $value) {
+                                echo "<span class='manage-id-part'>", $value, "</span>";
+                            }
+                        ?>
+                    </td>
                 </tr>
             </table>
         <?php
