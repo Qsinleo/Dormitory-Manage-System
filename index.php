@@ -19,15 +19,61 @@ if (!array_key_exists("loginid", $_SESSION)) {
     <!--- Link CSS --->
     <link rel="stylesheet" href="./css/homepage.css">
     <link rel="stylesheet" href="./css/nav.css">
+    <!--- 图标组件库 --->
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
 </head>
 
 <body>
+    <nav class="sidebar close">
+        <header>
+            <div class="image-text">
+                <span class="image">
+                    <img src="" alt="">
+                </span>
+                <div class="text logo-text">
+                    <span class="name">Phoenix</span>
+                    <span class="profession">Web Dev</span>
+                </div>
+            </div>
+            <i class="bx bx-chevron-right toggle"></i>
+        </header>
+        <div class="menu-bar">
+            <div class="menu">
+                <li class="seach-box">
+                    <i class="bx bx-search icon"></i>
+                    <input type="text">
+                </li>
+                <ul class="menu-links">
+                    <li class="nav-link">
+                        <a href="#">
+                            <i class="bx bx-home-alt icon"></i>
+                            <span class="text nav-text">Home</span>
+                        </a>
+                    </li>
+                    <li class="nav-link">
+                        <a href="#">
+                            <i class="bx bx-home-alt icon"></i>
+                            <span class="text nav-text">Home</span>
+                        </a>
+                    </li>
+                    <li class="nav-link">
+                        <a href="#">
+                            <i class="bx bx-home-alt icon"></i>
+                            <span class="text nav-text">Home</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
     <div id="main">
         <section id="title">
-            <div style="scale:0.5;"><span class="st">D</span>ormitory
-                &nbsp;<span class="st">M</span>anage
-                &nbsp;<span class="st">S</span>ystem</div>
-
+            <!-- Title -->
+            <div style="font-size:2em;">D M S</div>
+            <div style="font-size: 0.25em !important;font-weight: bold !important;">
+                宿 舍 管 理 系 统
+            </div>
         </section>
         <section id="rooms">
             <span style="text-align:center;display:block;font-size:2em;font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">房间</span>
@@ -55,7 +101,7 @@ if (!array_key_exists("loginid", $_SESSION)) {
             /*
             null：访客
             */
-            if ($_SESSION["loginas"] != null && $_SESSION["loginas"] != "failed") {
+            if ($_SESSION["loginas"] != null) {
             ?>
                 <div id="book" class="buttons">
                     预定房间
