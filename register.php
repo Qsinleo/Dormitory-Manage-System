@@ -28,7 +28,11 @@ require_once "mysqlConnect.php";
             <tr>
                 <td>密码：</td>
                 <td><input name="password" type="password" required /></td>
-
+            </tr>
+            <tr>
+                <td>重新输入密码：</td>
+                <td><input id="password-retype" type="password" required /></td>
+                <td id="is-same"></td>
             </tr>
             <tr>
                 <td>工作部门：</td>
@@ -65,5 +69,6 @@ require_once "mysqlConnect.php";
 </body>
 <script src="js/required.js"></script>
 <script src="js/isExistedEmail.js"></script>
+<script src="js/retypePassword.js"></script>
 
 </html>

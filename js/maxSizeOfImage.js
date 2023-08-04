@@ -11,3 +11,16 @@ document.getElementById("image").onchange = () => {
         document.getElementById("image").files = files;
     }
 }
+
+
+for (const each of document.getElementById("dialogue").getElementsByTagName("form")) {
+    let reset = document.createElement("input");
+    reset.type = "reset";
+    let submit = document.createElement("input");
+    submit.type = "submit";
+    submit.value = "Go!(～￣▽￣)～"
+    each.appendChild(reset);
+    each.appendChild(submit);
+}
+
+hideDialog();

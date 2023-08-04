@@ -14,11 +14,11 @@ document.getElementsByName("email")[0].onkeyup = () => {
         document.getElementById("is-existed").innerText = "加载中";
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
             if (xmlhttp.responseText == "true") {
-                document.getElementById("is-existed").innerText = "√";
+                document.getElementById("is-existed").innerText = "邮箱可用";
                 document.getElementById("is-existed").style.color = "green";
                 document.getElementById("submit").disabled = "";
             } else {
-                document.getElementById("is-existed").innerText = "×";
+                document.getElementById("is-existed").innerText = "邮箱已存在！";
                 document.getElementById("is-existed").style.color = "red";
             };
         }

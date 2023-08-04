@@ -32,20 +32,59 @@ $userinfo = mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM `users` where i
     <div id="hide-screen">&nbsp;</div>
     <div id="dialogue">
         <button class="close" onclick="hideDialog()">×</button>
-        <form action="proceed.php" method="post" enctype="multipart/form-data">
-            <div id="upload-header">
-                <header>上传头像</header>
-                <input type="hidden" name="type" value="change-header">
-                <input type="file" id="image" accept="images" name="header" />
-                <div id="drop">拖到此处以上传</div>
-            </div>
-            <div id="change-realname">
-                <header>更改真实名称</header>
-                <input type="hidden" name="type" value="change-realname">
-                <input type="text" name="realname" maxlength="8" value="<?php echo $userinfo["realname"]; ?>" />
-            </div>
-            <input type="reset" value="重置" />
-            <input type="submit" value="Go(～￣▽￣)～">
+        <button class="collapse" onclick="smallDialog()">-</button>
+        <form action="proceed.php" method="post" enctype="multipart/form-data" id="upload-header">
+            <header>上传头像</header>
+            <input type="hidden" name="type" value="change-header">
+            <input type="file" id="image" accept="images" name="header" />
+            <div id="drop">拖到此处以上传</div>
+        </form>
+        <form action="proceed.php" method="post" id="change-realname">
+            <header>更改真实名称</header>
+            <input type="hidden" name="type" value="change-realname">
+            <input type="text" name="realname" maxlength="8" value="<?php echo $userinfo["realname"]; ?>" required />
+        </form>
+        <form action="proceed.php" method="post" id="change-access">
+            <header>更改权限</header>
+            <input type="hidden" name="type" value="change-access">
+            <input type="hidden" name="toaccess" value="<?php ?>">
+            <div>确定要将权限修改为“中级管理员”吗？这将需要中级管理员/系统管理员批准。</div>
+        </form>
+        <form action="proceed.php" method="post" id="change-depart">
+            <header>修改部门</header>
+            <input type="hidden" name="type" value="change-depart">
+            <input type="number" name="depart" value="<?php echo $userinfo["department"]; ?>">
+        </form>
+        <form action="proceed.php" method="post" id="change-workid">
+            <header>修改工号</header>
+            <input type="hidden" name="type" value="change-workid">
+            <input type="number" name="workid" value="<?php echo $userinfo["workid"]; ?>">
+        </form>
+        <form action="proceed.php" method="post" id="change-liveroom">
+            <header>修改住所房间号</header>
+            <input type="hidden" name="type" value="change-liveroom">
+            <input type="text" name="liveinroom" value="<?php if (!is_null($userinfo["liveinroom"])) echo mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM `rooms` where id=" . $_SESSION["liveinroom"]))["number"]; ?>" />
+        </form>
+        <form action="proceed.php" method="post" id="change-password">
+            <header>修改密码</header>
+            <input type="hidden" name="type" value="change-password">
+            <table>
+                <tr>
+                    <td>请输入旧密码：</td>
+                    <td><input type="password" id="old-password" key="<?php echo $userinfo["password"]; ?>" required /></td>
+                    <td id="password-info"></td>
+                </tr>
+                <tr>
+                    <td>请输入新密码：</td>
+                    <td><input type="password" name="new-password" required /></td>
+                    <td id="password-info3"></td>
+                </tr>
+                <tr>
+                    <td>请再次输入新密码：</td>
+                    <td><input type="password" id="new-password-retype" required /></td>
+                    <td id="password-info2"></td>
+                </tr>
+            </table>
         </form>
     </div>
     <div>
@@ -68,7 +107,7 @@ $userinfo = mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM `users` where i
                         ?>
                         <button onclick="openDialog('upload-header')">更改</button>
                     </td>
-                    <td><?php echo $userinfo["realname"] ?><button onclick="openDialog('change-realname')">更改</button></td>
+                    <td><?php echo $userinfo["realname"] ?>(ID:<?php echo $userinfo["id"] ?>)<button onclick="openDialog('change-realname')">更改</button></td>
                 </tr>
                 <tr>
                     <td><?php
@@ -80,13 +119,14 @@ $userinfo = mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM `users` where i
                             echo "系统管理员";
                         }
                         ?></td>
-                    <td>工号：<?php echo $userinfo["workid"]; ?></td>
+                    <td>工号：<?php echo $userinfo["workid"]; ?><button onclick="openDialog('change-workid')">更改</button></td>
                 </tr>
                 <tr>
-                    <td>部门：<?php echo $userinfo["department"]; ?></td>
+                    <td>部门：<?php echo $userinfo["department"]; ?><button onclick="openDialog('change-depart')">更改</button></td>
                     <td>住在房间号：<?php
                                 echo is_null($userinfo["liveinroom"]) ? "无" : mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM `rooms` where id=" . $userinfo["liveinroom"]))["number"];
-                                ?></td>
+                                ?><button onclick="openDialog('change-liveroom')">更改</button></td>
+
                 </tr>
                 <tr>
                     <td colspan="2">管理区域：
@@ -105,12 +145,15 @@ $userinfo = mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM `users` where i
         <?php
         }
         ?>
+        <button onclick="openDialog('change-password')">更改密码</button>
         <form action="proceed.php" method="post">
             <input type="submit" name="delete-account" value="删除账户" />
         </form>
     </div>
 </body>
+<script src="js/sha1.js"></script>
 <script src="js/maxSizeOfImage.js"></script>
 <script src="js/dropToUpload.js"></script>
+<script src="js/verifyPassword.js"></script>
 
 </html>

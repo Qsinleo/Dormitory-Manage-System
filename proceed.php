@@ -7,15 +7,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         mysqli_query(
             $con,
             "INSERT INTO `users` VALUES (NULL,'" .
-                $_REQUEST["email"] .
+                mysqli_escape_string($con, $_REQUEST["email"]) .
                 "','" .
-                $_REQUEST["real-name"] .
+                mysqli_escape_string($con, $_REQUEST["realname"])  .
                 "',SHA1('" .
-                $_REQUEST["password"] .
+                mysqli_escape_string($con, $_REQUEST["password"])  .
                 "')," .
                 ($_REQUEST["workid"] == "" ? "NULL" : $_REQUEST["workid"]) .
                 ",'" .
-                $_REQUEST["department"] .
+                mysqli_escape_string($con, $_REQUEST["department"])  .
                 "','" .
                 $_REQUEST["access"] .
                 "',NULL,NULL,0,NULL)"
@@ -51,7 +51,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         header("Location: index.php");
     } elseif ($_REQUEST["type"] == "change-header") {
         //改变头像
-        mysqli_query($con, "UPDATE `users` SET header = '" . mysqli_escape_string($con, file_get_contents($_FILES['header']['tmp_name'])) . "'");
+        mysqli_query($con, "UPDATE `users` SET header = '" . mysqli_escape_string($con, file_get_contents($_FILES['header']['tmp_name'])) . "' WHERE id = " . $_SESSION["loginid"]);
+        header("Location: manage.php");
+    } elseif ($_REQUEST["type"] == "change-realname") {
+        //改变真名
+        mysqli_query($con, "UPDATE `users` SET realname = '" . mysqli_escape_string($con, $_REQUEST["realname"]) . "' WHERE id = " . $_SESSION["loginid"]);
+        header("Location: manage.php");
+    } elseif ($_REQUEST["type"] == "change-workid") {
+        //改变工号
+        if ($_REQUEST["workid"] != "")
+            mysqli_query($con, "UPDATE `users` SET workid = '" . mysqli_escape_string($con, $_REQUEST["workid"]) . "' WHERE id = " . $_SESSION["loginid"]);
+        else
+            mysqli_query($con, "UPDATE `users` SET workid = NULL WHERE id = " . $_SESSION["loginid"]);
+        header("Location: manage.php");
+    } elseif ($_REQUEST["type"] == "change-depart") {
+        //改变部门
+        mysqli_query($con, "UPDATE `users` SET department = '" . mysqli_escape_string($con, $_REQUEST["depart"]) . "' WHERE id = " . $_SESSION["loginid"]);
+        header("Location: manage.php");
+    } elseif ($_REQUEST["type"] == "change-password") {
+        //改变密码
+        if (sha1($_REQUEST["new-password"]) == mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM `users` where id=" . $_SESSION["loginid"]))["password"])
+            mysqli_query($con, "UPDATE `users` SET department = '" . mysqli_escape_string($con, $_REQUEST["depart"]) . "' WHERE id = " . $_SESSION["loginid"]);
         header("Location: manage.php");
     }
 }

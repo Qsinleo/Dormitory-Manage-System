@@ -1,5 +1,5 @@
 #hide-screen {
-    position: absolute;
+    position: fixed;
     height: 100%;
     width: 100%;
     z-index: 998;
@@ -11,7 +11,7 @@
 }
 
 #dialogue {
-    position: absolute;
+    position: fixed;
     height: fit-content;
     width: 70%;
     left: 0;
@@ -26,12 +26,12 @@
     padding: 15px;
     text-align: center;
     display: none;
+    overflow: hidden;
 }
 
 header {
     font-size: x-large;
     font-weight: bold;
-    text-align: center;
 }
 
 #drop {
@@ -42,7 +42,6 @@ header {
 }
 
 .close {
-    display: block;
     background-color: rgba(0, 0, 0, 0);
     border: none;
     border-radius: 10px;
@@ -66,4 +65,28 @@ img {
     height: 100px;
     width: 100px;
     border-radius: 10px;
+}
+
+.collapse {
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+    border-radius: 10px;
+    text-align: left;
+    transition: .2s;
+    font-size: xx-large;
+    font-weight: bold;
+}
+
+.collapse:hover {
+    background-color: greenyellow;
+    transform: scale(1.1);
+}
+
+.collapse:active {
+    background-color: green;
+    transform: scale(.95);
+}
+
+.error {
+    color: red;
 }
