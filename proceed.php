@@ -49,5 +49,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         //账号删除
         mysqli_query($con, "DELETE FROM `users` WHERE id=" . $_SESSION["loginid"]);
         header("Location: index.php");
+    } elseif ($_REQUEST["type"] == "change-header") {
+        //改变头像
+        mysqli_query($con, "UPDATE `users` SET header = '" . mysqli_escape_string($con, file_get_contents($_FILES['header']['tmp_name'])) . "'");
+        header("Location: manage.php");
     }
 }

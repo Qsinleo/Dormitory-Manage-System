@@ -1,4 +1,5 @@
 document.getElementsByName("email")[0].onkeyup = () => {
+    document.getElementById("submit").disabled = "disabled";
     document.getElementById("is-existed").style.color = "initial";
     var xmlhttp;
     if (window.XMLHttpRequest) {
@@ -18,7 +19,6 @@ document.getElementsByName("email")[0].onkeyup = () => {
                 document.getElementById("submit").disabled = "";
             } else {
                 document.getElementById("is-existed").innerText = "×";
-                document.getElementById("submit").disabled = "disabled";
                 document.getElementById("is-existed").style.color = "red";
             };
         }

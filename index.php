@@ -101,7 +101,7 @@ if (!array_key_exists("loginid", $_SESSION)) {
             /*
             null：访客
             */
-            if ($_SESSION["loginas"] != null) {
+            if ($_SESSION["loginas"] != null && $_SESSION["loginas"] != "failed") {
             ?>
                 <div id="book" class="buttons">
                     预定房间

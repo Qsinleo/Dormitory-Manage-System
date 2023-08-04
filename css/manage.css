@@ -1,0 +1,69 @@
+#hide-screen {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: 998;
+    opacity: .7;
+    left: 0;
+    top: 0;
+    background-color: black;
+    display: none;
+}
+
+#dialogue {
+    position: absolute;
+    height: fit-content;
+    width: 70%;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    z-index: 999;
+    border: 1px whitesmoke;
+    border-radius: 15px;
+    background-color: bisque;
+    padding: 15px;
+    text-align: center;
+    display: none;
+}
+
+header {
+    font-size: x-large;
+    font-weight: bold;
+    text-align: center;
+}
+
+#drop {
+    height: 50px;
+    background-color: rgb(204, 204, 204);
+    color: rgb(63, 63, 63);
+    font-style: italic;
+}
+
+.close {
+    display: block;
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+    border-radius: 10px;
+    text-align: left;
+    transition: .2s;
+    font-size: xx-large;
+    font-weight: bold;
+}
+
+.close:hover {
+    background-color: red;
+    transform: scale(1.1);
+}
+
+.close:active {
+    background-color: darkred;
+    transform: scale(.95);
+}
+
+img {
+    height: 100px;
+    width: 100px;
+    border-radius: 10px;
+}
