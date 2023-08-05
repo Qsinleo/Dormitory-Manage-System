@@ -1,7 +1,8 @@
 <?php
 require_once "mysqlConnect.php";
 session_start();
-if (!array_key_exists("loginas", $_SESSION)) {
+//自动增加session
+if (!array_key_exists("loginas", $_SESSION) || $_SESSION["loginas"] == "failed") {
     $_SESSION["loginas"] = null;
 }
 if (!array_key_exists("loginid", $_SESSION)) {
@@ -10,7 +11,7 @@ if (!array_key_exists("loginid", $_SESSION)) {
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
     <meta charset="UTF-8">
@@ -103,26 +104,46 @@ if (!array_key_exists("loginid", $_SESSION)) {
             */
             if ($_SESSION["loginas"] != null && $_SESSION["loginas"] != "failed") {
             ?>
-                <div id="book" class="buttons">
+                <button id="book" class="buttons">
                     预定房间
-                </div>
-                <div id="checkout" class="buttons">
+                </button>
+                <button id="checkout" class="buttons">
                     退还房间
-                </div>
+                </button>
+                <button id="manage" class="buttons">
+                    管理我的账号
+                </button>
+                <?php
+                if ($_SESSION["loginas"] != "unactived") {
+                ?>
+                    <button id="accept" class="buttons">
+                        批准
+                    </button>
+                <?php
+                }
+                ?>
+
+
             <?php
             } else {
             ?>
-                <div id="login" onclick='document.location="/login.php"' class="buttons">
+                <button id="login" onclick='document.location="/login.php"' class="buttons">
                     登录
-                </div>
-                <div id="register" onclick='document.location="/register.php"' class="buttons">
+                </button>
+                <button id="register" onclick='document.location="/register.php"' class="buttons">
                     注册
-                </div>
+                </button>
             <?php
             }
             ?>
         </section>
-
+        <section class="debug">
+            <h3>Debug</h3>
+            <!-- 正式一定要删除！！！ -->
+            <?php
+            var_dump($_SESSION);
+            ?>
+        </section>
     </div>
     <!--- Scripts Below --->
     <script>
@@ -130,13 +151,10 @@ if (!array_key_exists("loginid", $_SESSION)) {
         var total = document.getElementById("totalNum");
         // console.log(remain.innerText+total.innerText);
         if (remain.innerText / total.innerText >= 0.75) {
-            console.log(remain.innerText / total.innerText);
             document.getElementById("remain").style.background = "rgb(186, 255, 181)";
         } else if (remain.innerText / total.innerText >= 0.25) {
-            console.log(remain.innerText / total.innerText);
             document.getElementById("remain").style.background = "rgb(255, 222, 181)"
         } else {
-            console.log(remain.innerText / total.innerText);
             document.getElementById("remain").style.background = "rgb(255, 181, 181)"
         }
     </script>

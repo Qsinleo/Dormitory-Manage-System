@@ -33,6 +33,10 @@ document.getElementById("new-password-retype").onkeyup = () => {
         document.getElementById("password-info2").style.color = "red";
         obj.disabled = "disabled";
         document.getElementById("password-info2").innerText = "密码不一致";
+    } else if (document.getElementsByName("new-password")[0].value.length < 8) {
+        document.getElementById("password-info2").style.color = "red";
+        obj.disabled = "disabled";
+        document.getElementById("password-info2").innerText = "密码少于8位";
     } else {
         document.getElementById("password-info2").style.color = "green";
         obj.disabled = "";

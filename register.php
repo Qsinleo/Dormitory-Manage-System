@@ -28,6 +28,7 @@ require_once "mysqlConnect.php";
             <tr>
                 <td>密码：</td>
                 <td><input name="password" type="password" required /></td>
+                <td id="is-long"></td>
             </tr>
             <tr>
                 <td>重新输入密码：</td>
@@ -69,6 +70,6 @@ require_once "mysqlConnect.php";
 </body>
 <script src="js/required.js"></script>
 <script src="js/isExistedEmail.js"></script>
-<script src="js/retypePassword.js"></script>
+<script src="js/verifyPasswordWhenRegister.js"></script>
 
 </html>

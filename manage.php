@@ -1,12 +1,12 @@
 <?php
 /*
 
-loginas:以……登录（null=访客）
+loginas:以……登录（null=访客，failed=登录失败，unactived=登录但未激活）
 loginid:登录id（null=访客）
 
 */
 session_start();
-if (!(array_key_exists("loginas", $_SESSION)) || $_SESSION["loginas"] == "failed") {
+if (is_null($_SESSION["loginas"]) || $_SESSION["loginas"] == "failed") {
     header("Location: index.php");
 }
 require_once "mysqlConnect.php";
@@ -36,6 +36,7 @@ $userinfo = mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM `users` where i
         <form action="proceed.php" method="post" enctype="multipart/form-data" id="upload-header">
             <header>上传头像</header>
             <input type="hidden" name="type" value="change-header">
+            <div>仅支持.png、.jpg和.jpeg的不超过5MB的图片文件！（注：图片较大时，传输时间可能较多。）</div>
             <input type="file" id="image" accept="images" name="header" />
             <div id="drop">拖到此处以上传</div>
         </form>
@@ -47,13 +48,13 @@ $userinfo = mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM `users` where i
         <form action="proceed.php" method="post" id="change-access">
             <header>更改权限</header>
             <input type="hidden" name="type" value="change-access">
-            <input type="hidden" name="toaccess" value="<?php ?>">
-            <div>确定要将权限修改为“中级管理员”吗？这将需要中级管理员/系统管理员批准。</div>
+            <input type="hidden" name="toaccess" value="<?php echo $userinfo["accessment"] == "staff" ? "admin" : "staff" ?>">
+            <div>确定要将权限修改为“<?php echo $userinfo["accessment"] == "staff" ? "中级管理员" : "员工" ?>”吗？<?php echo $userinfo["accessment"] == "staff" ? "这将需要系统管理员批准。" : "你将失去管理员权限！" ?></div>
         </form>
         <form action="proceed.php" method="post" id="change-depart">
             <header>修改部门</header>
             <input type="hidden" name="type" value="change-depart">
-            <input type="number" name="depart" value="<?php echo $userinfo["department"]; ?>">
+            <input type="text" name="depart" value="<?php echo $userinfo["department"]; ?>">
         </form>
         <form action="proceed.php" method="post" id="change-workid">
             <header>修改工号</header>
@@ -91,10 +92,12 @@ $userinfo = mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM `users` where i
         <h2>我的账号</h2>
         <?php
         if ($userinfo["actived"] == 0) {
+            $_SESSION["loginas"] = "unactived"; //未激活
         ?>
-            <div class="non-actived">您的帐户尚未被批准！</div>
+            <div class="non-actived">您的帐户尚未被批准。请检查邮箱，以便获取是否被通过。</div>
         <?php
         } else {
+            $_SESSION["loginas"] = $userinfo["accessment"];
         ?>
             <table>
                 <tr>
@@ -114,11 +117,14 @@ $userinfo = mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM `users` where i
                         if ($_SESSION["loginas"] == "staff") {
                             echo "员工";
                         } elseif ($_SESSION["loginas"] == "admin") {
-                            echo "管理员";
+                            echo "中级管理员";
                         } else {
                             echo "系统管理员";
                         }
-                        ?></td>
+                        if (!($_SESSION["loginas"] == "system-admin")) {
+                        ?><button onclick="openDialog('change-access')">更改</button>
+                        <?php } ?>
+                    </td>
                     <td>工号：<?php echo $userinfo["workid"]; ?><button onclick="openDialog('change-workid')">更改</button></td>
                 </tr>
                 <tr>
@@ -144,11 +150,19 @@ $userinfo = mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM `users` where i
             </table>
         <?php
         }
+        if ($_SESSION["loginas"] == "admin" || $_SESSION["loginas"] == "system-admin") {
         ?>
+            <div><a href="acception.php">批准</a></div>
+        <?php } ?>
         <button onclick="openDialog('change-password')">更改密码</button>
         <form action="proceed.php" method="post">
-            <input type="submit" name="delete-account" value="删除账户" />
+            <input type="submit" name="logout" value="退出登录" />
         </form>
+        <?php if (!$_SESSION["loginas"] == "system-admin") { ?>
+            <form action="proceed.php" method="post">
+                <input type="submit" name="delete-account" value="删除账户" />
+            </form>
+        <?php } ?>
     </div>
 </body>
 <script src="js/sha1.js"></script>

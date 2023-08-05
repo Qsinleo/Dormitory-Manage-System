@@ -29,5 +29,6 @@ session_start();
         <input type="submit" />
     </form>
 </body>
+<script src="js/required.js"></script>
 
 </html>

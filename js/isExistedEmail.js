@@ -20,7 +20,7 @@ document.getElementsByName("email")[0].onkeyup = () => {
             } else {
                 document.getElementById("is-existed").innerText = "邮箱已存在！";
                 document.getElementById("is-existed").style.color = "red";
-            };
+            }
         }
     }
     xmlhttp.open("POST", "proceed.php?type=queryemail&email=" + document.getElementsByName("email")[0].value, true);

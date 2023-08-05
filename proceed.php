@@ -1,7 +1,12 @@
 <?php
 require_once "mysqlConnect.php";
+require_once "mail.php";
 session_start();
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (key_exists("logout", $_REQUEST)) {
+        session_destroy();
+        header("Location: index.php");
+    } else
     if ($_REQUEST["type"] == "register") {
         //注册
         mysqli_query(
@@ -47,7 +52,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     } elseif (key_exists("delete-account", $_REQUEST)) {
         //账号删除
+
+        $value = mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM `users` where id=" . $_SESSION["loginid"]));
+        $tovalue = mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM `users` where id=" . $_REQUEST["id"]));
+        $format_string = "<h1>您的账号已删除</h1><p>尊敬的" . $tovalue["realname"] . "，您的账号（ID：" . $tovalue["id"] . "）<b>已被删除</b>。感谢你的使用，期待再会。</p>";
+        send_mail($format_string, $value["mail"], "您的账号删除成功");
+        mysqli_query($con, "DELETE FROM `upgrade` WHERE requestid=" . $_SESSION["loginid"]);
         mysqli_query($con, "DELETE FROM `users` WHERE id=" . $_SESSION["loginid"]);
+        session_destroy();
         header("Location: index.php");
     } elseif ($_REQUEST["type"] == "change-header") {
         //改变头像
@@ -73,5 +85,46 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (sha1($_REQUEST["new-password"]) == mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM `users` where id=" . $_SESSION["loginid"]))["password"])
             mysqli_query($con, "UPDATE `users` SET department = '" . mysqli_escape_string($con, $_REQUEST["depart"]) . "' WHERE id = " . $_SESSION["loginid"]);
         header("Location: manage.php");
+    } elseif ($_REQUEST["type"] == "register-allow") {
+        if ($_REQUEST["action"] == "accept") {
+            mysqli_query($con, "UPDATE `users` SET actived = 1 WHERE id = " . $_REQUEST["id"]);
+            $value = mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM `users` where id=" . $_SESSION["loginid"]));
+            $tovalue = mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM `users` where id=" . $_REQUEST["id"]));
+            $format_string = "<h1>您的账号已经被批准</h1><p>尊敬的" . $tovalue["realname"] . "，您的账号（ID：" . $tovalue["id"] . "）已经被管理员（ID：" . $value['id'] . "）" . $value['realname'] . "<b>批准</b>。现在，您可以正式成为" . ($tovalue["accessment"] == "staff" ? "员工" : "中级管理员") . "了。</p>";
+            send_mail($format_string, $value["mail"], "您的账号已被批准");
+        } else {
+            $value = mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM `users` where id=" . $_SESSION["loginid"]));
+            $tovalue = mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM `users` where id=" . $_REQUEST["id"]));
+            $format_string = "<h1>您的账号注册申请被驳回</h1><p>尊敬的" . $tovalue["realname"] . "，您的账号（ID：" . $tovalue["id"] . "）被管理员（ID：" . $value['id'] . "）" . $value['realname'] . "<b>驳回</b>。如果您需要再次发送申请邮件，请先删除账号再重新注册。</p>";
+            send_mail($format_string, $value["mail"], "您的账号注册申请被驳回");
+        }
+        header("Location: acception.php");
+    } elseif ($_REQUEST["type"] == "change-access") {
+        //升级
+        if ($_REQUEST["toaccess"] == "staff") {
+            //无需批准
+            mysqli_query($con, "UPDATE `users` SET accessment = 'staff' WHERE id = " . $_SESSION["loginid"]);
+        } else {
+            //需要批准
+            mysqli_query($con, "INSERT INTO `upgrade` VALUES (NULL," . $_SESSION["loginid"] . ")");
+        }
+        header("Location: manage.php");
+    } elseif ($_REQUEST["type"] == "upgrade-allow") {
+        //升级
+        if ($_REQUEST["action"] == "accept") {
+            mysqli_query($con, "DELETE FROM `upgrade` WHERE requestid = " . $_REQUEST["id"]);
+            mysqli_query($con, "UPDATE `users` SET accessment = 'admin' WHERE id = " . $_REQUEST["id"]);
+            $value = mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM `users` where id=" . $_SESSION["loginid"]));
+            $tovalue = mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM `users` where id=" . $_REQUEST["id"]));
+            $format_string = "<h1>您的权限升级申请已经被批准</h1><p>尊敬的" . $tovalue["realname"] . "，您的账号（ID：" . $tovalue["id"] . "）的升级申请已经被管理员（ID：" . $value['id'] . "）" . $value['realname'] . "<b>批准</b>。现在，您可以正式成为中级管理员了。</p>";
+            send_mail($format_string, $value["mail"], "您的账号已被升级");
+        } else {
+            $value = mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM `users` where id=" . $_SESSION["loginid"]));
+            $tovalue = mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM `users` where id=" . $_REQUEST["id"]));
+            $format_string = "<h1>您的权限升级申请已经被批准</h1><p>尊敬的" . $tovalue["realname"] . "，您的账号（ID：" . $tovalue["id"] . "）的升级申请被管理员（ID：" . $value['id'] . "）" . $value['realname'] . "<b>驳回</b>。</p>";
+            send_mail($format_string, $value["mail"], "您的账号升级申请被驳回");
+        }
+
+        header("Location: acception.php");
     }
 }

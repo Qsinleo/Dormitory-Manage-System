@@ -1,4 +1,6 @@
 function openDialog(openid) {
+    reopenDialog();
+    hideDialog();
     document.getElementById("dialogue").style.display =
         document.getElementById(openid).style.display =
         document.getElementById("hide-screen").style.display = "block";
@@ -20,7 +22,7 @@ function smallDialog() {
     obj.style.top = "calc(100% - 55px)";
     obj.getElementsByTagName("button")[0].style.display =
         document.getElementById("hide-screen").style.display = "none";
-    obj.getElementsByTagName("button")[1].innerText = "^";
+    obj.getElementsByTagName("button")[1].innerText = "↑";
     obj.getElementsByTagName("button")[1].onclick = () => {
         reopenDialog();
     }
