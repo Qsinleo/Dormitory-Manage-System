@@ -1,13 +1,5 @@
 <?php
-require_once "mysqlConnect.php";
-session_start();
-//自动增加session
-if (!array_key_exists("loginas", $_SESSION) || $_SESSION["loginas"] == "failed") {
-    $_SESSION["loginas"] = null;
-}
-if (!array_key_exists("loginid", $_SESSION)) {
-    $_SESSION["loginid"] = null;
-}
+require_once "header.php";
 ?>
 
 <!DOCTYPE html>
@@ -102,7 +94,7 @@ if (!array_key_exists("loginid", $_SESSION)) {
             /*
             null：访客
             */
-            if ($_SESSION["loginas"] != null && $_SESSION["loginas"] != "failed") {
+            if (!is_null($usertype) && $usertype != "failed") {
             ?>
                 <button id="book" class="buttons">
                     预定房间
@@ -114,7 +106,7 @@ if (!array_key_exists("loginid", $_SESSION)) {
                     管理我的账号
                 </button>
                 <?php
-                if ($_SESSION["loginas"] != "unactived") {
+                if ($usertype != "inactived") {
                 ?>
                     <button id="accept" class="buttons">
                         批准

@@ -1,5 +1,5 @@
 <?php
-require_once "mysqlConnect.php";
+require_once "header.php";
 ?>
 
 <!DOCTYPE html>
@@ -18,7 +18,7 @@ require_once "mysqlConnect.php";
         <table>
             <tr>
                 <td>真实姓名：</td>
-                <td><input name="real-name" maxlength="8" /></td>
+                <td><input name="realname" maxlength="8" /></td>
             </tr>
             <tr>
                 <td>邮箱：</td>

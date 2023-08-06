@@ -35,7 +35,7 @@ function send_mail($mainbody, $to, $title, $altbody = ""): void
         //Content
         $mail->isHTML(true);                                  // 是否以HTML文档格式发送  发送后客户端可直接显示对应HTML内容
         $mail->Subject = $title;
-        $mail->Body    = $mainbody . date('Y-m-d H:i:s');
+        $mail->Body    = "<div style='width:50%;box-shadow:grey 5px 7px 4px;margin:auto;'>" . $mainbody . date('Y-m-d H:i:s') . "</div>";
         $mail->AltBody = $altbody;
         $mail->send();
     } catch (Exception $e) {
