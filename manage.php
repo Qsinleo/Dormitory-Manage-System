@@ -105,13 +105,55 @@ function data_uri($contents, $mime)
             <input type="reset" />
             <input type="submit" value="Go(/≧▽≦)/">
         </form>
+        <form action="proceed.php" method="post" id="change-email">
+            <header>修改邮箱</header>
+            <input type="hidden" name="type" value="change-email" />
+            <label>请输入新的邮箱
+                <input type="email" name="email" value="<?php echo $userinfo["mail"] ?>" required />
+            </label>
+            <span id="is-existed"></span>
+            <input type="reset" />
+            <input type="submit" value="Go(/≧▽≦)/" id="submit">
+        </form>
+        <form action="proceed.php" method="post" id="change-manage">
+            <header>修改管理区域</header>
+            <?php
+            if (mysqli_num_rows(mysqli_query($con, "SELECT * FROM `requests` WHERE requestid = " . $_SESSION["loginid"] . " AND `type` = 'change-manage'")) == 0) { ?>
+                <fieldset>
+                    <input type="hidden" name="type" value="change-manage" />
+                    <input type="hidden" name="room-data" id="room-data" />
+                    当前管理房间号分别为：
+                    <ul id="manage-parts">
+                        <?php
+                        if (!is_null($userinfo["managepartid"])) {
+                            foreach (explode(',', $userinfo["managepartid"]) as $value) {
+                                echo "<li>", mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM `rooms` WHERE `id` = " . $value))["number"],
+                                "<button onclick='delRoom(this);' type='button'>删除</button>",
+                                "</li>";
+                            }
+                        }
+                        ?>
+                    </ul>
+                </fieldset>
+                <fieldset>
+                    <label>请输入想添加的房号：
+                        <input type="number" id="room-number-add" />
+                        <span id="room-info">请键入房号以开始检查</span>
+                        <button type="button" onclick="addRoom()" id="add-room" disabled>添加</button>
+                    </label>
+                </fieldset>
+                <input type="submit" value="Go(/≧▽≦)/">
+            <?php } else { ?>
+                <div>您的更改权限申请已经提交，在系统管理员未回复以前无法再次提交。</div>
+            <?php } ?>
+        </form>
     </div>
     <div>
         <h2>我的账号</h2>
         <?php
         if ($usertype == "inactived") {
         ?>
-            <div class="non-actived">您的帐户尚未被批准。请检查邮箱，以便获取是否被通过（注册时已经自动发送了申请）。</div>
+            <div class="non-actived"><?php echo $userinfo["realname"] ?>（ID：<?php echo $userinfo["id"] ?>），您的帐户尚未被批准。请检查邮箱，以便获取是否被通过（注册时已经自动发送了申请）。</div>
             <?php
             if (mysqli_num_rows(mysqli_query($con, "SELECT * FROM `requests` WHERE requestid = " . $_SESSION["loginid"] . " AND `type` = 'register-allow'")) == 0) {
             ?>
@@ -125,17 +167,19 @@ function data_uri($contents, $mime)
                 echo "<div>您已经发送过注册申请，请等待管理员同意。</div>";
             }
         } else {
+            if ($userinfo["header"] == null) {
+                echo "无头像";
+            } else {
+                echo "<img src='" . data_uri($userinfo["header"], "image/png") . "' />";
+            }
             ?>
+            <button onclick="openDialog('upload-header')">更改</button>
             <table>
                 <tr>
                     <td><?php
-                        if ($userinfo["header"] == null) {
-                            echo "无头像";
-                        } else {
-                            echo "<img src='" . data_uri($userinfo["header"], "image/png") . "' />";
-                        }
+                        echo $userinfo["mail"];
                         ?>
-                        <button onclick="openDialog('upload-header')">更改</button>
+                        <button onclick="openDialog('change-email')">更改</button>
                     </td>
                     <td><?php echo $userinfo["realname"] ?>(ID:<?php echo $userinfo["id"] ?>)<button onclick="openDialog('change-realname')">更改</button></td>
                 </tr>
@@ -164,12 +208,17 @@ function data_uri($contents, $mime)
                 <tr>
                     <td>管理区域：
                         <?php
-                        if (is_null($userinfo["managepartid"]))
+                        if ($usertype == "system-admin")
+                            echo "全部房间";
+                        else if (is_null($userinfo["managepartid"]))
                             echo "无";
                         else {
                             foreach (explode(",", $userinfo["managepartid"]) as $from_info) {
-                                echo "<span class='manage-id'>", mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM `rooms` where id=" . $from_info))["number"], "</span>";
+                                echo "<span style='margin:5px;background-color:blue;color:white'>", mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM `rooms` where id=" . $from_info))["number"], "</span>";
                             }
+                        }
+                        if ($usertype == "admin") {
+                            echo "<button onclick=\"openDialog('change-manage')\">更改</button>";
                         }
                         ?>
                     </td>
@@ -188,10 +237,12 @@ function data_uri($contents, $mime)
         <form action="proceed.php" method="post">
             <input type="submit" name="logout" value="退出登录" />
         </form>
-        <?php if (!$usertype == "system-admin") { ?>
+        <?php if ($usertype != "system-admin") { ?>
             <form action="proceed.php" method="post">
                 <input type="submit" name="delete-account" value="删除账户" />
             </form>
+        <?php } else { ?>
+            <button disabled title="系统管理员无法删除账号">删除账号</button>
         <?php } ?>
     </div>
 </body>
@@ -199,5 +250,7 @@ function data_uri($contents, $mime)
 <script src="js/maxSizeOfImage.js"></script>
 <script src="js/dropToUpload.js"></script>
 <script src="js/verifyPassword.js"></script>
+<script src="js/isExistedEmail.js"></script>
+<script src="js/manageChange.js"></script>
 
 </html>

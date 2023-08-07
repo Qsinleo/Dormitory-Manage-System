@@ -47,7 +47,7 @@ if (!is_null($_SESSION["message"])) {
     font-size:xx-large;
     vertical-align:top;
     box-shadow:3px 3px 3px lightgrey;
-    ' onclick='this.parentNode.style.display = "none"'>×</button>
+    ' onclick='clearTimeout(fadeOutMessage);fadeOut(document.getElementById("message-bar-no-conflicting"),40);'>×</button>
     </div>
     <script>
     function fadeOut(element,text,speed){
@@ -65,7 +65,7 @@ if (!is_null($_SESSION["message"])) {
         }
     
     }
-    setTimeout(function (){
+    var fadeOutMessage = setTimeout(function (){
         fadeOut(document.getElementById("message-bar-no-conflicting"),40)
     },5000);
     </script>

@@ -9,6 +9,7 @@ require './mail/SMTP.php';
 
 function send_mail($mainbody, $to, $title, $altbody = ""): void
 {
+    date_default_timezone_set("PRC");
     $mail = new PHPMailer(true);                        // Passing `true` enables exceptions
     try {
         //服务器配置
@@ -35,7 +36,7 @@ function send_mail($mainbody, $to, $title, $altbody = ""): void
         //Content
         $mail->isHTML(true);                                  // 是否以HTML文档格式发送  发送后客户端可直接显示对应HTML内容
         $mail->Subject = $title;
-        $mail->Body    = "<div style='width:50%;box-shadow:grey 5px 7px 4px;margin:auto;'>" . $mainbody . date('Y-m-d H:i:s') . "</div>";
+        $mail->Body    = "<div style='width:50%;box-shadow:grey 5px 7px 4px;margin:auto;padding:10px'>" . $mainbody . date('Y-m-d H:i:s') . " (UTC+8)</div>";
         $mail->AltBody = $altbody;
         $mail->send();
     } catch (Exception $e) {

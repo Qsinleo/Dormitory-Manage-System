@@ -90,3 +90,7 @@ img {
 .error {
     color: red;
 }
+
+li {
+    list-style: inside;
+}
