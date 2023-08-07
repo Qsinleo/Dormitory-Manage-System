@@ -113,13 +113,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $from_info = mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM `users` where id=" . $_SESSION["loginid"]));
             $send_to_info = mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM `users` where id=" . $_REQUEST["id"]));
             $format_string = "<h1>您的账号已经被批准</h1><p>尊敬的" . $send_to_info["realname"] . "，您的账号（ID：" . $send_to_info["id"] . "）已经被管理员（ID：" . $from_info['id'] . "）" . $from_info['realname'] . "<b>批准</b>。现在，您可以正式成为" . ($send_to_info["accessment"] == "staff" ? "员工" : "中级管理员") . "了。</p>";
-            send_mail($format_string, $from_info["mail"], "您的账号已被批准");
+            send_mail($format_string, $send_to_info["mail"], "您的账号已被批准");
             $_SESSION["message"] = "成功批准" . $send_to_info["realname"] . "的请求";
         } else {
             $from_info = mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM `users` where id=" . $_SESSION["loginid"]));
             $send_to_info = mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM `users` where id=" . $_REQUEST["id"]));
             $format_string = "<h1>您的账号注册申请被驳回</h1><p>尊敬的" . $send_to_info["realname"] . "，您的账号（ID：" . $send_to_info["id"] . "）被管理员（ID：" . $from_info['id'] . "）" . $from_info['realname'] . "<b>驳回</b>。如果您需要再次发送申请邮件，请在管理界面申请重新发送。</p>";
-            send_mail($format_string, $from_info["mail"], "您的账号注册申请被驳回");
+            send_mail($format_string, $send_to_info["mail"], "您的账号注册申请被驳回");
             $_SESSION["message"] = "成功驳回" . $send_to_info["realname"] . "的请求";
         }
         header("Location: accept.php");
