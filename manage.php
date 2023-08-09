@@ -36,8 +36,8 @@ function data_uri($contents, $mime)
         <form action="proceed.php" method="post" enctype="multipart/form-data" id="upload-header">
             <header>上传头像</header>
             <input type="hidden" name="type" value="change-header">
-            <div>仅支持.png、.jpg和.jpeg的不超过5MB的图片文件！（注：图片较大时，传输时间可能较多。）</div>
-            <input type="file" id="image" accept="images" name="header" />
+            <div>仅支持.png、.jpg和.jpeg的不超过1MB的图片文件！（注：图片较大时，传输时间可能较多。）</div>
+            <input type="file" id="image" accept="image/png,image/jpg,image/jpeg" name="header" />
             <div id="drop">拖到此处以上传</div>
             <input type="reset" />
             <input type="submit" value="Go(/≧▽≦)/">
@@ -232,6 +232,8 @@ function data_uri($contents, $mime)
         if ($usertype == "admin" || $usertype == "system-admin") {
         ?>
             <div><a href="accept.php">批准</a></div>
+            <div><a href="userlist.php">用户列表</a></div>
+            <div><a href="roomlist.php">房间列表</a></div>
         <?php } ?>
         <button onclick="openDialog('change-password')">更改密码</button>
         <form action="proceed.php" method="post">
@@ -247,10 +249,27 @@ function data_uri($contents, $mime)
     </div>
 </body>
 <script src="js/sha1.js"></script>
-<script src="js/maxSizeOfImage.js"></script>
 <script src="js/dropToUpload.js"></script>
 <script src="js/verifyPassword.js"></script>
 <script src="js/isExistedEmail.js"></script>
 <script src="js/manageChange.js"></script>
+<script>
+    document.getElementById("image").onchange = () => {
+        let sizeOfFile = 1024 * 1024 * 1;
+        const item = document.getElementById("image");
+        if (item.files[0] && item.files) {
+            if (item.files[0].size > sizeOfFile) {
+                alert("文件大小不能超出1MB!");
+                document.getElementById("upload-header").reset();
+            } else if (item.files[0].type != "image/png" && item.files[0].type != "image/jpg" && item.files[0].type != "image/jpeg") {
+                alert("文件格式错误，当前：" + item.files[0].type);
+                document.getElementById("upload-header").reset();
+            }
+        }
+
+    }
+
+    hideDialog();
+</script>
 
 </html>

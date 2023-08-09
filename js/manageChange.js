@@ -19,13 +19,15 @@ function delRoom(obj) {
     document.getElementById("room-data").value = roomlist.join(",");
 }
 
+
 document.getElementById("room-number-add").onkeydown = () => {
     document.getElementById("add-room").disabled = "disabled";
     document.getElementById("room-info").style.color = "initial";
     document.getElementById("room-info").innerText = "等待失焦……";
 }
 
-document.getElementById("room-number-add").onchange = () => {
+document.getElementById("room-number-add").onblur = () => {
+    document.getElementById("room-info").innerText = "加载中";
     document.getElementById("add-room").disabled = "disabled";
     document.getElementById("room-info").style.color = "initial";
     if (document.getElementById("room-number-add").value.length == 0) {
@@ -45,7 +47,6 @@ document.getElementById("room-number-add").onchange = () => {
             xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
         }
         xmlhttp.onreadystatechange = function () {
-            document.getElementById("room-info").innerText = "加载中";
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
                 if (xmlhttp.responseText == "true") {
                     document.getElementById("room-info").innerText = "房间存在";
@@ -68,6 +69,7 @@ function addRoom() {
     document.getElementById("manage-parts").appendChild(newRoom);
     roomlist.push(document.getElementById("room-number-add").value);
     document.getElementById("room-data").value = roomlist.join(",");
+    console.log(document.getElementById("room-data").value)
     document.getElementById("add-room").disabled = "disabled";
 }
 

@@ -7,8 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         unset($_SESSION["loginid"]);
         $_SESSION["message"] = "退出登录成功";
         header("Location: index.php");
-    } else
-    if ($_REQUEST["type"] == "register") {
+    } elseif ($_REQUEST["type"] == "register") {
         //注册
         mysqli_query(
             $con,
@@ -198,5 +197,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
         mysqli_query($con, "DELETE FROM `requests` WHERE type = 'change-manage' AND requestid = " . $_REQUEST["id"]);
         header("Location: accept.php");
+    } elseif ($_REQUEST["type"] == "delete-room") {
+        //账号删除
+        mysqli_query($con, "DELETE FROM `rooms` WHERE id = " . $_REQUEST["id"]);
+        foreach (mysqli_fetch_all(mysqli_query($con, "SELECT * FROM `users` WHERE managepartid like '%," . $_REQUEST["id"] . "%'"), MYSQLI_ASSOC) as $value) {
+            $manage_now = explode(",", $value["managepartid"]);
+            unset($manage_now[array_search($_REQUEST["id"], $manage_now)]);
+            mysqli_query($con, "UPDATE `users` SET managepartid = '" . implode(",", $manage_now) . "' WHERE id = " . $value["id"]);
+        }
+        $_SESSION["message"] = "房间删除成功";
+        header("Location: roomlist.php");
+    } elseif ($_REQUEST["type"] == "delete-user") {
+        //系统管理员删除账号
+        $from_info = mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM `users` where id=" . $_SESSION["loginid"]));
+        $send_to_info = mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM `users` where id=" . $_REQUEST["id"]));
+        $format_string = "<h1>您的账号已被管理员删除</h1><p>尊敬的" . $send_to_info["realname"] . "，您的账号（ID：" . $send_to_info["id"] . "）<b>已被删除</b>。感谢你的使用，期待再会。</p>";
+        send_mail($format_string, $send_to_info["mail"], "您的账号已被管理员删除");
+        mysqli_query($con, "DELETE FROM `requests` WHERE requestid=" . $_SESSION["loginid"]);
+        mysqli_query($con, "DELETE FROM `users` WHERE id=" . $_SESSION["loginid"]);
+        unset($_SESSION["loginid"]);
+        $_SESSION["message"] = "删除账号成功";
+        header("Location: userlist.php");
+    } elseif ($_REQUEST["type"] == "add-room") {
+        if (mysqli_num_rows(mysqli_query($con, "SELECT * FROM `rooms` WHERE `number` = " . $_REQUEST["room-number"])) == 0) {
+            mysqli_query($con, "INSERT INTO `rooms` VALUES (NULL," . $_REQUEST["room-number"] . ",'empty',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP())");
+            $_SESSION["message"] = "添加房间成功";
+        } else {
+            $_SESSION["message"] = "添加房间失败：房间重复！";
+        }
+        header("Location: roomlist.php");
     }
 }

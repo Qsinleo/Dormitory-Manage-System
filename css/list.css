@@ -1,0 +1,70 @@
+.user-list,
+.room-list,
+.sidebar {
+    margin: 1%;
+    border: 1px solid;
+    box-shadow: gray 5px 5px 9px 1px;
+    border-radius: 10px;
+    padding: 1%;
+}
+
+.room-list {
+    width: 71%;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.sidebar {
+    width: 20%;
+    display: inline-block;
+}
+
+header {
+    font-size: x-large;
+    font-weight: bold;
+}
+
+li {
+    background-color: blanchedalmond;
+    margin-top: 1%;
+    padding: 1%;
+    border-radius: 5px;
+}
+
+.real-name {
+    font-size: large;
+    font-weight: bold;
+}
+
+a {
+    margin-left: 10px;
+}
+
+.access {
+    font-style: italic;
+}
+
+.identify {
+    font-style: italic;
+    font-size: small;
+}
+
+.room-number {
+    font-size: large;
+    font-weight: bold;
+}
+
+.room-status {
+    padding: 3px;
+    margin: 5px;
+    border-radius: 5px;
+}
+
+.inline {
+    margin-left: 3px;
+    display: inline;
+}
+
+button {
+    margin-left: 8px;
+}
