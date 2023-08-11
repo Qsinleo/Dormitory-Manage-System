@@ -77,13 +77,14 @@ if (key_exists("realname", $_REQUEST)) {
                 "<span class='access'>", ($value["accessment"] == "staff" ? "员工" : ($value["accessment"] == "admin" ? "中级管理员" : "系统管理员")),
                 "<span class='identify'>ID:", $value["id"], " 上次登录时间：", $value["logintime"], "</span>";
                 if ($usertype == "system-admin") {
-                    echo "<form action='proceed.php' method='post' class='inline'>
+                    if ($value["accessment"] != "system-admin")
+                        echo "<form action='proceed.php' method='post' class='inline'>
                     <input type='hidden' name='type' value='delete-user' />
                     <input type='hidden' name='id' value='" . $value["id"] . "' />
                     <input type='submit' value='删除用户' />
                     </form>";
                     if ($value["accessment"] == "admin")
-                        echo "<button onclick=\"document.getElementsByName('id')[0].value = '", $value["id"],
+                        echo "<button onclick=\"document.getElementsByName('setid')[0].value = '", $value["id"],
                         "';document.getElementById('change-user').innerText = '", $value["realname"],
                         "';querymanage()\">更改此用户权限→</button>";
                 }
@@ -95,22 +96,21 @@ if (key_exists("realname", $_REQUEST)) {
     </div>
     <div class="sidebar">
         <?php if ($usertype == "system-admin") { ?>
-            <form action="proceed.php" method="post" id="change-manage">
+            <form action="proceed.php" method="post">
                 <header>修改管理区域</header>
                 <div>选择管理人员：<span id="change-user"></span></div>
+                <input type="hidden" name="type" value="change-user-manage" />
+                <input type="hidden" name="setid" />
                 <input type="hidden" name="room-data" id="room-data" />
-                <input type="hidden" name="id" />
                 <fieldset>
-                    <input type="hidden" name="type" value="change-manage" />
-                    <input type="hidden" name="room-data" id="room-data" />
                     当前管理房间号分别为：
                     <ul id="manage-parts">
-
+                        尚未选择管理人员
                     </ul>
                 </fieldset>
                 <fieldset>
                     <label>请输入想添加的房号：
-                        <input type="number" id="room-number-add" />
+                        <input type="number" id="room-number-add" disabled />
                         <span id="room-info">请键入房号以开始检查</span>
                         <button type="button" onclick="addRoom()" id="add-room" disabled>添加</button>
                     </label>

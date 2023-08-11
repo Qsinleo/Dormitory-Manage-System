@@ -13,11 +13,13 @@ function delRoom(obj) {
     remove(roomlist, obj.previousSibling.data);
     obj.parentNode.parentNode.removeChild(obj.parentNode);
     document.getElementById("room-data").value = roomlist.join(",");
+    document.getElementById("submit").disabled = "";
 }
 
 function querymanage() {
     document.getElementById("manage-parts").innerText = "加载中";
     document.getElementById("submit").disabled = "disabled";
+    document.getElementById("room-number-add").disabled = "disabled";
     document.getElementById("manage-parts").style.color = "initial";
     var xmlhttp;
     if (window.XMLHttpRequest) {
@@ -30,6 +32,7 @@ function querymanage() {
     }
     xmlhttp.onreadystatechange = function () {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            document.getElementById("room-number-add").disabled = "";
             if (xmlhttp.responseText == "null") {
                 roomlist = [];
                 document.getElementById("room-data").value = [];
@@ -46,7 +49,7 @@ function querymanage() {
             }
         }
     }
-    xmlhttp.open("POST", "proceed.php?type=querymanage&id=" + document.getElementsByName("id")[0].value, true);
+    xmlhttp.open("POST", "proceed.php?type=querymanage&id=" + document.getElementsByName("setid")[0].value, true);
     xmlhttp.send();
 }
 
@@ -94,7 +97,7 @@ document.getElementById("room-number-add").onblur = () => {
 }
 
 function addRoom() {
-    if (document.getElementById("manage-parts").innerText = "无管理") {
+    if (document.getElementById("manage-parts").innerText == "无管理") {
         document.getElementById("manage-parts").innerText = "";
     }
     let newRoom = document.createElement("li");
@@ -104,4 +107,5 @@ function addRoom() {
     document.getElementById("room-data").value = roomlist.join(",");
     console.log(document.getElementById("room-data").value);
     document.getElementById("add-room").disabled = "disabled";
+    document.getElementById("submit").disabled = "";
 }

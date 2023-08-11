@@ -237,5 +237,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 echo mysqli_fetch_assoc(mysqli_query($con, "SELECT `number` FROM `rooms` WHERE id = " . $value))["number"], ",";
             }
         }
+    } elseif ($_REQUEST["type"] == "change-user-manage") {
+        $manage_now = [];
+        if ($_REQUEST["room-data"] != "") {
+            foreach (explode(",", $_REQUEST["room-data"]) as $value) {
+                array_push($manage_now, mysqli_fetch_assoc(mysqli_query($con, "SELECT `number` FROM `rooms` WHERE id = " . $value))["id"]);
+            }
+        }
+        mysqli_query($con, "UPDATE `users` SET managepartid = " . ($manage_now == [] ? "NULL" : "'" . implode(",", $manage_now) . "'") . " WHERE id = " . $_REQUEST["setid"]);
+        $_SESSION["message"] = "更改权限成功";
+        header("Location: userlist.php");
     }
 }

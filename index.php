@@ -129,13 +129,6 @@ require_once "header.php";
             }
             ?>
         </section>
-        <section class="debug">
-            <h3>Debug</h3>
-            <!-- 正式一定要删除！！！ -->
-            <?php
-            var_dump($_SESSION);
-            ?>
-        </section>
     </div>
     <!--- Scripts Below --->
     <script>
