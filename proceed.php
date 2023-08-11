@@ -198,13 +198,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         mysqli_query($con, "DELETE FROM `requests` WHERE type = 'change-manage' AND requestid = " . $_REQUEST["id"]);
         header("Location: accept.php");
     } elseif ($_REQUEST["type"] == "delete-room") {
-        //账号删除
-        mysqli_query($con, "DELETE FROM `rooms` WHERE id = " . $_REQUEST["id"]);
+        //房间删除
+        mysqli_query($con, "DELETE FROM `requests` WHERE type = 'change-manage' AND `param` like '%\\\"" . mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM `rooms` WHERE id = " . $_REQUEST["id"]))["number"] . "\\\"%'");
+        mysqli_query($con, "UPDATE `users` SET managepartid = NULL WHERE managepartid = " . $_REQUEST["id"]);
         foreach (mysqli_fetch_all(mysqli_query($con, "SELECT * FROM `users` WHERE managepartid like '%," . $_REQUEST["id"] . "%'"), MYSQLI_ASSOC) as $value) {
             $manage_now = explode(",", $value["managepartid"]);
             unset($manage_now[array_search($_REQUEST["id"], $manage_now)]);
             mysqli_query($con, "UPDATE `users` SET managepartid = '" . implode(",", $manage_now) . "' WHERE id = " . $value["id"]);
         }
+        mysqli_query($con, "DELETE FROM `rooms` WHERE id = " . $_REQUEST["id"]);
         $_SESSION["message"] = "房间删除成功";
         header("Location: roomlist.php");
     } elseif ($_REQUEST["type"] == "delete-user") {
@@ -226,5 +228,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION["message"] = "添加房间失败：房间重复！";
         }
         header("Location: roomlist.php");
+    } elseif ($_REQUEST["type"] == "querymanage") {
+        $res = mysqli_fetch_assoc(mysqli_query($con, "SELECT managepartid FROM `users` WHERE id = " . $_REQUEST["id"]))["managepartid"];
+        if (is_null($res)) {
+            echo "null";
+        } else {
+            foreach (explode(",", $res) as $value) {
+                echo mysqli_fetch_assoc(mysqli_query($con, "SELECT `number` FROM `rooms` WHERE id = " . $value))["number"], ",";
+            }
+        }
     }
 }

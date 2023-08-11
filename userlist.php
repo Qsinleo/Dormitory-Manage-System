@@ -82,8 +82,10 @@ if (key_exists("realname", $_REQUEST)) {
                     <input type='hidden' name='id' value='" . $value["id"] . "' />
                     <input type='submit' value='删除用户' />
                     </form>";
-                } else {
-                    echo "<button title='中级管理员无权限' disabled>删除用户</button>";
+                    if ($value["accessment"] == "admin")
+                        echo "<button onclick=\"document.getElementsByName('id')[0].value = '", $value["id"],
+                        "';document.getElementById('change-user').innerText = '", $value["realname"],
+                        "';querymanage()\">更改此用户权限→</button>";
                 }
                 echo "</li>";
             }
@@ -91,6 +93,35 @@ if (key_exists("realname", $_REQUEST)) {
             <i><small>没有更多了~</small></i>
         </ul>
     </div>
+    <div class="sidebar">
+        <?php if ($usertype == "system-admin") { ?>
+            <form action="proceed.php" method="post" id="change-manage">
+                <header>修改管理区域</header>
+                <div>选择管理人员：<span id="change-user"></span></div>
+                <input type="hidden" name="room-data" id="room-data" />
+                <input type="hidden" name="id" />
+                <fieldset>
+                    <input type="hidden" name="type" value="change-manage" />
+                    <input type="hidden" name="room-data" id="room-data" />
+                    当前管理房间号分别为：
+                    <ul id="manage-parts">
+
+                    </ul>
+                </fieldset>
+                <fieldset>
+                    <label>请输入想添加的房号：
+                        <input type="number" id="room-number-add" />
+                        <span id="room-info">请键入房号以开始检查</span>
+                        <button type="button" onclick="addRoom()" id="add-room" disabled>添加</button>
+                    </label>
+                </fieldset>
+                <input type="submit" value="Go(/≧▽≦)/" disabled id="submit">
+            </form>
+        <?php } else {
+            echo "你没有权限修改！";
+        } ?>
+    </div>
 </body>
+<script src="js/changeManageForUser.js"></script>
 
 </html>

@@ -58,7 +58,7 @@ if (!($usertype == "admin" || $usertype == "system-admin")) {
                     echo "注册成为", $params["request-to-be"] == "staff" ? "员工" : "中级管理员";
                     print_accept_or_reject("register-allow");
                 }
-                echo "【<a href=\"mailto:", $readuser["mail"], "\">使用邮件联系</a>（", $readuser["mail"], "）】";
+                echo "<a href=\"mailto:", $readuser["mail"], "\">", $readuser["mail"], "</a>";
                 echo "<small>", $value["time"], "</small>";
                 echo "</li>";
             }
