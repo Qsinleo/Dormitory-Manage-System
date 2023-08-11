@@ -16,7 +16,14 @@ function delRoom(obj) {
     document.getElementById("submit").disabled = "";
 }
 
-function querymanage() {
+function querymanage(id, name) {
+    document.getElementsByName("setid")[0].value = id;
+    document.getElementById("change-user").innerText = name;
+    fetchManage(id);
+}
+
+function fetchManage(id) {
+    document.getElementById("fetch-manage").disabled = "disabled";
     document.getElementById("manage-parts").innerText = "加载中";
     document.getElementById("submit").disabled = "disabled";
     document.getElementById("room-number-add").disabled = "disabled";
@@ -33,6 +40,7 @@ function querymanage() {
     xmlhttp.onreadystatechange = function () {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
             document.getElementById("room-number-add").disabled = "";
+            document.getElementById("fetch-manage").disabled = "";
             if (xmlhttp.responseText == "null") {
                 roomlist = [];
                 document.getElementById("room-data").value = [];
@@ -49,9 +57,10 @@ function querymanage() {
             }
         }
     }
-    xmlhttp.open("POST", "proceed.php?type=querymanage&id=" + document.getElementsByName("setid")[0].value, true);
+    xmlhttp.open("POST", "proceed.php?type=querymanage&id=" + id, true);
     xmlhttp.send();
 }
+
 
 document.getElementById("room-number-add").onkeydown = () => {
     document.getElementById("add-room").disabled = "disabled";

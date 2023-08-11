@@ -84,9 +84,7 @@ if (key_exists("realname", $_REQUEST)) {
                     <input type='submit' value='删除用户' />
                     </form>";
                     if ($value["accessment"] == "admin")
-                        echo "<button onclick=\"document.getElementsByName('setid')[0].value = '", $value["id"],
-                        "';document.getElementById('change-user').innerText = '", $value["realname"],
-                        "';querymanage()\">更改此用户权限→</button>";
+                        echo "<button onclick=\"querymanage(", $value["id"], ",'", $value["realname"], "')\">更改此用户权限→</button>";
                 }
                 echo "</li>";
             }
@@ -98,7 +96,7 @@ if (key_exists("realname", $_REQUEST)) {
         <?php if ($usertype == "system-admin") { ?>
             <form action="proceed.php" method="post">
                 <header>修改管理区域</header>
-                <div>选择管理人员：<span id="change-user"></span></div>
+                <div>选择管理人员：<span id="change-user">未选择</span></div>
                 <input type="hidden" name="type" value="change-user-manage" />
                 <input type="hidden" name="setid" />
                 <input type="hidden" name="room-data" id="room-data" />
@@ -115,6 +113,7 @@ if (key_exists("realname", $_REQUEST)) {
                         <button type="button" onclick="addRoom()" id="add-room" disabled>添加</button>
                     </label>
                 </fieldset>
+                <button type="button" onclick="fetchManage(document.getElementsByName('setid')[0].value);" disabled id="fetch-manage">重置/刷新</button>
                 <input type="submit" value="Go(/≧▽≦)/" disabled id="submit">
             </form>
         <?php } else {
