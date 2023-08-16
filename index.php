@@ -25,35 +25,61 @@ require_once "header.php";
                 </span>
                 <div class="text logo-text">
                     <span class="name">Phoenix</span>
-                    <span class="profession">Web Dev</span>
+                    <span class="profession">Web Developer</span>
                 </div>
             </div>
+
             <i class="bx bx-chevron-right toggle"></i>
         </header>
         <div class="menu-bar">
             <div class="menu">
-                <li class="seach-box">
+                <li class="search-box">
                     <i class="bx bx-search icon"></i>
-                    <input type="text">
+                    <input type="text" placeholder="Search...">
                 </li>
+
                 <ul class="menu-links">
-                    <!-- 列表项 -->
+
                     <li class="nav-link">
                         <a href="#">
                             <i class="bx bx-home-alt icon"></i>
-                            <span class="text nav-text">Home</span>
+                            <span class="text nav-text">Dashboard</span>
                         </a>
                     </li>
+
+                    <!-- 下面的小li都是一样的样式，只需要修改文字和图标 -->
                     <li class="nav-link">
                         <a href="#">
-                            <i class="bx bx-home-alt icon"></i>
-                            <span class="text nav-text">Home</span>
+                            <i class='bx bx-bar-chart-alt-2 icon'></i>
+                            <span class="text nav-text">Revenue</span>
                         </a>
                     </li>
+
                     <li class="nav-link">
                         <a href="#">
-                            <i class="bx bx-home-alt icon"></i>
-                            <span class="text nav-text">Home</span>
+                            <i class='bx bx-bell icon'></i>
+                            <span class="text nav-text">Notifications</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-link">
+                        <a href="#">
+                            <i class='bx bx-pie-chart-alt icon'></i>
+                            <span class="text nav-text">Analytics</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-link">
+                        <a href="#">
+                            <i class='bx bx-heart icon'></i>
+                            <span class="text nav-text">Likes</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-link">
+                        <a href="#">
+                            <i class='bx bx-wallet icon'></i>
+                            <span class="text nav-text">Wallets</span>
                         </a>
                     </li>
                 </ul>
@@ -71,9 +97,12 @@ require_once "header.php";
                         <i class="bx bx-sun icon sun"></i>
                     </div>
                     <span class="mode-text text">Dark Mode</span>
-                    <div class="toggle-switch"><span class="switch"></span></div>
+                    <div class="toggle-switch">
+                        <span class="switch"></span>
+                    </div>
                 </li>
             </div>
+
         </div>
     </nav>
 
@@ -225,5 +254,5 @@ require_once "header.php";
         getBrowserVersion();
     };
 </script>
-
+<script src="./js/nav.js"></script>
 </html>
