@@ -21,7 +21,7 @@ require_once "header.php";
         <header>
             <div class="image-text">
                 <span class="image">
-                    <img src="" alt="">
+                    <img src="./img/stuff.webp" alt="">
                 </span>
                 <div class="text logo-text">
                     <span class="name">Phoenix</span>
@@ -37,6 +37,7 @@ require_once "header.php";
                     <input type="text">
                 </li>
                 <ul class="menu-links">
+                    <!-- 列表项 -->
                     <li class="nav-link">
                         <a href="#">
                             <i class="bx bx-home-alt icon"></i>
@@ -56,6 +57,22 @@ require_once "header.php";
                         </a>
                     </li>
                 </ul>
+            </div>
+            <div class="bottom-content">
+                <li>
+                    <a href="#">
+                        <i class="bx bx-log-out icon"></i>
+                        <span class="text nav-text">Logout</span>
+                    </a>
+                </li>
+                <li class="mode">
+                    <div class="sun-moon">
+                        <i class="bx bx-moon icon moon"></i>
+                        <i class="bx bx-sun icon sun"></i>
+                    </div>
+                    <span class="mode-text text">Dark Mode</span>
+                    <div class="toggle-switch"><span class="switch"></span></div>
+                </li>
             </div>
         </div>
     </nav>
