@@ -36,7 +36,7 @@ function data_uri($contents, $mime)
         <form action="proceed.php" method="post" enctype="multipart/form-data" id="upload-header">
             <header>上传头像</header>
             <input type="hidden" name="type" value="change-header">
-            <div>仅支持.png、.jpg和.jpeg的不超过1MB的图片文件！（注：图片较大时，传输时间可能较多。）</div>
+            <div>仅支持.png、.jpg和.jpeg的不超过1MB的图片文件！建议您上传正方形尺寸照片。</div>
             <input type="file" id="image" accept="image/png,image/jpg,image/jpeg" name="header" />
             <div id="drop">拖到此处以上传</div>
             <input type="reset" />
@@ -73,13 +73,6 @@ function data_uri($contents, $mime)
             <header>修改工号</header>
             <input type="hidden" name="type" value="change-workid">
             <input type="number" name="workid" value="<?php echo $userinfo["workid"]; ?>">
-            <input type="reset" />
-            <input type="submit" value="Go(/≧▽≦)/">
-        </form>
-        <form action="proceed.php" method="post" id="change-liveroom">
-            <header>修改住所房间号</header>
-            <input type="hidden" name="type" value="change-liveroom">
-            <input type="text" name="liveinroom" value="<?php if (!is_null($userinfo["liveinroom"])) echo mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM `rooms` where id=" . $_SESSION["liveinroom"]))["number"]; ?>" />
             <input type="reset" />
             <input type="submit" value="Go(/≧▽≦)/">
         </form>
@@ -200,9 +193,7 @@ function data_uri($contents, $mime)
                 </tr>
                 <tr>
                     <td>部门：<?php echo $userinfo["department"]; ?><button onclick="openDialog('change-depart')">更改</button></td>
-                    <td>住在房间号：<?php
-                                echo is_null($userinfo["liveinroom"]) ? "无" : mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM `rooms` where id=" . $userinfo["liveinroom"]))["number"];
-                                ?><button onclick="openDialog('change-liveroom')">更改</button></td>
+                    <td>住所：<?php echo is_null($userinfo["liveinroom"]) ? "无" : $userinfo["liveinroom"] ?></td>
 
                 </tr>
                 <tr>
