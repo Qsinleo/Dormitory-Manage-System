@@ -11,12 +11,13 @@
 /* 一些需要重复使用的样式 */
 :root {
     /* 颜色 */
-    --body-color: #b0e9ff;
+    --body-color: rgb(139, 195, 255);
     --sidebar-color: #fff;
     --primary-color: #695cfe;
     --primary-color-light: #f6f5ff;
     --toggle-color: #ddd;
     --text-color: #707070;
+    --second-body-color:rgb(176,233,255);
 
     /* 过渡效果 */
     --tran-02: all 0.2s ease;
@@ -41,6 +42,7 @@ body.dark{
     --primary-color-light:#3a3b3c;
     --toggle-color:#fff;
     --text-color:#ccc;
+    --second-body-color:rgb(0,71,98);
 }
 
 /* sidebar上的初始化样式 */
