@@ -23,7 +23,7 @@ body {
     margin: auto;
     margin-top: 50vh;
     padding: 20px 20px 20px 20px;
-    background-color: #b0e9ff;
+    background-color: var(--second-body-color);
     border-radius: 30px;
     -webkit-border-radius: 30px;
     -moz-border-radius: 30px;

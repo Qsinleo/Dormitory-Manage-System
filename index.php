@@ -216,6 +216,10 @@ function data_uri($contents, $mime)
         } else {
             document.getElementById("remain").style.background = "rgb(255, 181, 181)"
         }
+        var manage=document.getElementById("manage");
+        manage.onclick=function(){
+            document.location="manage.php"
+        }
     </script>
 </body>
 <!--- NSBA SCRIPT --->
