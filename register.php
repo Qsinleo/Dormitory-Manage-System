@@ -18,7 +18,7 @@ require_once "header.php";
         <table>
             <tr>
                 <td>真实姓名：</td>
-                <td><input name="realname" maxlength="8" /></td>
+                <td><input name="realname" maxlength="8" required /></td>
             </tr>
             <tr>
                 <td>邮箱：</td>

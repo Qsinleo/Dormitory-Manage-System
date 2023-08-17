@@ -96,6 +96,13 @@ if ($usertype == "admin") {
                     echo "无";
                 }
                 echo "人居住</span><span class='identify'>ID:", $value["id"], "</span>";
+                if (mysqli_num_rows(mysqli_query($con, "SELECT * FROM `requests` WHERE requestid = " . $_SESSION["loginid"])) == 0) {
+                    echo '<button onclick="setRoom(', $value["id"], ',', $value["number"], ');">设为操作房间→</button>
+                    ';
+                } else {
+                    echo '<button disabled>设为操作房间→</button>
+                    ';
+                }
                 if ($usertype == "admin") {
                     if (in_array($value["id"], $manageparts)) {
                         if (mysqli_num_rows(mysqli_query($con, "SELECT * FROM `users` WHERE liveinroom = " . $value["id"])) == 0) {
@@ -123,14 +130,28 @@ if ($usertype == "admin") {
             <i><small>没有更多了~</small></i>
         </ul>
     </div>
-    <div class="sidebar">
-        <header>添加房间</header>
-        <form action="proceed.php" method="post">
-            <input type="hidden" name="type" value="add-room">
-            <label>请输入房号：<input type="number" name="room-number"></label>
-            <input type="reset" value="重置" />
-            <input type="submit" value="添加">
-        </form>
+    <div class="sidebar roomlist">
+        <?php if (mysqli_num_rows(mysqli_query($con, "SELECT * FROM `requests` WHERE requestid = " . $_SESSION["loginid"])) == 0) { ?>
+            <div>
+                <form action="proceed.php" method="post">
+                    <header>办理入住</header>
+                    <input type="hidden" name="type" value="request-check-in" />
+                    <input type="hidden" name="roomid" />
+                    入住房间号：<span id="room-id"></span>
+                </form>
+            </div>
+        <?php } ?>
+        <?php if ($usertype == "admin" || $usertype == "system-admin") { ?>
+            <div>
+                <header>添加房间</header>
+                <form action="proceed.php" method="post">
+                    <input type="hidden" name="type" value="add-room">
+                    <label>请输入房号：<input type="number" name="room-number"></label>
+                    <input type="reset" value="重置" />
+                    <input type="submit" value="添加">
+                </form>
+            </div>
+        <?php } ?>
     </div>
 </body>
 <script src="js/roomStatus.js"></script>

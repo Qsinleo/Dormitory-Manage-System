@@ -1,5 +1,9 @@
 <?php
 require_once "header.php";
+function data_uri($contents, $mime)
+{
+    return ('data:' . $mime . ';base64,' . base64_encode($contents));
+}
 ?>
 
 <!DOCTYPE html>
@@ -21,11 +25,32 @@ require_once "header.php";
         <header>
             <div class="image-text">
                 <span class="image">
-                    <img src="./img/stuff.webp" alt="">
+                    <img src="<?php echo (is_null($usertype) || $usertype == "inactived" || is_null($userinfo["header"])) ? "img/stuff.webp" : data_uri($userinfo["header"], "image/png"); ?>" alt="头像">
                 </span>
                 <div class="text logo-text">
-                    <span class="name">Phoenix</span>
-                    <span class="profession">Web Developer</span>
+                    <span class="name"><?php echo is_null($usertype) ? "访客" : (($usertype == "inactived") ? "[未激活]" : "" . $userinfo["realname"]) ?></span>
+                    <span class="profession"><?php
+                                                switch ($usertype) {
+                                                    case 'inactived':
+                                                        echo "未激活";
+                                                        break;
+                                                    case 'staff':
+                                                        echo "员工";
+                                                        break;
+                                                    case 'admin':
+                                                        echo "管理员";
+                                                        break;
+                                                    case 'system-admin':
+                                                        echo "系统管理员";
+                                                        break;
+                                                    case 'inactived':
+                                                        echo "未激活";
+                                                        break;
+                                                    default:
+                                                        echo "访客";
+                                                        break;
+                                                }
+                                                ?></span>
                 </div>
             </div>
 
@@ -41,56 +66,59 @@ require_once "header.php";
                 <ul class="menu-links">
 
                     <li class="nav-link">
-                        <a href="#">
+                        <a href="index.php">
                             <i class="bx bx-home-alt icon"></i>
-                            <span class="text nav-text">Dashboard</span>
+                            <span class="text nav-text">首页</span>
                         </a>
                     </li>
+                    <?php if ($usertype == "admin" || $usertype == "system-admin") { ?>
+                        <li class="nav-link">
+                            <a href="accept.php">
+                                <i class='bx bx-bar-chart-alt-2 icon'></i>
+                                <span class="text nav-text">批准</span>
+                            </a>
+                        </li>
 
-                    <!-- 下面的小li都是一样的样式，只需要修改文字和图标 -->
-                    <li class="nav-link">
-                        <a href="#">
-                            <i class='bx bx-bar-chart-alt-2 icon'></i>
-                            <span class="text nav-text">Revenue</span>
-                        </a>
-                    </li>
-
-                    <li class="nav-link">
-                        <a href="#">
-                            <i class='bx bx-bell icon'></i>
-                            <span class="text nav-text">Notifications</span>
-                        </a>
-                    </li>
-
+                        <li class="nav-link">
+                            <a href="roomlist.php">
+                                <i class='bx bx-bell icon'></i>
+                                <span class="text nav-text">房间列表</span>
+                            </a>
+                        </li>
+                    <?php } ?>
                     <li class="nav-link">
                         <a href="#">
                             <i class='bx bx-pie-chart-alt icon'></i>
-                            <span class="text nav-text">Analytics</span>
+                            <span class="text nav-text">？？？</span>
                         </a>
                     </li>
 
                     <li class="nav-link">
                         <a href="#">
                             <i class='bx bx-heart icon'></i>
-                            <span class="text nav-text">Likes</span>
+                            <span class="text nav-text">？？？</span>
                         </a>
                     </li>
 
                     <li class="nav-link">
                         <a href="#">
                             <i class='bx bx-wallet icon'></i>
-                            <span class="text nav-text">Wallets</span>
+                            <span class="text nav-text">？？？</span>
                         </a>
                     </li>
                 </ul>
             </div>
             <div class="bottom-content">
-                <li>
-                    <a href="#">
-                        <i class="bx bx-log-out icon"></i>
-                        <span class="text nav-text">Logout</span>
-                    </a>
-                </li>
+                <?php if (!is_null($usertype)) { ?>
+                    <li>
+                        <form action="proceed.php" method="post">
+                            <button type="submit" name="logout">
+                                <i class="bx bx-log-out icon"></i>
+                                <span class="text nav-text">Logout</span>
+                            </button>
+                        </form>
+                    </li>
+                <?php } ?>
                 <li class="mode">
                     <div class="sun-moon">
                         <i class="bx bx-moon icon moon"></i>
@@ -255,4 +283,5 @@ require_once "header.php";
     };
 </script>
 <script src="./js/nav.js"></script>
+
 </html>

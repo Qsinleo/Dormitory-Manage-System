@@ -69,3 +69,10 @@ button {
 #change-user {
     font-weight: bold;
 }
+
+.roomlist div {
+    margin: 5px;
+    border-radius: 5px;
+    border: 1px solid;
+    padding: 5px;
+}

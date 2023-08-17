@@ -62,8 +62,10 @@ header {
 }
 
 img {
-    width: 300px;
-    border-radius: 10px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50px;
+    border: 1px solid;
 }
 
 .collapse {

@@ -22,3 +22,8 @@ for (const iterator of document.getElementsByClassName("room-status")) {
             break;
     }
 }
+
+function setRoom(id, number) {
+    document.getElementById("roomid").innerText = id;
+    document.getElementsByName("room-id")[0].value = number;
+}
