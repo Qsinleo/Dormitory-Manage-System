@@ -23,7 +23,7 @@ for (const iterator of document.getElementsByClassName("room-status")) {
     }
 }
 
-function setRoom(id, number) {
-    document.getElementById("roomid").innerText = id;
-    document.getElementsByName("room-id")[0].value = number;
+function setRoom(number) {
+    document.getElementById("roomid").innerText = document.getElementsByName("room-id")[0].value = number;
+    document.getElementById("submit-room").disabled = "";
 }

@@ -97,7 +97,7 @@ if ($usertype == "admin") {
                 }
                 echo "人居住</span><span class='identify'>ID:", $value["id"], "</span>";
                 if (mysqli_num_rows(mysqli_query($con, "SELECT * FROM `requests` WHERE requestid = " . $_SESSION["loginid"])) == 0) {
-                    echo '<button onclick="setRoom(', $value["id"], ',', $value["number"], ');">设为操作房间→</button>
+                    echo '<button onclick="setRoom(', $value["number"], ');">设为操作房间→</button>
                     ';
                 } else {
                     echo '<button disabled>设为操作房间→</button>
@@ -136,8 +136,10 @@ if ($usertype == "admin") {
                 <form action="proceed.php" method="post">
                     <header>办理入住</header>
                     <input type="hidden" name="type" value="request-check-in" />
-                    <input type="hidden" name="roomid" />
-                    入住房间号：<span id="room-id"></span>
+                    <input type="hidden" name="room-id" />
+                    入住房间号：<span id="roomid">-</span>
+                    <input type="reset" value="重置" />
+                    <input type="submit" id="submit-room" value="提交申请" disabled />
                 </form>
             </div>
         <?php } ?>
