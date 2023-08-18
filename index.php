@@ -111,12 +111,8 @@ function data_uri($contents, $mime)
             <div class="bottom-content">
                 <?php if (!is_null($usertype)) { ?>
                     <li>
-                        <form action="proceed.php" method="post">
-                            <button type="submit" name="logout">
-                                <i class="bx bx-log-out icon"></i>
-                                <span class="text nav-text">Logout</span>
-                            </button>
-                        </form>
+                        <i class="bx bx-log-out icon"></i>
+                        <span class="text nav-text">Logout</span>
                     </li>
                 <?php } ?>
                 <li class="mode">
@@ -287,5 +283,5 @@ function data_uri($contents, $mime)
     };
 </script>
 <script src="./js/nav.js"></script>
-
+<script src="./js/lightDarkModeSwitcher.js"></script>
 </html>
