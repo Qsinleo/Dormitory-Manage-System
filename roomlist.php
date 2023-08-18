@@ -91,12 +91,12 @@ if ($usertype == "admin") {
                 }
                 echo "</span><span class='live-count'>";
                 if ($value["status"] == "occupied") {
-                    echo mysqli_num_rows(mysqli_query($con, "SELECT * FROM `users` WHERE liveinroom = " . $value["id"]));
+                    echo mysqli_num_rows(mysqli_query($con, "SELECT * FROM `checkios` WHERE roomid = " . $value["id"]));
                 } else {
                     echo "无";
                 }
                 echo "人居住</span><span class='identify'>ID:", $value["id"], "</span>";
-                if (mysqli_num_rows(mysqli_query($con, "SELECT * FROM `requests` WHERE requestid = " . $_SESSION["loginid"])) == 0) {
+                if (mysqli_num_rows(mysqli_query($con, "SELECT * FROM `requests` WHERE requestid = " . $_SESSION["loginid"] . " AND `type` = 'check-in'")) == 0) {
                     echo '<button onclick="setRoom(', $value["number"], ');">设为操作房间→</button>
                     ';
                 } else {
@@ -105,7 +105,7 @@ if ($usertype == "admin") {
                 }
                 if ($usertype == "admin") {
                     if (in_array($value["id"], $manageparts)) {
-                        if (mysqli_num_rows(mysqli_query($con, "SELECT * FROM `users` WHERE liveinroom = " . $value["id"])) == 0) {
+                        if (mysqli_num_rows(mysqli_query($con, "SELECT * FROM `checkios` WHERE roomid = " . $value["id"])) == 0) {
                             echo '<form action="proceed.php" method="post" class="inline">
                                 <input type="hidden" name="type" value="delete-room" />
                                 <input type="hidden" name="id" value="' . $value["id"] . '" />
@@ -131,19 +131,44 @@ if ($usertype == "admin") {
         </ul>
     </div>
     <div class="sidebar roomlist">
-        <?php if (mysqli_num_rows(mysqli_query($con, "SELECT * FROM `requests` WHERE requestid = " . $_SESSION["loginid"])) == 0) { ?>
+        <?php if (mysqli_num_rows(mysqli_query($con, "SELECT * FROM `checkios` WHERE requestid = " . $_SESSION["loginid"])) != 0) { ?>
+            <div>
+                <form action="proceed.php" method="post">
+                    <header>提前办理签出</header>
+                    <div>您的既定预约时间是：<b>
+                            <?php
+                            echo mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM `checkios` WHERE requestid = " . $_SESSION["loginid"]))["todate"];
+                            ?>
+                        </b></div>
+                    <div>房间号是：<b>
+                            <?php
+                            echo mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM `rooms` WHERE id = " . mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM `checkios` WHERE requestid = " . $_SESSION["loginid"]))["roomid"]))["number"];
+                            ?>
+                        </b></div>
+                    <input type="hidden" name="type" value="check-out" />
+                    <input type="submit" id="submit-room" value="确认提前签出" />
+                </form>
+            </div>
+        <?php } else if (mysqli_num_rows(mysqli_query($con, "SELECT * FROM `requests` WHERE requestid = " . $_SESSION["loginid"] . " AND `type` = 'check-in'")) == 0) { ?>
             <div>
                 <form action="proceed.php" method="post">
                     <header>办理入住</header>
                     <input type="hidden" name="type" value="request-check-in" />
-                    <input type="hidden" name="room-id" />
-                    入住房间号：<span id="roomid">-</span>
+                    <input type="hidden" name="room-num" />
+                    <div>入住房间号：<span id="roomnum">-</span></div>
+                    <div><label>开始居住时间<input type="date" name="start-time" min="<?php echo date("Y-m-d") ?>" value="<?php echo date("Y-m-d") ?>" /></label></div>
+                    <div><label>结束居住时间<input type="date" name="end-time" value="<?php echo date("Y-m-d") ?>" min="<?php echo date("Y-m-d") ?>" /></label></div>
+                    <textarea name="reason" maxlength="100" placeholder="住房原因。不超过100个字符。"></textarea>
                     <input type="reset" value="重置" />
                     <input type="submit" id="submit-room" value="提交申请" disabled />
                 </form>
             </div>
-        <?php } ?>
-        <?php if ($usertype == "admin" || $usertype == "system-admin") { ?>
+        <?php } else {  ?>
+            <div>
+                <header>您的提交正在被审核……</header>
+            </div>
+        <?php }
+        if ($usertype == "admin" || $usertype == "system-admin") { ?>
             <div>
                 <header>添加房间</header>
                 <form action="proceed.php" method="post">

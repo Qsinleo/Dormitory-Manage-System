@@ -76,3 +76,7 @@ button {
     border: 1px solid;
     padding: 5px;
 }
+
+#roomnum {
+    font-weight: bold;
+}

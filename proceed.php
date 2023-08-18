@@ -247,5 +247,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         mysqli_query($con, "UPDATE `users` SET managepartid = " . ($manage_now == [] ? "NULL" : "'" . implode(",", $manage_now) . "'") . " WHERE id = " . $_REQUEST["setid"]);
         $_SESSION["message"] = "更改权限成功";
         header("Location: userlist.php");
+    } elseif ($_REQUEST["type"] == "request-check-in") {
+        mysqli_query($con, "INSERT INTO `requests` VALUES (NULL," . $_SESSION["loginid"] . ",'check-in','" . mysqli_escape_string($con, json_encode(
+            [
+                "start-time" => $_REQUEST["start-time"],
+                "end-time" => $_REQUEST["end-time"],
+                "roomnumber" => $_REQUEST["room-num"],
+                "reason" => $_REQUEST["reason"]
+            ]
+        )) . "',CURRENT_TIMESTAMP())");
+        $_SESSION["message"] = "提交入住申请成功";
+        header("Location: roomlist.php");
+    } elseif ($_REQUEST["type"] == "check-in-allow") {
+        $params = json_decode(mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM `requests` WHERE requestid = " . $_REQUEST["id"] . " AND `type` = 'check-in'"))["param"], true);
+        mysqli_query($con, "INSERT INTO `checkios` VALUES (NULL," . $_REQUEST["id"] . "," . mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM `rooms` WHERE `number` = " . $params["roomnumber"]))["id"] . ",'" . $params["start-time"] . "','" . $params["end-time"] . "','" . mysqli_escape_string($con, $params["reason"]) . "')");
+        mysqli_query($con, "DELETE FROM `requests` WHERE requestid = " . $_REQUEST["id"] . " AND `type` = 'check-in'");
+        $_SESSION["message"] = "批准入住申请成功";
+        header("Location: accept.php");
+    } elseif ($_REQUEST["type"] == "check-out") {
+        mysqli_query($con, "DELETE FROM `checkios` WHERE requestid = " . $_SESSION["loginid"]);
+        $_SESSION["message"] = "成功办理签出";
+        header("Location: roomlist.php");
     }
 }

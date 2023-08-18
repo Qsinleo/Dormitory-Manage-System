@@ -57,6 +57,9 @@ if (!($usertype == "admin" || $usertype == "system-admin")) {
                 if ($value["type"] == "register-allow") {
                     echo "注册成为", $params["request-to-be"] == "staff" ? "员工" : "中级管理员";
                     print_accept_or_reject("register-allow");
+                } elseif ($value["type"] == "check-in") {
+                    echo "办理入住至<b>", $params["roomnumber"], "</b>从", $params["start-time"], "至", $params["end-time"];
+                    print_accept_or_reject("check-in-allow");
                 }
                 echo "<a href=\"mailto:", $readuser["mail"], "\">", $readuser["mail"], "</a>";
                 echo "<small>", $value["time"], "</small>";

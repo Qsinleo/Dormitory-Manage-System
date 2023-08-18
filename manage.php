@@ -193,7 +193,7 @@ function data_uri($contents, $mime)
                 </tr>
                 <tr>
                     <td>部门：<?php echo $userinfo["department"]; ?><button onclick="openDialog('change-depart')">更改</button></td>
-                    <td>住所：<?php echo is_null($userinfo["liveinroom"]) ? "无" : $userinfo["liveinroom"] ?></td>
+                    <td>住所：<?php echo mysqli_num_rows(mysqli_query($con, "SELECT * FROM `checkios` WHERE requestid = " . $userinfo["id"])) ? "无" : mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM `rooms` WHERE id = " . mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM `checkios` WHERE requestid = " . $userinfo["id"]))["roomid"]))["number"] ?></td>
 
                 </tr>
                 <tr>

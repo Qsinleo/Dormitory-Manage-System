@@ -24,6 +24,12 @@ for (const iterator of document.getElementsByClassName("room-status")) {
 }
 
 function setRoom(number) {
-    document.getElementById("roomid").innerText = document.getElementsByName("room-id")[0].value = number;
+    document.getElementById("roomnum").innerText = document.getElementsByName("room-num")[0].value = number;
     document.getElementById("submit-room").disabled = "";
+}
+
+document.getElementsByName("start-time")[0].onchange = document.getElementsByName("end-time")[0].onchange = () => {
+    if (new Date(document.getElementsByName("end-time")[0].value) - new Date(document.getElementsByName("start-time")[0].value) < 1) {
+        document.getElementsByName("end-time")[0].value = document.getElementsByName("start-time")[0].value + 1;
+    }
 }
