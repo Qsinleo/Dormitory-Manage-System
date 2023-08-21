@@ -43,9 +43,6 @@ function data_uri($contents, $mime)
                                                     case 'system-admin':
                                                         echo "系统管理员";
                                                         break;
-                                                    case 'inactived':
-                                                        echo "未激活";
-                                                        break;
                                                     default:
                                                         echo "访客";
                                                         break;
