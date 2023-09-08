@@ -1,9 +1,9 @@
 const switcher=() => {
     document.body.classList.toggle("dark");
     if(body.classList.contains('dark')){
-        modeText.innerText="Light mode"
-    }else{
         modeText.innerText="Dark mode"
+    }else{
+        modeText.innerText="Light mode"
     }
 };
 const media = window.matchMedia("(prefers-color-scheme:dark)");
