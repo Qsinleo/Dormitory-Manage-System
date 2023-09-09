@@ -20,6 +20,10 @@ if (key_exists("realname", $_REQUEST)) {
     $sql = "SELECT * FROM `users` WHERE realname = '" . $_REQUEST["realname"] . "'";
 }
 
+function data_uri($contents, $mime)
+{
+    return ('data:' . $mime . ';base64,' . base64_encode($contents));
+}
 ?>
 
 <!DOCTYPE html>
@@ -73,6 +77,7 @@ if (key_exists("realname", $_REQUEST)) {
         <ul>
             <?php foreach (mysqli_fetch_all(mysqli_query($con, $sql), MYSQLI_ASSOC) as $value) {
                 echo "<li>",
+                "<img src='" . (is_null($value["header"]) ? "img/stuff.webp" : data_uri($value["header"], "image/jpg")) . "' />",
                 "<span class='real-name'>", $value["realname"], "</span><a href='mailto:", $value["mail"], "'>", $value["mail"], "</a>",
                 "<span class='access'>", ($value["accessment"] == "staff" ? "员工" : ($value["accessment"] == "admin" ? "中级管理员" : "系统管理员")),
                 "<span class='identify'>ID:", $value["id"], " 上次登录时间：", $value["logintime"], "</span>";

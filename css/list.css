@@ -84,3 +84,10 @@ button {
 form {
     margin: 0;
 }
+
+img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50px;
+    border: 1px solid;
+}

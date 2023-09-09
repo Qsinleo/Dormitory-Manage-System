@@ -161,7 +161,7 @@ function data_uri($contents, $mime)
             }
         } else {
             if ($userinfo["header"] == null) {
-                echo "无头像";
+                echo "<img src='image/staff.webp' />";
             } else {
                 echo "<img src='" . data_uri($userinfo["header"], "image/png") . "' />";
             }
