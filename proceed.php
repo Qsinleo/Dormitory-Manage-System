@@ -3,11 +3,7 @@ require_once "header.php";
 require_once "mail.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if (key_exists("logout", $_REQUEST)) {
-        unset($_SESSION["loginid"]);
-        $_SESSION["message"] = "退出登录成功";
-        header("Location: index.php");
-    } elseif ($_REQUEST["type"] == "register") {
+    if ($_REQUEST["type"] == "register") {
         //注册
         mysqli_query(
             $con,
@@ -262,6 +258,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $params = json_decode(mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM `requests` WHERE requestid = " . $_REQUEST["id"] . " AND `type` = 'check-in'"))["param"], true);
         mysqli_query($con, "INSERT INTO `checkios` VALUES (NULL," . $_REQUEST["id"] . "," . mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM `rooms` WHERE `number` = " . $params["roomnumber"]))["id"] . ",'" . $params["start-time"] . "','" . $params["end-time"] . "','" . mysqli_escape_string($con, $params["reason"]) . "')");
         mysqli_query($con, "DELETE FROM `requests` WHERE requestid = " . $_REQUEST["id"] . " AND `type` = 'check-in'");
+        mysqli_query($con, "UPDATE `rooms` SET `status` = 'occupied' WHERE `number` = " . $params["roomnumber"]);
         $_SESSION["message"] = "批准入住申请成功";
         header("Location: accept.php");
     } elseif ($_REQUEST["type"] == "check-out") {
