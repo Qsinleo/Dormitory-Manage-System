@@ -227,7 +227,7 @@ body.dark .sidebar li a:hover .text {
 }
 
 .sidebar .menu-bar {
-    height: calc(100% - 55px);
+    height: calc(100% - 100px);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
