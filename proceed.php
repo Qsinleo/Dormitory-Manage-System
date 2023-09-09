@@ -3,7 +3,11 @@ require_once "header.php";
 require_once "mail.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if ($_REQUEST["type"] == "register") {
+    if (key_exists("logout", $_REQUEST)) {
+        unset($_SESSION["loginid"]);
+        $_SESSION["message"] = "退出登录成功";
+        header("Location: index.php");
+    } elseif ($_REQUEST["type"] == "register") {
         //注册
         mysqli_query(
             $con,
