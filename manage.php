@@ -193,7 +193,7 @@ function data_uri($contents, $mime)
                 </tr>
                 <tr>
                     <td>部门：<?php echo $userinfo["department"]; ?><button onclick="openDialog('change-depart')">更改</button></td>
-                    <td>住所：<?php echo mysqli_num_rows(mysqli_query($con, "SELECT * FROM `checkios` WHERE requestid = " . $userinfo["id"])) ? "无" : mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM `rooms` WHERE id = " . mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM `checkios` WHERE requestid = " . $userinfo["id"]))["roomid"]))["number"] ?></td>
+                    <td>住所：<?php echo mysqli_num_rows(mysqli_query($con, "SELECT * FROM `checkios` WHERE requestid = " . $userinfo["id"])) == 0 ? "无" : mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM `rooms` WHERE id = " . mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM `checkios` WHERE requestid = " . $userinfo["id"]))["roomid"]))["number"] ?></td>
 
                 </tr>
                 <tr>
@@ -227,9 +227,7 @@ function data_uri($contents, $mime)
             <div><a href="roomlist.php">房间列表</a></div>
         <?php } ?>
         <button onclick="openDialog('change-password')">更改密码</button>
-        <form action="proceed.php" method="post">
-            <input type="submit" name="logout" value="退出登录" />
-        </form>
+        <button onclick="location.href = 'logout.php'">退出登录</button>
         <?php if ($usertype != "system-admin") { ?>
             <form action="proceed.php" method="post">
                 <input type="submit" name="delete-account" value="删除账户" />
