@@ -227,7 +227,9 @@ function data_uri($contents, $mime)
             <div><a href="roomlist.php">房间列表</a></div>
         <?php } ?>
         <button onclick="openDialog('change-password')">更改密码</button>
-        <button onclick="location.href = 'logout.php'">退出登录</button>
+        <form action="proceed.php" method="post">
+            <input type="submit" name="logout" value="退出登录" />
+        </form>
         <?php if ($usertype != "system-admin") { ?>
             <form action="proceed.php" method="post">
                 <input type="submit" name="delete-account" value="删除账户" />
