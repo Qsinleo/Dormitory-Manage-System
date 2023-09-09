@@ -110,7 +110,7 @@ function data_uri($contents, $mime)
                 <?php if (!is_null($usertype)) { ?>
                     <li>
                         <i class="bx bx-log-out icon"></i>
-                        <span class="text nav-text">Logout</span>
+                        <span class="text nav-text" onclick="location.href = 'logout.php'">Logout</span>
                     </li>
                 <?php } ?>
                 <li class="mode">
@@ -210,13 +210,15 @@ function data_uri($contents, $mime)
         } else {
             document.getElementById("remain").style.background = "rgb(255, 181, 181)"
         }
-        var manage=document.getElementById("manage");
-        manage.onclick=function(){
-            document.location="manage.php"
+        var manage = document.getElementById("manage");
+        manage.onclick = function() {
+            document.location = "manage.php"
         }
     </script>
 </body>
 <!--- NSBA SCRIPT --->
 <script src="./js/browserChecker.js"></script>
 <script src="./js/nav.js"></script>
+<script src="./js/lightDarkModeSwitcher.js"></script>
+
 </html>
