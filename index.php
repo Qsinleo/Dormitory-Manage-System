@@ -108,9 +108,8 @@ function data_uri($contents, $mime)
             </div>
             <div class="bottom-content">
                 <?php if (!is_null($usertype)) { ?>
-                    <li>
-                        <i class="bx bx-log-out icon"></i>
-                        <span class="text nav-text">Logout</span>
+                    <li class="nax-link">
+                        <a class="text nav-text" href='logout.php'><i class="bx bx-log-out icon"></i>Logout</a>
                     </li>
                 <?php } ?>
                 <li class="mode">
@@ -164,19 +163,16 @@ function data_uri($contents, $mime)
             */
             if (!is_null($usertype) && $usertype != "failed") {
             ?>
-                <button id="book" class="buttons">
-                    预定房间
+                <button id="book" class="buttons" onclick='document.location="/roomlist.php"'>
+                    预定房间/退还房间
                 </button>
-                <button id="checkout" class="buttons">
-                    退还房间
-                </button>
-                <button id="manage" class="buttons">
+                <button id="manage" class="buttons" onclick='document.location="/manage.php"'>
                     管理我的账号
                 </button>
                 <?php
                 if ($usertype != "inactived") {
                 ?>
-                    <button id="accept" class="buttons">
+                    <button id="accept" class="buttons" onclick='document.location="/accept.php"'>
                         批准
                     </button>
                 <?php
@@ -210,9 +206,9 @@ function data_uri($contents, $mime)
         } else {
             document.getElementById("remain").style.background = "rgb(255, 181, 181)"
         }
-        var manage=document.getElementById("manage");
-        manage.onclick=function(){
-            document.location="manage.php"
+        var manage = document.getElementById("manage");
+        manage.onclick = function() {
+            document.location = "manage.php"
         }
     </script>
 </body>
@@ -220,4 +216,5 @@ function data_uri($contents, $mime)
 <script src="./js/browserChecker.js"></script>
 <script src="./js/nav.js"></script>
 <script src="./js/lightDarkModeSwitcher.js"></script>
+
 </html>

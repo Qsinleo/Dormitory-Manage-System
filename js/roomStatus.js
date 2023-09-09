@@ -1,18 +1,18 @@
 for (const iterator of document.getElementsByClassName("room-status")) {
     switch (iterator.innerText) {
-        case "occupied":
-            iterator.style.color = "black";
-            iterator.style.backgroundColor = "orange";
+        case "有人":
+            iterator.style.color = "white";
+            iterator.style.backgroundColor = "red";
             break;
-        case "empty":
-            iterator.style.color = "black";
+        case "无人":
+            iterator.style.color = "white";
             iterator.style.backgroundColor = "green";
             break;
-        case "cleaning":
+        case "正在打扫":
             iterator.style.color = "white";
             iterator.style.backgroundColor = "purple";
             break;
-        case "repairing":
+        case "正在修复":
             iterator.style.color = "white";
             iterator.style.backgroundColor = "blue";
             break;
