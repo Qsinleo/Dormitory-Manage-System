@@ -8,12 +8,6 @@ body {
     margin-top: 8.5%;
 }
 
-#title{
-    display: grid;
-    place-items: center;
-    font-size: 7em;
-}
-
 .st{
     font-size: 3em;
 }
@@ -21,7 +15,7 @@ body {
 #rooms {
     text-align: center;
     margin: auto;
-    margin-top: 50vh;
+    margin-top: 100vh;
     padding: 20px 20px 20px 20px;
     background-color: var(--second-body-color);
     border-radius: 30px;
