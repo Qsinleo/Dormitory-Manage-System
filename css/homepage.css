@@ -1,14 +1,21 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,500;1,400&display=swap");
+
 body {
     background-color: rgb(139, 195, 255);
     scroll-behavior: smooth;
 }
 
-#main{
+#main {
     margin-top: 8.5%;
 }
 
-.st{
+#title {
+    display: grid;
+    place-items: center;
+    font-size: 7em;
+}
+
+.st {
     font-size: 3em;
 }
 
@@ -60,7 +67,7 @@ body {
     vertical-align: top;
 }
 
-.buttons{
+.buttons {
     display: grid;
     place-items: center;
     width: 300px;
@@ -77,18 +84,18 @@ body {
     -moz-border-radius: 10px;
     -ms-border-radius: 10px;
     -o-border-radius: 10px;
-    transition: .25s ;
-    -webkit-transition: .25s ;
-    -moz-transition: .25s ;
-    -ms-transition: .25s ;
-    -o-transition: .25s ;
+    transition: .25s;
+    -webkit-transition: .25s;
+    -moz-transition: .25s;
+    -ms-transition: .25s;
+    -o-transition: .25s;
 }
 
-.buttons:hover{
+.buttons:hover {
     background-color: #408d86;
 }
 
-.buttons:active{
+.buttons:active {
     transform: scale(0.95);
     -webkit-transform: scale(0.95);
     -moz-transform: scale(0.95);
