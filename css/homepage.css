@@ -22,7 +22,7 @@ body {
 #rooms {
     text-align: center;
     margin: auto;
-    margin-top: 50vh;
+    margin-top: 100vh;
     padding: 20px 20px 20px 20px;
     background-color: var(--second-body-color);
     border-radius: 30px;
