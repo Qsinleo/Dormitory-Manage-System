@@ -6,13 +6,9 @@ loginid:登录id（null=访客）
 
 */
 require_once "header.php";
+include_once "navpage.php";
 if (is_null($_SESSION["loginid"])) {
     header("Location: index.php");
-}
-
-function data_uri($contents, $mime)
-{
-    return ('data:' . $mime . ';base64,' . base64_encode($contents));
 }
 
 ?>
@@ -227,9 +223,7 @@ function data_uri($contents, $mime)
             <div><a href="roomlist.php">房间列表</a></div>
         <?php } ?>
         <button onclick="openDialog('change-password')">更改密码</button>
-        <form action="proceed.php" method="post">
-            <input type="submit" name="logout" value="退出登录" />
-        </form>
+        <button onclick="location.href = 'logout.php'">退出登录</button>
         <?php if ($usertype != "system-admin") { ?>
             <form action="proceed.php" method="post">
                 <input type="submit" name="delete-account" value="删除账户" />

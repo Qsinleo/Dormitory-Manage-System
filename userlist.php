@@ -1,5 +1,6 @@
 <?php
 require_once "header.php";
+include_once "navpage.php";
 if (!($usertype == "admin" || $usertype == "system-admin")) {
     header("Location: manage.php");
 } elseif (is_null($usertype)) {
@@ -20,10 +21,6 @@ if (key_exists("realname", $_REQUEST)) {
     $sql = "SELECT * FROM `users` WHERE realname = '" . $_REQUEST["realname"] . "'";
 }
 
-function data_uri($contents, $mime)
-{
-    return ('data:' . $mime . ';base64,' . base64_encode($contents));
-}
 ?>
 
 <!DOCTYPE html>

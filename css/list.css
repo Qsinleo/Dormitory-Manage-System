@@ -22,6 +22,7 @@ header {
 }
 
 li {
+    list-style: none;
     background-color: blanchedalmond;
     margin-top: 1%;
     padding: 1%;

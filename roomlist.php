@@ -1,5 +1,6 @@
 <?php
 require_once "header.php";
+include_once "navpage.php";
 if (!($usertype == "admin" || $usertype == "system-admin")) {
     header("Location: manage.php");
 } elseif (is_null($usertype)) {
