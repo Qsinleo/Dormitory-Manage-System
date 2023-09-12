@@ -24,3 +24,5 @@
   - [x] 所有权限
   - [x] 给中级管理员划分区域
 - [ ] 人机验证？
+
+Ethereal Room=EthRoom
