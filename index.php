@@ -84,26 +84,26 @@ function data_uri($contents, $mime)
                             </a>
                         </li>
                     <?php } ?>
-                    <li class="nav-link">
-                        <a href="#">
-                            <i class='bx bx-pie-chart-alt icon'></i>
-                            <span class="text nav-text">？？？</span>
-                        </a>
-                    </li>
-
-                    <li class="nav-link">
-                        <a href="#">
-                            <i class='bx bx-heart icon'></i>
-                            <span class="text nav-text">？？？</span>
-                        </a>
-                    </li>
-
-                    <li class="nav-link">
+                    <?php if (is_null($usertype)) { ?>
+                        <li class="nav-link">
+                            <a href="login.php">
+                                <i class='bx bx-pie-chart-alt icon'></i>
+                                <span class="text nav-text">登录</span>
+                            </a>
+                        </li>
+                        <li class="nav-link">
+                            <a href="register.php">
+                                <i class='bx bx-heart icon'></i>
+                                <span class="text nav-text">注册</span>
+                            </a>
+                        </li>
+                    <?php } ?>
+                    <!-- <li class="nav-link">
                         <a href="#">
                             <i class='bx bx-wallet icon'></i>
                             <span class="text nav-text">？？？</span>
                         </a>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
             <div class="bottom-content">
