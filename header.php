@@ -21,7 +21,7 @@ if (!is_null($_SESSION["loginid"])) {
 
 if (!is_null($_SESSION["message"])) {
     echo <<<EOF
-    <div id="message-bar-no-conflicting" style="opacity:1;">
+    <div id="message-bar-no-conflicting" style="opacity:1;width:20%;position:absolute;right:0px;top:50px">
     <div style='box-shadow:3px 3px 3px grey;
     padding:10px;
     margin:5px;
@@ -67,7 +67,7 @@ if (!is_null($_SESSION["message"])) {
     }
     var fadeOutMessage = setTimeout(function (){
         fadeOut(document.getElementById("message-bar-no-conflicting"),40)
-    },5000);
+    },3000);
     </script>
     EOF;
     unset($_SESSION["message"]);

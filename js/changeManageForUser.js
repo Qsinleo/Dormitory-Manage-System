@@ -57,6 +57,7 @@ function fetchManage(id) {
             }
         }
     }
+    console.log("proceed.php?type=querymanage&id=" + id);
     xmlhttp.open("POST", "proceed.php?type=querymanage&id=" + id, true);
     xmlhttp.send();
 }

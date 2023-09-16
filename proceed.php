@@ -87,10 +87,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION["message"] = "工号成功置空";
         }
         header("Location: manage.php");
-    } elseif ($_REQUEST["type"] == "change-depart") {
+    } elseif ($_REQUEST["type"] == "change-email") {
         //改变部门
         mysqli_query($con, "UPDATE `users` SET mail = '" . mysqli_escape_string($con, $_REQUEST["email"]) . "' WHERE id = " . $_SESSION["loginid"]);
         $_SESSION["message"] = "邮箱成功更改为" . $_REQUEST["email"];
+        header("Location: manage.php");
+    } elseif ($_REQUEST["type"] == "change-depart") {
+        //改变部门
+        mysqli_query($con, "UPDATE `users` SET department = '" . mysqli_escape_string($con, $_REQUEST["email"]) . "' WHERE id = " . $_SESSION["loginid"]);
+        $_SESSION["message"] = "部门成功更改为" . $_REQUEST["depart"];
         header("Location: manage.php");
     } elseif ($_REQUEST["type"] == "change-password") {
         //改变密码
@@ -237,7 +242,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $manage_now = [];
         if ($_REQUEST["room-data"] != "") {
             foreach (explode(",", $_REQUEST["room-data"]) as $value) {
-                array_push($manage_now, mysqli_fetch_assoc(mysqli_query($con, "SELECT `number` FROM `rooms` WHERE id = " . $value))["id"]);
+                array_push($manage_now, mysqli_fetch_assoc(mysqli_query($con, "SELECT `id` FROM `rooms` WHERE `number` = " . $value))["id"]);
             }
         }
         mysqli_query($con, "UPDATE `users` SET managepartid = " . ($manage_now == [] ? "NULL" : "'" . implode(",", $manage_now) . "'") . " WHERE id = " . $_REQUEST["setid"]);
