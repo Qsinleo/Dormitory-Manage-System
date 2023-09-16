@@ -131,8 +131,8 @@ function data_uri($contents, $mime)
         <div id="title">
             <!-- Title -->
             <div                  style="width: 40%; height: 65vh; left: 30vw; top: 15vh; position: absolute; background: linear-gradient(271deg, #541FA9 0%, rgba(83.58, 31.36, 168.79, 0) 100%);; border-radius: 110px"></div>
-            <div id="title-text"  style="width: 45vw; left: 9vh; top: 27vh; position: absolute; color: white; font-size: 5em; font-family: Inter; font-weight: 400; word-wrap: break-word">Raoms</div>
-            <div id="title-text2" style="width: 90vw; height: 11vh; left: 10vw; top: 51vh; position: absolute; color: rgba(255, 255, 255, 0.40); font-size: 50px; font-family: Inter; font-weight: 400; letter-spacing: 25px; word-wrap: break-word">A New DMS.</div>
+            <div id="title-text"  style="width: 55w; left: 16vh; top: 27vh; position: absolute; color: white; font-size: 5em; font-family: Inter; font-weight: 400; word-wrap: break-word">EthRoom</div>
+            <div id="title-text2" style="width: 90vw; height: 11vh; left: 17vw; top: 51vh; position: absolute; color: rgba(255, 255, 255, 0.40); font-size: 50px; font-family: Inter; font-weight: 400; letter-spacing: 25px; word-wrap: break-word">A New DMS.</div>
         </div>
         <section id="rooms">
             <span style="text-align:center;display:block;font-size:2em;font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">房间</span>
@@ -217,7 +217,7 @@ function data_uri($contents, $mime)
 <script src="./js/lightDarkModeSwitcher.js"></script>
 <script>
     var fontMatcher=()=>{    var screenDiv=window.innerWidth / 1920;
-        document.getElementById("title-text").style.fontSize=(250 * screenDiv)+"px"
+        document.getElementById("title-text").style.fontSize=(220 * screenDiv)+"px"
         document.getElementById("title-text2").style.fontSize=(50 * screenDiv)+"px"}
     setInterval(fontMatcher,100)
 </script>
