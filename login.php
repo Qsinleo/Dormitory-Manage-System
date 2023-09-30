@@ -37,7 +37,7 @@ include_once "navpage.php";
 
                 <!-- Remind Passowrd -->
                 <div id="formFooter">
-                    <a class="underlineHover" href="#">忘记密码？</a>
+                    <a class="underlineHover" href="#">忘记密码</a>
                 </div>
 
             </div>
