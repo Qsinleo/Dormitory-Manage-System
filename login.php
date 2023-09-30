@@ -19,7 +19,7 @@ include_once "navpage.php";
             <div id="formContent">
                 <!-- Tabs Titles -->
                 <h2 class="active"> Sign In </h2>
-                <h2 class="inactive underlineHover">Sign Up </h2>
+                <h2 class="inactive underlineHover"> Sign Up </h2>
 
                 <!-- Icon -->
                 <div class="fadeIn first">
