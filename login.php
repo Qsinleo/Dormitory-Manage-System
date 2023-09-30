@@ -18,8 +18,8 @@ include_once "navpage.php";
         <div class="wrapper fadeInDown">
             <div id="formContent">
                 <!-- Tabs Titles -->
-                <h2 class="active" style="cursor: pointer;"> Sign In </h2>
-                <h2 class="inactive underlineHover" style="cursor: pointer;" onclick="window.location='register.php'"> Sign Up </h2>
+                <h2 class="active" style="cursor: pointer;"> 登录 </h2>
+                <h2 class="inactive underlineHover" style="cursor: pointer;" onclick="window.location='register.php'"> 注册 </h2>
 
                 <!-- Icon -->
                 <div class="fadeIn first">
@@ -30,14 +30,14 @@ include_once "navpage.php";
                 <form action="proceed.php" method="post">
                     <input type="hidden" value="login" name="type" />
 
-                    <input type="text" id="login" class="fadeIn second" name="mail" placeholder="login">
-                    <input type="text" id="password" class="fadeIn third" name="password" placeholder="password">
-                    <input type="submit" class="fadeIn fourth" value="Log In">
+                    <input type="text" id="login" class="fadeIn second" name="mail" placeholder="邮箱">
+                    <input type="text" id="password" class="fadeIn third" name="password" placeholder="密码">
+                    <input type="submit" class="fadeIn fourth" value="登录">
                 </form>
 
                 <!-- Remind Passowrd -->
                 <div id="formFooter">
-                    <a class="underlineHover" href="#">Forgot Password?</a>
+                    <a class="underlineHover" href="#">忘记密码</a>
                 </div>
 
             </div>
