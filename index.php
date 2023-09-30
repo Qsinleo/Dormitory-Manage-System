@@ -14,7 +14,7 @@ function data_uri($contents, $mime)
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DMS - 宿舍管理系统</title>
     <!--- Link CSS --->
-    <link rel="stylesheet" href="./css/homepage.css">
+    <link rel="stylesheet" href="./css/pages/homepage.css">
     <link rel="stylesheet" href="./css/nav.css">
     <!--- 图标组件库 --->
     <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">

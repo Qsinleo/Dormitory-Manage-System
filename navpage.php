@@ -3,7 +3,6 @@ function data_uri($contents, $mime)
 {
     return ('data:' . $mime . ';base64,' . base64_encode($contents));
 }
-if (!is_null($usertype)) {
 ?>
     <style>
         /* 字体库不一定要是我这个，甚至不用也可以 */
@@ -30,6 +29,12 @@ if (!is_null($usertype)) {
     /* 过渡效果 */
     --tran-02: all 0.2s ease;
     --tran-03: all 0.3s ease;
+}
+
+main{
+    width: 95.5vw;
+    position: absolute;
+    right: 0;
 }
 
 body {
@@ -482,4 +487,5 @@ modeSwitch.addEventListener("click", () => {
 });
 
     </script>
-<?php } ?>
+    
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
