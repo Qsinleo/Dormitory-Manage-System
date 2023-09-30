@@ -13,6 +13,7 @@ include_once "navpage.php";
 </head>
 
 <body>
+
     <h1>登录</h1>
     <form action="proceed.php" method="post">
         <table>

@@ -22,6 +22,7 @@ function data_uri($contents, $mime)
 </head>
 
 <body>
+    <!-- Nav -->
     <nav class="sidebar close">
         <header>
             <div class="image-text">
@@ -126,7 +127,7 @@ function data_uri($contents, $mime)
 
         </div>
     </nav>
-
+    <!-- Main -->
     <div id="main">
         <div id="title">
             <!-- Title -->
