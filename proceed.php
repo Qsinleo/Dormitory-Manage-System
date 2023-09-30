@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 mysqli_escape_string($con, $_REQUEST["department"])  .
                 "','" .
                 $_REQUEST["access"] .
-                "',NULL,NULL,0,NULL,CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP())"
+                "',NULL,0,NULL,CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP())"
         );
         $_SESSION["loginid"] = mysqli_fetch_row(mysqli_query($con, "SELECT last_insert_id()"))[0];
         $_SESSION["message"] = "注册成功";

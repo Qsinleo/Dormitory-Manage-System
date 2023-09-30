@@ -84,7 +84,7 @@ if (!is_null($usertype)) {
                 <a href="logout.php">退出登录</a>
             </div>
             <div class="right-side">
-                <span class="name"><?php echo is_null($usertype) ? "访客" : (($usertype == "inactived") ? "[未激活]" : "" . $userinfo["realname"]) ?></span>
+                <span class="name"><?php echo (($usertype == "inactived") ? "[未激活]" : "") . $userinfo["realname"] ?></span>
                 <span class="access-user"><?php
                                             switch ($usertype) {
                                                 case 'inactived':
@@ -106,7 +106,7 @@ if (!is_null($usertype)) {
                                             ?></span>
             </div>
         </nav>
-        <img src="<?php echo data_uri($userinfo["header"], "image/jpeg") ?>" class="header" />
+        <img src="<?php echo !is_null($userinfo["header"]) ? data_uri($userinfo["header"], "image/jpeg") : "img/stuff.webp" ?>" class="header" />
     </div>
     <script>
         const aTags = document.getElementsByTagName("nav")[0].getElementsByTagName("a");

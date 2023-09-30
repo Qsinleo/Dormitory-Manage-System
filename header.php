@@ -1,6 +1,6 @@
 <?php
 
-$con = mysqli_connect("72.44.78.124", "dms", password: "dms", database: "dms-data");
+$con = mysqli_connect("leoministry.xyz", "dms", password: "dms", database: "dms-data");
 session_start();
 if (!array_key_exists("loginid", $_SESSION)) {
     $_SESSION["loginid"] = null;

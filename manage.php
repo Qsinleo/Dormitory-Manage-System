@@ -156,8 +156,8 @@ if (is_null($_SESSION["loginid"])) {
                 echo "<div>您已经发送过注册申请，请等待管理员同意。</div>";
             }
         } else {
-            if ($userinfo["header"] == null) {
-                echo "<img src='image/staff.webp' />";
+            if (is_null($userinfo["header"])) {
+                echo "<img src='img/stuff.webp' />";
             } else {
                 echo "<img src='" . data_uri($userinfo["header"], "image/png") . "' />";
             }
