@@ -18,8 +18,8 @@ include_once "navpage.php";
         <div class="wrapper fadeInDown">
             <div id="formContent">
                 <!-- Tabs Titles -->
-                <h2 class="active"> Sign In </h2>
-                <h2 class="inactive underlineHover"> Sign Up </h2>
+                <h2 class="active" style="cursor: pointer;"> Sign In </h2>
+                <h2 class="inactive underlineHover" style="cursor: pointer;" onclick="window.location='register.php'"> Sign Up </h2>
 
                 <!-- Icon -->
                 <div class="fadeIn first">
