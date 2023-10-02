@@ -16,10 +16,11 @@ function hideDialog() {
 
 function smallDialog() {
     const obj = document.getElementById("dialogue");
-    obj.style.width = "10%";
-    obj.style.height = "27px";
+    obj.style.width = "60px";
+    obj.style.height = "60px";
     obj.style.margin = "0";
-    obj.style.top = "calc(100% - 55px)";
+    obj.style.top = "calc(100% - 65px)";
+    obj.style.left = "calc(50% - 60px)";
     obj.getElementsByTagName("button")[0].style.display =
         document.getElementById("hide-screen").style.display = "none";
     obj.getElementsByTagName("button")[1].innerText = "↑";
@@ -34,6 +35,7 @@ function reopenDialog() {
     obj.style.height = "fit-content";
     obj.style.margin = "auto";
     obj.style.top = "0";
+    obj.style.left = "0";
     obj.getElementsByTagName("button")[0].style.display =
         document.getElementById("hide-screen").style.display = "initial";
     obj.getElementsByTagName("button")[1].innerText = "-";

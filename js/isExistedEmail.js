@@ -18,6 +18,7 @@ document.getElementsByName("email")[0].onkeyup = () => {
                 document.getElementById("is-existed").style.color = "green";
                 document.getElementById("submit").disabled = "";
             } else {
+                console.log(xmlhttp.responseText);
                 document.getElementById("is-existed").innerText = "邮箱已存在！";
                 document.getElementById("is-existed").style.color = "red";
             }

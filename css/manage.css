@@ -41,57 +41,99 @@ header {
     font-style: italic;
 }
 
-.close {
+button.close {
     background-color: rgba(0, 0, 0, 0);
     border: none;
     border-radius: 10px;
     text-align: left;
     transition: .2s;
-    font-size: xx-large;
+    font-size: x-large;
     font-weight: bold;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
-.close:hover {
+button.close:hover {
     background-color: red;
     transform: scale(1.1);
 }
 
-.close:active {
+button.close:active {
     background-color: darkred;
     transform: scale(.95);
 }
 
-img {
-    width: 70px;
-    height: 70px;
-    border-radius: 50px;
-    border: 1px solid;
-}
-
-.collapse {
+button.collapse {
+    padding-left: 10px;
+    padding-right: 10px;
     background-color: rgba(0, 0, 0, 0);
     border: none;
     border-radius: 10px;
     text-align: left;
     transition: .2s;
-    font-size: xx-large;
+    font-size: x-large;
     font-weight: bold;
 }
 
-.collapse:hover {
+button.collapse:hover {
     background-color: greenyellow;
     transform: scale(1.1);
 }
 
-.collapse:active {
+button.collapse:active {
     background-color: green;
     transform: scale(.95);
 }
 
-.error {
-    color: red;
-}
 
 li {
     list-style: inside;
+}
+
+main {
+    width: 70%;
+    background-color: aliceblue;
+    box-shadow: 3px 3px 3px salmon;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    height: 80%;
+    padding: 20px;
+    border-radius: 15px;
+}
+
+button,
+input[type=submit],
+input[type=reset] {
+    transform: skewX(-10deg);
+    transition-duration: .2s;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: rgb(104, 232, 255);
+    padding: 5px;
+    margin: 2px;
+}
+
+button:hover,
+input[type=submit]:hover,
+input[type=reset]:hover {
+    transform: skewX(-10deg) scale(1.1);
+}
+
+button:active,
+input[type=submit]:active,
+input[type=res]:active {
+    transform: skewX(-10deg) scale(0.95);
+}
+
+input[type=reset],
+input.delete-account {
+    background-color: rgb(255, 104, 104);
+}
+
+.inline {
+    display: inline;
 }
