@@ -1,46 +1,3 @@
-#hide-screen {
-    position: fixed;
-    height: 100%;
-    width: 100%;
-    z-index: 998;
-    opacity: .7;
-    left: 0;
-    top: 0;
-    background-color: black;
-    display: none;
-}
-
-#dialogue {
-    position: fixed;
-    height: fit-content;
-    width: 70%;
-    left: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    margin: auto;
-    z-index: 999;
-    border: 1px whitesmoke;
-    border-radius: 15px;
-    background-color: bisque;
-    padding: 15px;
-    text-align: center;
-    display: none;
-    overflow: hidden;
-}
-
-header {
-    font-size: x-large;
-    font-weight: bold;
-}
-
-#drop {
-    height: 50px;
-    background-color: rgb(204, 204, 204);
-    color: rgb(63, 63, 63);
-    font-style: italic;
-}
-
 button.close {
     background-color: rgba(0, 0, 0, 0);
     border: none;
@@ -124,8 +81,7 @@ input[type=reset]:active {
     transform: skewX(-10deg) scale(0.95);
 }
 
-input[type=reset],
-input.delete-account {
+input[type=reset] {
     background-color: rgb(255, 104, 104);
 }
 
@@ -139,6 +95,6 @@ input.delete-account {
     border-radius: 50%;
 }
 
-input.delete-account {
-    background-color: rgb(255, 104, 104);
+.message-bar-no-conflicting button {
+    transform: none;
 }

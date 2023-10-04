@@ -29,6 +29,7 @@ if (key_exists("realname", $_REQUEST)) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="initial-scale=1.0">
+    <link rel="stylesheet" href="css/general.css">
     <link rel="stylesheet" href="css/list.css">
     <title>列表</title>
 </head>

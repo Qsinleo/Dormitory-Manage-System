@@ -17,8 +17,8 @@ if (is_null($_SESSION["loginid"])) {
 
 <head>
     <meta charset="UTF-8">
-
     <link rel="stylesheet" href="css/manage.css">
+    <link rel="stylesheet" href="css/general.css">
     <title>管理</title>
 </head>
 <script src="js/dialogueOpenAndClose.js"></script>
@@ -158,9 +158,9 @@ if (is_null($_SESSION["loginid"])) {
                 }
             } else {
                 if (is_null($userinfo["header"])) {
-                    echo "<img src='img/stuff.webp' />";
+                    echo "<img src='img/stuff.webp' class=\"header\"/>";
                 } else {
-                    echo "<img src='" . data_uri($userinfo["header"], "image/png") . "' />";
+                    echo "<img src='" . data_uri($userinfo["header"], "image/png") . "' class=\"header\"/>";
                 }
                 ?>
                 <button onclick="openDialog('upload-header')">更改</button>

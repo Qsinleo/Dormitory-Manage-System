@@ -21,7 +21,7 @@ if (!is_null($_SESSION["loginid"])) {
 
 if (!is_null($_SESSION["message"])) {
     echo <<<EOF
-    <div id="message-bar-no-conflicting" style="opacity:1;width:20%;position:absolute;right:0px;top:50px">
+    <div id="message-bar-no-conflicting" style="opacity:1;width:20%;position:absolute;right:0px;top:5px">
     <div style='box-shadow:3px 3px 3px grey;
     padding:10px;
     margin:5px;
