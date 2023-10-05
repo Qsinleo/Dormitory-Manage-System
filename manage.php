@@ -217,12 +217,7 @@ if (is_null($_SESSION["loginid"])) {
                 </table>
             <?php
             }
-            if ($usertype == "admin" || $usertype == "system-admin") {
             ?>
-                <div><a href="accept.php">批准</a></div>
-                <div><a href="userlist.php">用户列表</a></div>
-                <div><a href="roomlist.php">房间列表</a></div>
-            <?php } ?>
             <button onclick="openDialog('change-password')">更改密码</button>
             <button onclick="location.href = 'logout.php'">退出登录</button>
             <?php if ($usertype != "system-admin") { ?>

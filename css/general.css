@@ -1,50 +1,7 @@
-button.close {
-    background-color: rgba(0, 0, 0, 0);
-    border: none;
-    border-radius: 10px;
-    text-align: left;
-    transition: .2s;
-    font-size: x-large;
-    font-weight: bold;
-    padding-left: 10px;
-    padding-right: 10px;
-}
-
-button.close:hover {
-    background-color: red;
-    transform: scale(1.1);
-}
-
-button.close:active {
-    background-color: darkred;
-    transform: scale(.95);
-}
-
-button.collapse {
-    padding-left: 10px;
-    padding-right: 10px;
-    background-color: rgba(0, 0, 0, 0);
-    border: none;
-    border-radius: 10px;
-    text-align: left;
-    transition: .2s;
-    font-size: x-large;
-    font-weight: bold;
-}
-
-button.collapse:hover {
-    background-color: greenyellow;
-    transform: scale(1.1);
-}
-
-button.collapse:active {
-    background-color: green;
-    transform: scale(.95);
-}
-
 main {
+    overflow: auto;
     width: 70%;
-    background-color: aliceblue;
+    background-color: var(--primary-color-light);
     box-shadow: 3px 3px 3px salmon;
     position: absolute;
     left: 0;
@@ -57,9 +14,24 @@ main {
     border-radius: 15px;
 }
 
+main * {
+    color: var(--text-color);
+}
+
+main button {
+    color: initial;
+}
+
+input,
+textarea,
+select {
+    background-color: var(--primary-color-light);
+}
+
 button,
 input[type=submit],
 input[type=reset] {
+    color: initial;
     transform: skewX(-10deg);
     transition-duration: .2s;
     border-radius: 5px;
@@ -93,8 +65,4 @@ input[type=reset] {
     width: 150px;
     height: 150px;
     border-radius: 50%;
-}
-
-.message-bar-no-conflicting button {
-    transform: none;
 }

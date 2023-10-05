@@ -1,7 +1,7 @@
 .user-list,
 .room-list,
-.sidebar {
-    width: 70%;
+.sidebar-inner {
+    width: 55%;
     display: inline-block;
     vertical-align: top;
     margin: 1%;
@@ -11,20 +11,28 @@
     padding: 1%;
 }
 
-.sidebar {
-    width: 20%;
+.sidebar-inner {
+    width: 40%;
     display: inline-block;
 }
 
+.operation-info {
+    text-align: center;
+}
+
+.operation-info input {
+    width: calc((100% - 40px) / 2);
+}
 
 header {
     font-size: x-large;
     font-weight: bold;
 }
 
-li {
+.room-list ul li,
+.user-list ul li {
     list-style: none;
-    background-color: blanchedalmond;
+    background-color: var(--sidebar-color);
     margin-top: 1%;
     padding: 1%;
     border-radius: 5px;
@@ -35,7 +43,7 @@ li {
     font-weight: bold;
 }
 
-a {
+a.email {
     margin-left: 10px;
 }
 
@@ -59,11 +67,6 @@ a {
     border-radius: 5px;
 }
 
-.inline {
-    margin-left: 3px;
-    display: inline;
-}
-
 button {
     margin-left: 8px;
 }
@@ -72,15 +75,9 @@ button {
     font-weight: bold;
 }
 
-.roomlist div {
-    margin: 5px;
-    border-radius: 5px;
-    border: 1px solid;
-    padding: 5px;
-}
-
 #roomnum {
     font-weight: bold;
+    font-size: x-large;
 }
 
 form {
@@ -92,4 +89,20 @@ img {
     height: 40px;
     border-radius: 50px;
     border: 1px solid;
+}
+
+input.delete,
+button.reset {
+    background-color: rgb(255, 104, 104);
+}
+
+.reason {
+    width: 100%;
+    height: 200px;
+    resize: none;
+    overflow: auto;
+}
+
+#manage-parts li {
+    list-style: none;
 }

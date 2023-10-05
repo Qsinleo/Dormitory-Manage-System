@@ -260,13 +260,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION["message"] = "提交入住申请成功";
         header("Location: roomlist.php");
     } elseif ($_REQUEST["type"] == "check-in-allow") {
-        $params = json_decode(mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM `requests` WHERE requestid = " . $_REQUEST["id"] . " AND `type` = 'check-in'"))["param"], true);
-        mysqli_query($con, "INSERT INTO `checkios` VALUES (NULL," . $_REQUEST["id"] . "," . mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM `rooms` WHERE `number` = " . $params["roomnumber"]))["id"] . ",'" . $params["start-time"] . "','" . $params["end-time"] . "','" . mysqli_escape_string($con, $params["reason"]) . "')");
+        $from_info = mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM `users` where id=" . $_SESSION["loginid"]));
+        $send_to_info = mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM `users` where id=" . $_REQUEST["id"]));
+        if ($_REQUEST["action"] == "accept") {
+            $params = json_decode(mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM `requests` WHERE requestid = " . $_REQUEST["id"] . " AND `type` = 'check-in'"))["param"], true);
+            mysqli_query($con, "INSERT INTO `checkios` VALUES (NULL," . $_REQUEST["id"] . "," . mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM `rooms` WHERE `number` = " . $params["roomnumber"]))["id"] . ",'" . $params["start-time"] . "','" . $params["end-time"] . "','" . mysqli_escape_string($con, $params["reason"]) . "')");
+            mysqli_query($con, "UPDATE `rooms` SET `status` = 'occupied' WHERE `number` = " . $params["roomnumber"]);
+            $format_string = "<h1>您的入住申请已经被批准</h1><p>尊敬的" . $send_to_info["realname"] . "，您的账号（ID：" . $send_to_info["id"] . "）的入住房间" . $params["room-num"] . "被管理员（ID：" . $from_info['id'] . "）" . $from_info['realname'] . "<b>批准</b>。</p>";
+            $_SESSION["message"] = "成功批准升级权限的请求";
+            send_mail($format_string, $send_to_info["mail"], "您的账号入住申请被批准");
+            $_SESSION["message"] = "批准入住申请成功";
+        } else {
+            $format_string = "<h1>您的入住申请已经被批准</h1><p>尊敬的" . $send_to_info["realname"] . "，您的账号（ID：" . $send_to_info["id"] . "）的入住房间" . $params["room-num"] . "被管理员（ID：" . $from_info['id'] . "）" . $from_info['realname'] . "<b>驳回</b>。</p>";
+            $_SESSION["message"] = "成功驳回" . $send_to_info["realname"] . "的请求";
+            send_mail($format_string, $send_to_info["mail"], "您的账号入住申请被驳回");
+            $_SESSION["message"] = "驳回入住申请成功";
+        }
         mysqli_query($con, "DELETE FROM `requests` WHERE requestid = " . $_REQUEST["id"] . " AND `type` = 'check-in'");
-        mysqli_query($con, "UPDATE `rooms` SET `status` = 'occupied' WHERE `number` = " . $params["roomnumber"]);
-        $_SESSION["message"] = "批准入住申请成功";
         header("Location: accept.php");
     } elseif ($_REQUEST["type"] == "check-out") {
+        if (mysqli_num_rows(mysqli_query($con, "SELECT * FROM `checkios` WHERE `roomid` = " . mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM `checkios` WHERE `requestid` = " . $_SESSION["loginid"])["roomid"]))) == 1)
+            mysqli_query($con, "UPDATE `rooms` SET `status` = 'empty' WHERE `id` = " . mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM `checkios` WHERE `requestid` = " . $_SESSION["loginid"])["roomid"]));
         mysqli_query($con, "DELETE FROM `checkios` WHERE requestid = " . $_SESSION["loginid"]);
         $_SESSION["message"] = "成功办理签出";
         header("Location: roomlist.php");

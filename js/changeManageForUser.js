@@ -27,7 +27,7 @@ function fetchManage(id) {
     document.getElementById("manage-parts").innerText = "加载中";
     document.getElementById("submit").disabled = "disabled";
     document.getElementById("room-number-add").disabled = "disabled";
-    document.getElementById("manage-parts").style.color = "initial";
+    document.getElementById("manage-parts").style.color = "var(--text-color)";
     var xmlhttp;
     if (window.XMLHttpRequest) {
         //  IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
@@ -65,14 +65,14 @@ function fetchManage(id) {
 
 document.getElementById("room-number-add").onkeydown = () => {
     document.getElementById("add-room").disabled = "disabled";
-    document.getElementById("room-info").style.color = "initial";
+    document.getElementById("room-info").style.color = "var(--text-color)";
     document.getElementById("room-info").innerText = "等待失焦……";
 }
 
 document.getElementById("room-number-add").onblur = () => {
     document.getElementById("room-info").innerText = "加载中";
     document.getElementById("add-room").disabled = "disabled";
-    document.getElementById("room-info").style.color = "initial";
+    document.getElementById("room-info").style.color = "var(--text-color)";
     if (document.getElementById("room-number-add").value.length == 0) {
         document.getElementById("room-info").innerText = "房间不能为空！";
         document.getElementById("room-info").style.color = "red";

@@ -22,7 +22,7 @@
     z-index: 999;
     border: 1px whitesmoke;
     border-radius: 15px;
-    background-color: bisque;
+    background-color: var(--primary-color-light);
     padding: 15px;
     text-align: center;
     display: none;
@@ -42,7 +42,9 @@ header {
 }
 
 button.close {
+    transform: none;
     background-color: rgba(0, 0, 0, 0);
+    color: var(--text-color);
     border: none;
     border-radius: 10px;
     text-align: left;
@@ -54,16 +56,18 @@ button.close {
 }
 
 button.close:hover {
+    transform: none;
     background-color: red;
-    transform: scale(1.1);
 }
 
 button.close:active {
+    transform: none;
     background-color: darkred;
-    transform: scale(.95);
 }
 
 button.collapse {
+    color: var(--text-color);
+    transform: none;
     padding-left: 10px;
     padding-right: 10px;
     background-color: rgba(0, 0, 0, 0);
@@ -76,67 +80,13 @@ button.collapse {
 }
 
 button.collapse:hover {
+    transform: none;
     background-color: greenyellow;
-    transform: scale(1.1);
 }
 
 button.collapse:active {
+    transform: none;
     background-color: green;
-    transform: scale(.95);
-}
-
-main {
-    width: 70%;
-    background-color: aliceblue;
-    box-shadow: 3px 3px 3px salmon;
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    margin: auto;
-    height: 80%;
-    padding: 20px;
-    border-radius: 15px;
-}
-
-button,
-input[type=submit],
-input[type=reset] {
-    transform: skewX(-10deg);
-    transition-duration: .2s;
-    border-radius: 5px;
-    font-size: 14px;
-    background-color: rgb(104, 232, 255);
-    padding: 2px;
-    margin: 2px;
-}
-
-button:hover,
-input[type=submit]:hover,
-input[type=reset]:hover {
-    transform: skewX(-10deg) scale(1.1);
-}
-
-button:active,
-input[type=submit]:active,
-input[type=reset]:active {
-    transform: skewX(-10deg) scale(0.95);
-}
-
-input[type=reset],
-input.delete-account {
-    background-color: rgb(255, 104, 104);
-}
-
-.inline {
-    display: inline;
-}
-
-.header {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
 }
 
 input.delete-account {

@@ -16,7 +16,7 @@
     --primary-color: #695cfe;
     --primary-color-light: #f6f5ff;
     --toggle-color: #ddd;
-    --text-color: #707070;
+    --text-color: #414141;
     --second-body-color: rgb(176, 233, 255);
 
     /* 过渡效果 */
@@ -31,8 +31,8 @@ body {
 }
 
 ::selection {
-    background-color: var(--primary-color);
-    color: #fff;
+    background-color: rgb(76, 199, 189);
+    color: rgb(63, 56, 58);
 }
 
 /* 当body标签拥有dark类名的时候的样式 */
@@ -51,7 +51,7 @@ body.dark {
     top: 0;
     left: 0;
     height: 100%;
-    width: 13vw;
+    width: 220px;
     padding: 10px 14px;
     background: var(--sidebar-color);
     transition: var(--tran-03);
@@ -59,7 +59,7 @@ body.dark {
 }
 
 .sidebar.close {
-    width: 4.5vw;
+    width: 85px;
 }
 
 .sidebar li {
@@ -212,12 +212,14 @@ body.dark .sidebar header .toggle {
     transition: var(--tran-03);
 }
 
-.sidebar li a:hover {
+.sidebar li a:hover,
+.logout-btn a:hover {
     background-color: var(--primary-color);
 }
 
 .sidebar li a:hover .icon,
-.sidebar li a:hover .text {
+.sidebar li a:hover .text,
+.logout-btn a:hover .text {
     color: var(--sidebar-color);
 }
 

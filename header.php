@@ -47,6 +47,7 @@ if (!is_null($_SESSION["message"])) {
     font-size:xx-large;
     vertical-align:top;
     box-shadow:3px 3px 3px lightgrey;
+    transform:none;
     ' onclick='clearTimeout(fadeOutMessage);fadeOut(document.getElementById("message-bar-no-conflicting"),40);'>×</button>
     </div>
     <script>
