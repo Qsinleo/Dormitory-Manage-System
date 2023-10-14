@@ -18,13 +18,14 @@ require_once "navpage.php";
 </head>
 
 <body>
+    <script src="/js/loading.js"></script>
     <!-- Main -->
     <div id="main">
         <div id="title">
             <!-- Title -->
             <div style="width: 40%; height: 65vh; left: 30vw; top: 15vh; position: absolute; background: linear-gradient(271deg, #541FA9 0%, rgba(83.58, 31.36, 168.79, 0) 100%);; border-radius: 110px"></div>
-            <div id="title-text" style="width: 55w; left: 16vh; top: 27vh; position: absolute; color: white; font-size: 5em; font-family: Inter; font-weight: 400; word-wrap: break-word">EthRoom</div>
-            <div id="title-text2" style="width: 90vw; height: 11vh; left: 17vw; top: 51vh; position: absolute; color: rgba(255, 255, 255, 0.40); font-size: 50px; font-family: Inter; font-weight: 400; letter-spacing: 25px; word-wrap: break-word">A New DMS.</div>
+            <div id="title-text" style="left: 16vh; top: 27vh; position: absolute; color: white; font-size: 5em; font-family: Inter; font-weight: 400; word-wrap: break-word">EthRoom</div>
+            <div id="title-text2" style="height: 11vh; left: 17vw; top: 51vh; position: absolute; color: rgba(255, 255, 255, 0.40); font-size: 50px; font-family: Inter; font-weight: 400; letter-spacing: 25px; word-wrap: break-word">A New DMS.</div>
         </div>
         <section id="rooms">
             <span id="rooms-title">房间</span>
