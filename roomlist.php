@@ -41,8 +41,7 @@ if ($usertype == "admin") {
             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) ?>">
                 <label>只看：
                     <select name="view">
-                        <option value="occupied">有人</option>
-                        <option value="empty">无人</option>
+                        <option value="normal">正常</option>
                         <option value="cleaning">正在打扫</option>
                         <option value="repairing">正在修复</option>
                         <option value="stop">停用</option>
@@ -74,11 +73,8 @@ if ($usertype == "admin") {
                     "<span class='room-number'>", $value["number"], "</span>",
                     "<span class='room-status'>";
                     switch ($value["status"]) {
-                        case 'occupied':
-                            echo "有人";
-                            break;
-                        case 'empty':
-                            echo "无人";
+                        case 'normal':
+                            echo "正常";
                             break;
                         case 'cleaning':
                             echo "正在打扫";
@@ -88,22 +84,19 @@ if ($usertype == "admin") {
                             break;
                         case 'stop':
                         default:
-                            echo "无人";
+                            echo "停用";
                             break;
                     }
-                    echo "</span><span class='live-count'>";
-                    if ($value["status"] == "occupied") {
-                        echo mysqli_num_rows(mysqli_query($con, "SELECT * FROM `checkios` WHERE roomid = " . $value["id"]));
-                    } else {
-                        echo "无";
+                    echo "</span>";
+                    if ($value["status"] == "normal") {
+                        echo "<span class='live-count'>", mysqli_num_rows(mysqli_query($con, "SELECT * FROM `checkios` WHERE roomid = " . $value["id"])), "人居住</span>";
                     }
-                    echo "人居住</span><span class='identify'>ID:", $value["id"], "</span>";
-                    if (mysqli_num_rows(mysqli_query($con, "SELECT * FROM `requests` WHERE requestid = " . $_SESSION["loginid"] . " AND `type` = 'check-in'")) == 0) {
-                        echo '<button onclick="setRoom(', $value["number"], ');">设为操作房间→</button>
-                    ';
-                    } else {
-                        echo '<button disabled>设为操作房间→</button>
-                    ';
+                    echo "<span class='identify'>ID:", $value["id"], "</span>";
+                    if (
+                        mysqli_num_rows(mysqli_query($con, "SELECT * FROM `requests` WHERE requestid = " . $_SESSION["loginid"] . " AND `type` = 'check-in'")) == 0 &&
+                        $value["status"] == "normal"
+                    ) {
+                        echo '<button onclick="setRoom(', $value["number"], ');">设为入住房间→</button>';
                     }
                     if ($usertype == "admin") {
                         if (in_array($value["id"], $manageparts)) {
@@ -112,18 +105,44 @@ if ($usertype == "admin") {
                                 <input type="hidden" name="type" value="delete-room" />
                                 <input type="hidden" name="id" value="' . $value["id"] . '" />
                                 <input type="submit" value="删除房间" />
-                            </form>';
+                                </form>
+                                <form action="proceed.php" method="post" class="inline">
+                                <input type="hidden" name="type" value="change-room-status" />
+                                <input type="hidden" name="id" value="' . $value["id"] . '" />
+                                <label>将房间状态更改为：
+                                <select name="change-to-status">
+                                    <option value="normal">正常(有人/无人)</option>
+                                    <option value="cleaning">打扫中</option>
+                                    <option value="repairing">修理中</option>
+                                    <option value="stop">停用</option>
+                                </select>
+                                </label>
+                                </form>
+                            ';
                             } else {
                                 echo "<button title='房间里还有成员正在居住！' disabled>删除房间</button>";
                             }
                         } else {
-                            echo "<button title='你没有权限，请在管理页面申请权限！' disabled>删除房间</button>";
+                            echo "<span class='no-access'>您没有对此房间管理的权限。</span>";
                         }
                     } else {
                         echo '<form action="proceed.php" method="post" class="inline">
                                 <input type="hidden" name="type" value="delete-room" />
                                 <input type="hidden" name="id" value="' . $value["id"] . '" />
                                 <input type="submit" value="删除房间" class="delete"/>
+                            </form>
+                            <form action="proceed.php" method="post" class="inline">
+                            <input type="hidden" name="type" value="change-room-status" />
+                            <input type="hidden" name="id" value="' . $value["id"] . '" />
+                            <label>将房间状态更改为
+                            <select name="change-to-status">
+                                <option value="normal">正常(有人/无人)</option>
+                                <option value="cleaning">打扫中</option>
+                                <option value="repairing">修理中</option>
+                                <option value="stop">停用</option>
+                            </select>
+                            </label>
+                            <input type="submit" value="确定"/>
                             </form>';
                     }
                     echo "</li>";
@@ -139,6 +158,9 @@ if ($usertype == "admin") {
                         <header>提前办理签出</header>
                         <div>您的既定预约时间是：<b>
                                 <?php
+                                echo mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM `checkios` WHERE requestid = " . $_SESSION["loginid"]))["fromdate"];
+                                ?> →
+                                <?php
                                 echo mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM `checkios` WHERE requestid = " . $_SESSION["loginid"]))["todate"];
                                 ?>
                             </b></div>
@@ -148,7 +170,7 @@ if ($usertype == "admin") {
                                 ?>
                             </b></div>
                         <input type="hidden" name="type" value="check-out" />
-                        <input type="submit" id="submit-room" value="确认提前签出" />
+                        <input type="submit" id="submit-room" value="确认(提前)签出" />
                     </form>
                 </div>
             <?php } else if (mysqli_num_rows(mysqli_query($con, "SELECT * FROM `requests` WHERE requestid = " . $_SESSION["loginid"] . " AND `type` = 'check-in'")) == 0) { ?>

@@ -223,7 +223,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         header("Location: userlist.php");
     } elseif ($_REQUEST["type"] == "add-room") {
         if (mysqli_num_rows(mysqli_query($con, "SELECT * FROM `rooms` WHERE `number` = " . $_REQUEST["room-number"])) == 0) {
-            mysqli_query($con, "INSERT INTO `rooms` VALUES (NULL," . $_REQUEST["room-number"] . ",'empty',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP())");
+            mysqli_query($con, "INSERT INTO `rooms` VALUES (NULL," . $_REQUEST["room-number"] . ",'normal',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP())");
             $_SESSION["message"] = "添加房间成功";
         } else {
             $_SESSION["message"] = "添加房间失败：房间重复！";
@@ -279,10 +279,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         mysqli_query($con, "DELETE FROM `requests` WHERE requestid = " . $_REQUEST["id"] . " AND `type` = 'check-in'");
         header("Location: accept.php");
     } elseif ($_REQUEST["type"] == "check-out") {
-        if (mysqli_num_rows(mysqli_query($con, "SELECT * FROM `checkios` WHERE `roomid` = " . mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM `checkios` WHERE `requestid` = " . $_SESSION["loginid"])["roomid"]))) == 1)
-            mysqli_query($con, "UPDATE `rooms` SET `status` = 'empty' WHERE `id` = " . mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM `checkios` WHERE `requestid` = " . $_SESSION["loginid"])["roomid"]));
+        if (mysqli_num_rows(
+            mysqli_query(
+                $con,
+                "SELECT * FROM `checkios` WHERE `roomid` = " .
+                    mysqli_fetch_assoc(
+                        mysqli_query(
+                            $con,
+                            "SELECT * FROM `checkios` WHERE `requestid` = " . $_SESSION["loginid"]
+                        )
+                    )["roomid"]
+            )
+        ) == 1)
+            mysqli_query($con, "UPDATE `rooms` SET `status` = 'empty' WHERE `id` = "
+                . mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM `checkios` WHERE `requestid` = " . $_SESSION["loginid"]))["roomid"]);
         mysqli_query($con, "DELETE FROM `checkios` WHERE requestid = " . $_SESSION["loginid"]);
         $_SESSION["message"] = "成功办理签出";
+        header("Location: roomlist.php");
+    } elseif ($_REQUEST["type"] == "change-room-status") {
+        mysqli_query($con, "UPDATE `rooms` SET `status` = '" . $_REQUEST["change-to-status"] . "' WHERE id = " . $_REQUEST["id"]);
+        $_SESSION["message"] = "成功更改房间状态";
         header("Location: roomlist.php");
     }
 }

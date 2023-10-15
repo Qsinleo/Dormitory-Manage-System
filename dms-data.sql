@@ -59,7 +59,7 @@ CREATE TABLE `requests` (
 CREATE TABLE `rooms` (
   `id` int(11) NOT NULL COMMENT '房间ID',
   `number` int(11) NOT NULL COMMENT '房间号',
-  `status` enum('occupied','empty','cleaning','repairing','stop') NOT NULL COMMENT '房间状态',
+  `status` enum('normal','cleaning','repairing','stop') NOT NULL COMMENT '房间状态',
   `updatetime` datetime NOT NULL COMMENT '更改时间',
   `addtime` datetime NOT NULL COMMENT '添加时间'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
