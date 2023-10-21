@@ -69,8 +69,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         header("Location: index.php");
     } elseif ($_REQUEST["type"] == "change-header") {
         //改变头像
-        mysqli_query($con, "UPDATE `users` SET header = '" . mysqli_escape_string($con, file_get_contents($_FILES['header']['tmp_name'])) . "' WHERE id = " . $_SESSION["loginid"]);
-        $_SESSION["message"] = "头像更改成功";
+        if (!$_FILES['header']['type'] == "image/png" || $_FILES['header']['type'] == "image/jpg" || $_FILES['header']['type'] == "image/jpeg") {
+            $_SESSION["message"] = "头像更改失败：文件类型不符";
+        } else if ($_FILES['header']['size'] > 131072) {
+            $_SESSION["message"] = "头像更改失败：文件大小超出1MB";
+        } else {
+            mysqli_query($con, "UPDATE `users` SET header = '" . mysqli_escape_string($con, file_get_contents($_FILES['header']['tmp_name'])) . "' WHERE id = " . $_SESSION["loginid"]);
+            $_SESSION["message"] = "头像更改成功";
+        }
         header("Location: manage.php");
     } elseif ($_REQUEST["type"] == "change-realname") {
         //改变真名

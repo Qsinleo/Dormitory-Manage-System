@@ -15,10 +15,24 @@ function dragOver(e) {
 
 function drop(e) {
     // 当文件拖拽到dropBox区域时,可以在该事件取到files
-    const files = e.dataTransfer.files;
-    let sizeOfFile = 1024 * 1024 * 5;
+    verify(e.dataTransfer.files);
+}
+
+document.addEventListener('drop', function (e) {
+    e.preventDefault()
+}, false);
+document.addEventListener('dragover', function (e) {
+    e.preventDefault()
+}, false);
+
+document.getElementById("image").onchange = () => {
+    verify(document.getElementById("image").files);
+}
+
+function verify(files) {
+    let sizeOfFile = 1024 * 1024;
     if (files[0].size > sizeOfFile) {
-        alert("文件大小不能超出5MB!");
+        alert("文件大小不能超出1MB!");
         document.getElementById("dialogue").reset();
     } else if (files[0].type != "image/png" && files[0].type != "image/jpg" && files[0].type != "image/jpeg") {
         alert("文件类型必须是.png、.jpg和.jpeg！");
@@ -27,10 +41,3 @@ function drop(e) {
         document.getElementById("image").files = files;
     }
 }
-
-document.addEventListener('drop', function (e) {
-    e.preventDefault()
-}, false)
-document.addEventListener('dragover', function (e) {
-    e.preventDefault()
-}, false)

@@ -33,8 +33,8 @@ if (is_null($_SESSION["loginid"])) {
             <form action="proceed.php" method="post" enctype="multipart/form-data" id="upload-header">
                 <header>上传头像</header>
                 <input type="hidden" name="type" value="change-header">
-                <div>仅支持.png、.jpg和.jpeg的不超过1MB的图片文件！建议您上传正方形尺寸照片。</div>
-                <input type="file" id="image" accept="image/png,image/jpg,image/jpeg" name="header" />
+                <div>仅支持.png、.jpg和. jpeg的不超过1MB的图片文件！建议您上传正方形尺寸照片。</div>
+                <input type="file" id="image" accept="image/png,image/jpg" name="header" />
                 <div id="drop">拖到此处以上传</div>
                 <input type="reset" />
                 <input type="submit" value="Go(/≧▽≦)/">
@@ -236,21 +236,6 @@ if (is_null($_SESSION["loginid"])) {
 <script src="js/isExistedEmail.js"></script>
 <script src="js/manageChange.js"></script>
 <script>
-    document.getElementById("image").onchange = () => {
-        let sizeOfFile = 1024 * 1024 * 1;
-        const item = document.getElementById("image");
-        if (item.files[0] && item.files) {
-            if (item.files[0].size > sizeOfFile) {
-                alert("文件大小不能超出1MB!");
-                document.getElementById("upload-header").reset();
-            } else if (item.files[0].type != "image/png" && item.files[0].type != "image/jpg" && item.files[0].type != "image/jpeg") {
-                alert("文件格式错误，当前：" + item.files[0].type);
-                document.getElementById("upload-header").reset();
-            }
-        }
-
-    }
-
     hideDialog();
 </script>
 

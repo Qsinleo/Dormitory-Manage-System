@@ -1,9 +1,7 @@
 <?php
 require_once "header.php";
 require_once "navpage.php";
-if (!($usertype == "admin" || $usertype == "system-admin")) {
-    header("Location: manage.php");
-} elseif (is_null($usertype)) {
+if (is_null($usertype)) {
     header("Location: index.php");
 }
 
@@ -125,7 +123,7 @@ if ($usertype == "admin") {
                         } else {
                             echo "<span class='no-access'>您没有对此房间管理的权限。</span>";
                         }
-                    } else {
+                    } elseif ($usertype == "system-admin") {
                         echo '<form action="proceed.php" method="post" class="inline">
                                 <input type="hidden" name="type" value="delete-room" />
                                 <input type="hidden" name="id" value="' . $value["id"] . '" />
