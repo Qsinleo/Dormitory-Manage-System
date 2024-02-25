@@ -2,6 +2,17 @@
 
 宿舍管理系统
 
+## Dependence
+
+`Mysql 5.7+` `PHP 8.0+`
+
+## Installation
+
+初次运行打开主页后自动跳转安装页面
+安装完成后重新访问主页即可
+管理员帐号：admin@dms.site
+管理员密码：12345678
+
 ## Todo list
 
 - [x] 录入房间，查看房情
