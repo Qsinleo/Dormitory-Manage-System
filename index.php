@@ -19,7 +19,7 @@ require_once "navpage.php";
     <link rel="stylesheet" href="./css/pages/homepage.css">
     <link rel="stylesheet" href="./css/nav.css">
     <!--- 图标组件库 --->
-    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+    <link rel="stylesheet" href="https://s4.zstatic.net/npm/boxicons@latest/css/boxicons.min.css">
 </head>
 
 <body>
