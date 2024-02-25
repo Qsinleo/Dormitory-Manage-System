@@ -1,8 +1,13 @@
 <?php
+$file = 'config.json';
+
+if (!file_exists($file)) {
+    header('Location: /install'); // 重定向到/install页面
+    exit;
+}
 require_once "header.php";
 require_once "navpage.php";
 ?>
-
 <!DOCTYPE html>
 <html>
 

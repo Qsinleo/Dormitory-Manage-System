@@ -1,6 +1,18 @@
 <?php
 
-$con = mysqli_connect("leoministry.xyz", "dms", password: "dms", database: "dms-data");
+// 读取config.json文件
+$config_file = 'config.json';
+$config_data = file_get_contents($config_file);
+
+// 将JSON数据解码为关联数组
+$config_array = json_decode($config_data, true);
+
+// 检查是否成功解析JSON数据
+if ($config_array === null) {
+    die("Error parsing config.json file.");
+}
+
+$con = mysqli_connect($config_array['db_host'], $config_array['db_username'], password: $config_array['db_password'], database: $config_array['db_name']);
 session_start();
 if (!array_key_exists("loginid", $_SESSION)) {
     $_SESSION["loginid"] = null;

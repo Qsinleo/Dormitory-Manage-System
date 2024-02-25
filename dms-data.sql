@@ -97,8 +97,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `mail`, `realname`, `password`, `workid`, `department`, `accessment`, `managepartid`, `actived`, `header`, `registertime`, `logintime`) VALUES
-(1, 'lylsnrc@126.com', '李雨乐', 0x37633232326662323932376438323861663232663539323133346538393332343830363337633064, 1145, 'SYSTEM-ADMIN', 'system-admin', NULL, 1, NULL, '2023-09-19 20:40:19', '2023-09-19 20:40:19'),
-(3, 'temp@unknown.com', '需好困', 0x37633232326662323932376438323861663232663539323133346538393332343830363337633064, NULL, 'ADMIN', 'admin', NULL, 1, NULL, '2023-09-19 21:16:23', '2023-09-19 21:16:23');
+(1, 'admin@dms.site', 'Admin', 0x37633232326662323932376438323861663232663539323133346538393332343830363337633064, 1145, 'SYSTEM-ADMIN', 'system-admin', NULL, 1, NULL, '2023-09-19 20:40:19', '2023-09-19 20:40:19'),
 
 --
 -- 转储表的索引
