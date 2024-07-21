@@ -1,11 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,500;1,400&display=swap");
-
-body {
-    background-color: rgb(139, 195, 255);
-    scroll-behavior: smooth;
-}
-
-#main {
+main {
     margin-top: 8.5%;
 }
 
@@ -22,9 +15,10 @@ body {
 #rooms {
     text-align: center;
     margin: auto;
+    color: black;
     margin-top: 100vh;
     padding: 20px 20px 20px 20px;
-    background-color: var(--primary-color-light);
+    background-color: var(--light-bg);
     border-radius: 30px;
     -webkit-border-radius: 30px;
     -moz-border-radius: 30px;
@@ -46,6 +40,7 @@ body {
     display: inline-block;
     text-align: center;
     width: 150px;
+    color: black;
     background-color: rgb(186, 255, 181);
     height: 150px;
     border-radius: 5px;
@@ -63,8 +58,6 @@ body {
     text-align: center;
     width: 150px;
     background-color: rgb(186, 255, 181);
-    /* background-color: rgb(255, 222, 181);
-    background-color: rgb(255, 181, 181); */
     height: 150px;
     border-radius: 5px;
     -webkit-border-radius: 5px;
@@ -76,38 +69,12 @@ body {
 }
 
 .buttons {
-    display: grid;
-    place-items: center;
     width: 300px;
     height: 50px;
-    background-color: var(--sidebar-color);
-    color: var(--text-color);
-    font-family: "Roboto", sans-serif, Arial, Helvetica;
-    text-align: center;
+    display: grid;
+    place-items: center;
     margin-left: auto;
     margin-right: auto;
     margin-top: 10px;
     margin-bottom: 10px;
-    border-radius: 10px;
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-    -ms-border-radius: 10px;
-    -o-border-radius: 10px;
-    transition: .25s;
-    -webkit-transition: .25s;
-    -moz-transition: .25s;
-    -ms-transition: .25s;
-    -o-transition: .25s;
-}
-
-.buttons:hover {
-    background-color: #408d86;
-}
-
-.buttons:active {
-    transform: scale(0.95);
-    -webkit-transform: scale(0.95);
-    -moz-transform: scale(0.95);
-    -ms-transform: scale(0.95);
-    -o-transform: scale(0.95);
 }

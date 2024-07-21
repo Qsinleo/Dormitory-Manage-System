@@ -1,12 +1,5 @@
 <?php
-$file = 'config.json';
-
-if (!file_exists($file)) {
-    header('Location: /install'); // 重定向到/install页面
-    exit;
-}
-require_once "header.php";
-require_once "navpage.php";
+require_once "embed/sidenav.php";
 ?>
 <!DOCTYPE html>
 <html>
@@ -14,23 +7,21 @@ require_once "navpage.php";
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DMS - 宿舍管理系统</title>
+    <title>Ethroom [<?php echo service_title; ?>]</title>
     <!--- Link CSS --->
-    <link rel="stylesheet" href="./css/pages/homepage.css">
-    <link rel="stylesheet" href="./css/nav.css">
-    <!--- 图标组件库 --->
-    <link rel="stylesheet" href="https://s4.zstatic.net/npm/boxicons@latest/css/boxicons.min.css">
+    <link rel="stylesheet" href="css/pages/homepage.css">
 </head>
 
 <body>
-    <script src="/js/loading.js"></script>
     <!-- Main -->
-    <div id="main">
+    <main>
         <div id="title">
             <!-- Title -->
             <div style="width: 40%; height: 65vh; left: 30vw; top: 15vh; position: absolute; background: linear-gradient(271deg, #541FA9 0%, rgba(83.58, 31.36, 168.79, 0) 100%);; border-radius: 110px"></div>
             <div id="title-text" style="left: 16vh; top: 27vh; position: absolute; color: white; font-size: 5em; font-family: Inter; font-weight: 400; word-wrap: break-word">EthRoom</div>
-            <div id="title-text2" style="height: 11vh; left: 17vw; top: 51vh; position: absolute; color: rgba(255, 255, 255, 0.40); font-size: 50px; font-family: Inter; font-weight: 400; letter-spacing: 25px; word-wrap: break-word">A New DMS.</div>
+            <div id="title-text2" style="height: 11vh; left: 17vw; top: 51vh; position: absolute; color: rgba(255, 255, 255, 0.40); font-size: 50px; font-family: Inter; font-weight: 400; letter-spacing: 20px; word-wrap: break-word">
+                <?php echo service_title; ?>
+            </div>
         </div>
         <section id="rooms">
             <span id="rooms-title">房间</span>
@@ -39,7 +30,7 @@ require_once "navpage.php";
                     剩余房间:
                     <div id="remainNum">
                         <?php
-                        echo mysqli_num_rows(mysqli_query($con, "SELECT * FROM `rooms` WHERE `status` = 'normal'"));
+                        echo $con->query("SELECT * FROM `rooms` WHERE `status` = 'normal'")->num_rows;
                         ?>
                     </div>
                 </div>
@@ -49,7 +40,7 @@ require_once "navpage.php";
                     房间总数:
                     <div id="totalNum">
                         <?php
-                        echo mysqli_num_rows(mysqli_query($con, "SELECT * FROM `rooms`"));
+                        echo $con->query("SELECT * FROM `rooms`")->num_rows;
                         ?>
                     </div>
                 </div>
@@ -60,16 +51,16 @@ require_once "navpage.php";
             */
             if (!is_null($usertype) && $usertype != "failed") {
             ?>
-                <button id="book" class="buttons" onclick='document.location="/roomlist.php"'>
+                <button class="buttons" data-href="room-list.php">
                     预定房间/退还房间
                 </button>
-                <button id="manage" class="buttons" onclick='document.location="/manage.php"'>
+                <button class="buttons" data-href="manage.php">
                     管理我的账号
                 </button>
                 <?php
-                if ($usertype != "inactived") {
+                if ($usertype == "admin" || $userinfo == "system-admin") {
                 ?>
-                    <button id="accept" class="buttons" onclick='document.location="/accept.php"'>
+                    <button class="buttons" data-href="accept.php">
                         批准
                     </button>
                 <?php
@@ -80,17 +71,14 @@ require_once "navpage.php";
             <?php
             } else {
             ?>
-                <button id="login" onclick='document.location="/login.php"' class="buttons">
-                    登录
-                </button>
-                <button id="register" onclick='document.location="/register.php"' class="buttons">
-                    注册
+                <button class="buttons" data-href="access.php">
+                    登录 / 注册
                 </button>
             <?php
             }
             ?>
         </section>
-    </div>
+    </main>
     <!--- Scripts Below --->
     <script>
         var remain = document.getElementById("remainNum");
@@ -103,15 +91,15 @@ require_once "navpage.php";
         } else {
             document.getElementById("remain").style.background = "rgb(255, 181, 181)"
         }
-        var manage = document.getElementById("manage");
-        manage.onclick = function() {
-            document.location = "manage.php"
+        for (const iterator of document.getElementsByClassName("buttons")) {
+            iterator.addEventListener("click", () => {
+                location.href = iterator.dataset.href;
+            })
         }
     </script>
 </body>
 <!--- NSBA SCRIPT --->
-<script src="./js/browserChecker.js"></script>
-<script src="./js/nav.js"></script>
+<script src="js/browserChecker.js"></script>
 <script>
     var fontMatcher = () => {
         var screenDiv = window.innerWidth / 1920;

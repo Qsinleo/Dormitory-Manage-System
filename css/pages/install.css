@@ -1,0 +1,179 @@
+/* 基本样式设置 */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f4f4;
+}
+
+.form-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    flex-wrap: wrap;
+}
+
+.form-container>div {
+    flex-basis: calc(50% - 10px);
+}
+
+/* 标签和输入框的样式 */
+label {
+    display: block;
+    font-weight: bold;
+}
+
+.form-container label+input {
+    margin-top: 5px;
+}
+
+input {
+    display: block;
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    /* 确保padding和border不会增加元素的总宽度 */
+}
+
+/* 提交按钮的样式 */
+input[type="submit"] {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+
+/* 提交按钮的点击效果 */
+input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+button {
+    align-items: center;
+    background-color: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: .25rem;
+    box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+    box-sizing: border-box;
+    color: rgba(0, 0, 0, 0.85);
+    cursor: pointer;
+    display: inline-flex;
+    font-family: system-ui, -apple-system, system-ui, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    justify-content: center;
+    line-height: 1.25;
+    min-height: 3rem;
+    padding: calc(.875rem - 1px) calc(1.5rem - 1px);
+    text-decoration: none;
+    transition: all 250ms;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: baseline;
+    width: auto;
+}
+
+button:hover,
+button:focus {
+    border-color: rgba(0, 0, 0, 0.15);
+    box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+    color: rgba(0, 0, 0, 0.65);
+}
+
+button:hover {
+    transform: translateY(-1px);
+}
+
+button:active {
+    background-color: #F0F0F1;
+    border-color: rgba(0, 0, 0, 0.15);
+    box-shadow: rgba(0, 0, 0, 0.06) 0 2px 4px;
+    color: rgba(0, 0, 0, 0.65);
+    transform: translateY(0);
+}
+
+code {
+    background-color: rgb(216, 216, 216);
+    padding: 2px;
+    margin: 2px;
+    border-radius: 3px;
+}
+
+.container {
+    display: flex;
+    gap: 10px;
+}
+
+.container>div {
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 0 auto;
+    flex: 1;
+}
+
+.run-logs {
+    height: 300px;
+    overflow-y: scroll;
+    padding: 5px;
+    background-color: azure;
+    margin-bottom: 20px;
+}
+
+.run-logs>div {
+    padding: 5px;
+    margin: 3px;
+    border-radius: 5px;
+    line-height: 18px;
+    font-family: monospace;
+}
+
+.success {
+    background-color: lightgreen;
+}
+
+.error {
+    background-color: rgb(238, 182, 144);
+}
+
+.not-started {
+    background-color: lightblue;
+}
+
+.success::before {
+    content: "✔";
+    color: green;
+    margin-right: 8px;
+}
+
+.error::before {
+    content: "❌";
+    margin-right: 8px;
+}
+
+.setup-result {
+    margin: 10px;
+    font-size: large;
+    width: fit-content;
+    font-weight: bold;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.link-button {
+    margin-top: 10px;
+    width: 100%;
+}

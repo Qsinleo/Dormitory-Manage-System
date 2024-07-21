@@ -1,0 +1,80 @@
+/* Main Container */
+main {
+    overflow: auto;
+    width: fit-content;
+    min-width: 650px;
+    max-width: calc(100% - 300px);
+    /* 可选：设置一个最大宽度 */
+    background-color: var(--background-color);
+    position: absolute;
+    margin: auto;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    height: fit-content;
+    max-height: calc(100% - 100px);
+    overflow: auto;
+    /* 可选：设置一个最大高度 */
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 6px 6px 8px rgba(80, 80, 80, 0.4);
+}
+
+main header {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+main h1 {
+    margin-bottom: 30px;
+    border-bottom: 2px solid var(--separate-color);
+}
+
+main h2 {
+    margin-bottom: 15px;
+    margin-top: 10px;
+}
+
+
+main a {
+    display: inline-block;
+    transition-duration: .1s;
+    padding: 4px;
+    margin: 3px;
+    color: var(--text-color);
+    text-decoration: none;
+    background-color: var(--input-bg);
+    border-radius: 3px;
+}
+
+main a:hover {
+    background-color: var(--input-hover-color);
+}
+
+main a:active {
+    background-color: var(--input-active-color);
+}
+
+details {
+    padding: 5px;
+    margin: 5px;
+    border-radius: 3px;
+    background-color: var(--light-bg);
+}
+
+details summary {
+    user-select: none;
+    padding-left: 10px;
+    transition-duration: .2s;
+    border-radius: 5px;
+}
+
+details summary:hover {
+    background-color: var(--input-hover-color);
+}
+
+details summary:active {
+    background-color: var(--input-active-color);
+}

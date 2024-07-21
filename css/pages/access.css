@@ -1,9 +1,12 @@
-@import url('https://fonts.googleapis.com/css?family=Poppins');
-
 /* BASIC */
-
 html {
-    background-color: #56baed;
+    background-color: var(--body-color);
+}
+
+main {
+    position: absolute;
+    right: 0;
+    width: 95.5vw;
 }
 
 body {
@@ -48,11 +51,12 @@ h2 {
 }
 
 #formContent {
-    -webkit-border-radius: 10px 10px 10px 10px;
-    border-radius: 10px 10px 10px 10px;
-    background: #fff;
+    color: var(--text-color);
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background-color: var(--background-color);
     padding: 30px;
-    width: 90%;
+    width: fit-content;
     max-width: 450px;
     position: relative;
     padding: 0px;
@@ -62,34 +66,33 @@ h2 {
 }
 
 #formFooter {
-    background-color: #f6f6f6;
-    border-top: 1px solid #dce8f1;
+    border-top: 2px solid var(--separate-color);
     padding: 25px;
     text-align: center;
     -webkit-border-radius: 0 0 10px 10px;
     border-radius: 0 0 10px 10px;
 }
 
-
-
 /* TABS */
 
-h2.inactive {
-    color: #cccccc;
+.tabs {
+    cursor: pointer;
 }
 
-h2.active {
-    color: #0d0d0d;
-    border-bottom: 2px solid #5fbae9;
+.tabs.inactive {
+    color: var(--light-text-color);
 }
 
-
+.tabs.active {
+    color: var(--text-color);
+    border-top: 2px solid var(--separate-color);
+}
 
 /* FORM TYPOGRAPHY*/
 
-input[type=button],
-input[type=submit],
-input[type=reset] {
+#main-form-container input[type=button],
+#main-form-container input[type=submit],
+#main-form-container input[type=reset] {
     background-color: #56baed;
     border: none;
     color: white;
@@ -111,15 +114,15 @@ input[type=reset] {
     transition: all 0.3s ease-in-out;
 }
 
-input[type=button]:hover,
-input[type=submit]:hover,
-input[type=reset]:hover {
+#main-form-container input[type=button]:hover,
+#main-form-container input[type=submit]:hover,
+#main-form-container input[type=reset]:hover {
     background-color: #39ace7;
 }
 
-input[type=button]:active,
-input[type=submit]:active,
-input[type=reset]:active {
+#main-form-container input[type=button]:active,
+#main-form-container input[type=submit]:active,
+#main-form-container input[type=reset]:active {
     -moz-transform: scale(0.95);
     -webkit-transform: scale(0.95);
     -o-transform: scale(0.95);
@@ -127,10 +130,11 @@ input[type=reset]:active {
     transform: scale(0.95);
 }
 
-input[type=text] , input[type=password]{
-    background-color: #f6f6f6;
-    border: none;
-    color: #0d0d0d;
+#main-form-container input[type=text],
+#main-form-container input[type=password],
+#main-form-container input[type=email],
+#main-form-container input[type=number],
+#main-form-container select {
     padding: 15px 32px;
     text-align: center;
     text-decoration: none;
@@ -138,26 +142,31 @@ input[type=text] , input[type=password]{
     font-size: 16px;
     margin: 5px;
     width: 85%;
-    border: 2px solid #f6f6f6;
+    /* border: 1px solid var(--body-color); */
     -webkit-transition: all 0.5s ease-in-out;
     -moz-transition: all 0.5s ease-in-out;
     -ms-transition: all 0.5s ease-in-out;
     -o-transition: all 0.5s ease-in-out;
     transition: all 0.5s ease-in-out;
-    -webkit-border-radius: 5px 5px 5px 5px;
-    border-radius: 5px 5px 5px 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
 }
 
-input[type=text]:focus , input[type=password]:focus{
-    background-color: #fff;
-    border-bottom: 2px solid #5fbae9;
+#main-form-container input[type=text]:focus,
+#main-form-container input[type=password]:focus,
+#main-form-container input[type=email]:focus,
+#main-form-container select:focus,
+#main-form-container input[type=number]:focus {
+    border-bottom: 2px solid var(--second-body-color);
 }
 
-input[type=text]:placeholder , input[type=password]::placeholder {
-    color: #cccccc;
+#main-form-container input[type=text]::placeholder,
+#main-form-container input[type=password]::placeholder,
+#main-form-container input[type=email]::placeholder,
+#main-form-container select::placeholder,
+#main-form-container input[type=number]::placeholder {
+    color: var(--light-text-color);
 }
-
-
 
 /* ANIMATIONS */
 
@@ -269,34 +278,7 @@ input[type=text]:placeholder , input[type=password]::placeholder {
     animation-delay: 1s;
 }
 
-/* Simple CSS3 Fade-in Animation */
-.underlineHover:after {
-    display: block;
-    left: 0;
-    bottom: -10px;
-    width: 0;
-    height: 2px;
-    background-color: #56baed;
-    content: "";
-    transition: width 0.2s;
-}
 
-.underlineHover:hover {
-    color: #0d0d0d;
-}
-
-.underlineHover:hover:after {
-    width: 100%;
-}
-
-
-
-/* OTHERS */
-
-*:focus {
-    outline: none;
-}
-
-* {
-    box-sizing: border-box;
+#main-form-container>div:nth-child(2) {
+    display: none;
 }

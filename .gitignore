@@ -1,2 +1,3 @@
 mail/*
-config.json
+env_config.php
+.htaccess

@@ -1,0 +1,80 @@
+#popup-bg {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    z-index: 499;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: none;
+}
+
+#popup-border {
+    position: fixed;
+    height: fit-content;
+    width: fit-content;
+    max-width: 80%;
+    max-height: 70%;
+    overflow: auto;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    box-shadow: 0 2px 2px var(--separate-color);
+    border-radius: 15px;
+    background-color: var(--background-color);
+    padding: 20px;
+    text-align: center;
+    overflow: hidden;
+}
+
+#popup-controller {
+    margin-bottom: 15px;
+    gap: 5px;
+    display: flex;
+    justify-content: stretch center;
+}
+
+#popup-controller>div {
+    user-select: none;
+    font-size: x-large;
+    height: fit-content;
+    padding-left: 15px;
+    line-height: 28px;
+    padding-right: 15px;
+    border-radius: 3px;
+    margin: auto;
+    color: red;
+    transition-duration: .1s;
+    background-color: var(--light-bg);
+}
+
+#popup-controller>header {
+    font-size: x-large;
+    font-weight: bold;
+    text-align: left;
+    flex-grow: 1;
+}
+
+#popup-content header {
+    font-size: large;
+    font-weight: bold;
+    margin: 8px;
+}
+
+#popup-controller>div:hover {
+    background-color: red;
+    color: white;
+}
+
+#popup-controller>div:active {
+    background-color: darkred;
+}
+
+.form-controller {
+    text-align: center;
+    margin: 10px;
+}

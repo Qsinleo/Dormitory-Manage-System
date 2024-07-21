@@ -1,0 +1,74 @@
+#drop-image-box {
+    margin: auto;
+    height: 50px;
+    width: 50%;
+    line-height: 50px;
+    border-radius: 5px;
+    background-color: var(--light-bg);
+    color: var(--light-text-color);
+    user-select: none;
+    font-style: italic;
+}
+
+.flex {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin: 5px;
+}
+
+.flex>* {
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    padding: 10px;
+
+    background-color: var(--light-bg);
+    flex-grow: 1;
+}
+
+.flex>div>* {
+    vertical-align: bottom;
+}
+
+.flex>div>span:first-child {
+    color: var(--light-text-color);
+}
+
+
+.flex>div>span:nth-child(2) {
+    font-size: large;
+    font-weight: bold;
+}
+
+.header-image-label {
+    background-color: var(--background-color);
+    border-radius: 5px;
+    padding: 5px;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.header-image-label img {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    object-fit: cover;
+    vertical-align: middle;
+    /* 如果使用 img 标签，确保图片保持比例并覆盖整个容器 */
+    background-color: var(--background-color);
+}
+
+
+#uploaded-image-status-label {
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content;
+    padding: 5px;
+    border-radius: 3px;
+    font-size: small;
+    background-color: var(--light-bg);
+}

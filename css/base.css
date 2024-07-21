@@ -1,0 +1,208 @@
+/* 一些需要重复使用的样式 */
+:root {
+    /* 颜色 */
+    --body-color: rgb(139, 195, 255);
+    --background-color: #fff;
+    --sidebar-label-hover-color: rgb(93, 27, 155);
+    --input-hover-color: rgb(185, 185, 185);
+    --input-active-color: #a1a1a1;
+    --light-bg: #f7f7f7;
+    --input-bg: #e2e2e2;
+    --light-text-color: #777;
+    --text-color: #444;
+    --second-body-color: rgb(176, 233, 255);
+    --separate-color: rgb(0, 195, 255);
+
+    /* 过渡效果 */
+    --tran-02: all 0.2s ease;
+    --tran-03: all 0.3s ease;
+}
+
+/* 当body标签拥有dark类名的时候的样式 */
+
+body {
+    min-height: 100vh;
+    background-color: var(--body-color);
+    color: var(--text-color);
+    transition: var(--tran-03);
+    scroll-behavior: smooth;
+}
+
+body.dark {
+    --body-color: #275158;
+    --background-color: #1b1c1d;
+    --sidebar-label-hover-color: rgb(54, 54, 54);
+    --input-hover-color: #41494e;
+    --light-bg: #343536;
+    --input-bg: #2e3131;
+    --input-active-color: #2b586d;
+    --light-text-color: #999;
+    --text-color: #ccc;
+    --separate-color: #428cc9;
+    --second-body-color: rgb(96, 142, 160);
+}
+
+::selection {
+    background-color: rgb(76, 199, 189);
+    color: rgb(63, 56, 58);
+}
+
+/* Inline Elements */
+.inline {
+    display: inline-block;
+    /* 使用 inline-block 替代 inline，以便可以设置宽度和高度 */
+    vertical-align: top;
+    /* 可选：确保内联元素垂直对齐 */
+}
+
+.underline-hover:after {
+    display: block;
+    left: 0;
+    bottom: -10px;
+    width: 0;
+    height: 2px;
+    background-color: var(--separate-color);
+    content: "";
+    transition: width 0.2s;
+}
+
+.underline-hover:hover:after {
+    width: 100%;
+}
+
+.light-bg {
+    background-color: var(--light-bg);
+    padding: 5px;
+    margin: 5px;
+    border-radius: 5px;
+}
+
+.smaller {
+    font-size: smaller;
+}
+
+.lighter {
+    color: var(--light-text-color);
+}
+
+
+
+/* Input Fields */
+button,
+input,
+textarea,
+select {
+    vertical-align: middle;
+    color: var(--text-color);
+    background-color: var(--input-bg);
+    border: none;
+    border-bottom: 2px solid var(--body-color);
+    outline: none;
+    border-radius: 5px;
+    padding: 6px;
+    font-size: 14px;
+    /* 增加边距 */
+    margin: 2px 4px;
+    transition: all .1s;
+    line-height: 20px;
+}
+
+input[type=number] {
+    width: 100px;
+}
+
+/* input[type=submit],
+input[type=reset] {
+    font-size: 14px;
+    padding: 5px;
+    margin: 3px;
+    border: none;
+    border-bottom: 1px var(--input-border-color) solid;
+    box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.4);
+    background: var(--light-bg);
+    color: var(--text-color);
+    border-radius: 4px;
+} */
+
+button:not(:disabled):hover,
+input:not(:disabled):hover,
+textarea:not(:disabled):hover,
+select:not(:disabled):hover {
+    background: var(--input-hover-color);
+}
+
+
+button:not(:disabled):active,
+input:not(:disabled):active,
+textarea:not(:disabled):active {
+    background: var(--input-active-color);
+}
+
+input:not([type=submit]):not([type=reset]):not(:disabled):focus,
+textarea:not(:disabled):focus,
+select:not(:disabled):focus {
+    border-color: var(--second-body-color);
+}
+
+button:disabled,
+input:disabled,
+select:disabled,
+textarea:disabled {
+    color: lightgrey;
+    background-color: gray;
+}
+
+.dangerous,
+input[type=reset] {
+    border-color: orangered;
+}
+
+::file-selector-button {
+    color: var(--text-color);
+    border-radius: .25rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+code {
+    display: inline-block;
+    background-color: var(--light-bg);
+    border-bottom: solid var(--second-body-color) 2px;
+    padding: 5px;
+    margin: 2px;
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    width: 10px;
+    background: rgba(128, 128, 128, 0.2);
+    -webkit-border-radius: 2em;
+    -moz-border-radius: 2em;
+    border-radius: 2em;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgba(144, 147, 153, .5);
+    background-clip: padding-box;
+    min-height: 28px;
+    -webkit-border-radius: 2em;
+    -moz-border-radius: 2em;
+    border-radius: 2em;
+    transition: background-color .3s;
+    cursor: pointer;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(144, 147, 153, .3);
+}
+
+::-webkit-scrollbar-thumb:active {
+    background-color: rgba(108, 110, 114, 0.3);
+}

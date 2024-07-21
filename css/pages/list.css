@@ -1,0 +1,135 @@
+.data-list {
+    min-height: 100px;
+    max-height: 300px;
+    overflow: auto;
+    padding: 5px;
+    border-top: 2px solid var(--second-body-color);
+    border-bottom: 2px solid var(--second-body-color);
+}
+
+.data-list table {
+    width: 100%;
+}
+
+.data-list td {
+    margin: 2px;
+    background-color: var(--light-bg);
+    border-radius: 3px;
+    padding: 5px;
+    overflow: auto;
+    border-bottom: gray solid 1px;
+    text-align: center;
+}
+
+.restrict-table {
+    margin: 5px;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.restrict-table>div {
+    justify-content: space-between;
+    display: flex;
+    gap: 5px;
+}
+
+.no-matched-data-label {
+    display: none;
+    user-select: none;
+    line-height: 100px;
+    font-size: x-large;
+    text-align: center;
+}
+
+.flex {
+    display: flex;
+    gap: 5px;
+    margin: 5px;
+}
+
+.flex>* {
+    flex-grow: 1;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.number-label {
+    font-size: large;
+    font-weight: bold;
+}
+
+
+.separator::before {
+    vertical-align: middle;
+    content: "|";
+    color: var(--light-text-color);
+    line-height: 40px;
+}
+
+#user-changed-label {
+    font-weight: bold;
+}
+
+#chosen-room-number-label {
+    text-align: center;
+    font-weight: bold;
+    font-size: x-large;
+}
+
+#chosen-room-number-label::before {
+    font-size: small;
+    color: var(--light-text-color);
+    content: "ROOM ";
+}
+
+.reason {
+    margin: auto;
+    display: block;
+    height: 150px;
+    width: calc(100% - 30px);
+    resize: none;
+    overflow: auto;
+}
+
+.operation-info {
+    text-align: center;
+    margin: 8px;
+}
+
+.checking-request-info {
+    font-size: large;
+    font-weight: bold;
+}
+
+#included-rooms-searchbox,
+#exists-area-list {
+    width: 300px;
+    margin: 10px auto;
+    height: fit-content;
+    max-height: 200px;
+    overflow: auto;
+}
+
+.room-list {
+    padding: 10px;
+    height: fit-content;
+    overflow: auto;
+    width: 300px;
+    word-break: keep-all;
+}
+
+.room-list>* {
+    user-select: none;
+    margin: 3px;
+    border-radius: 3px;
+    padding: 3px;
+    background-color: var(--body-color);
+}
+
+
+#room-living-people-list {
+    width: fit-content;
+    min-width: 350px;
+    height: 200px;
+    overflow: auto;
+}
