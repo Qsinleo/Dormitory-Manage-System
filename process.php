@@ -420,7 +420,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             } else {
                 $_SESSION["message"] = "错误：用户不存在！";
             }
-            $con->query("DELETE FROM `requests` WHERE `id` = " . $_REQUEST["req-id"] . " AND `type` = 'check-in'");
+            $con->query("DELETE FROM `requests` WHERE `id` = " . $_REQUEST["req-id"]);
             header("Location: accept.php");
             break;
         case "register-allow":
@@ -439,14 +439,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             } else {
                 $_SESSION["message"] = "错误：用户不存在！";
             }
-            $con->query("DELETE FROM `requests` WHERE `type` = 'register-allow' AND `id` = " . $_REQUEST["req-id"]);
+            $con->query("DELETE FROM `requests` WHERE `id` = " . $_REQUEST["req-id"]);
             header("Location: accept.php");
             break;
         case "change-manage-allow":
             check_access(4);
-            var_dump($_REQUEST["id"]);
             if (check_user_exists($_REQUEST["id"])) {
                 if ($_REQUEST["action"] == "accept") {
+                    $res = json_decode($con->query("SELECT * FROM `requests` WHERE `id` = " . $_REQUEST["req-id"])->fetch_assoc()["params"], true);
+                    $con->query("UPDATE `users` SET `managepart` = " . (is_null($res["area-name"]) ? "NULL" : "'" . $con->real_escape_string($res["area-name"]) . "'") . " WHERE `id` = " . $_REQUEST["id"]);
                     $format_string = "<h1>您的权限更改申请已经被批准</h1><p>尊敬的" . $email_to_info["realname"] . "，您的账号权限更改申请（ID：" . $email_to_info["id"] . "）已经被管理员" . $userinfo['realname'] . "（ID：" . $userinfo['id'] . "）<b>批准</b>。</p>";
                     send_mail($format_string, $userinfo["email"], "您的权限更改申请已被批准");
                     $_SESSION["message"] = "成功批准" . $email_to_info["realname"] . "的请求";
@@ -458,7 +459,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             } else {
                 $_SESSION["message"] = "错误：用户不存在！";
             }
-            $con->query("DELETE FROM `requests` WHERE `type` = 'change-manage' AND `id` = " . $_REQUEST["req-id"]);
+            $con->query("DELETE FROM `requests` WHERE `id` = " . $_REQUEST["req-id"]);
             header("Location: accept.php");
             break;
         case "upgrade-allow":
@@ -478,7 +479,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             } else {
                 $_SESSION["message"] = "错误：用户不存在！";
             }
-            $con->query("DELETE FROM `requests` WHERE `type` = 'upgrade-to-admin' AND `id` = " . $_REQUEST["req-id"]);
+            $con->query("DELETE FROM `requests` WHERE `id` = " . $_REQUEST["req-id"]);
             header("Location: accept.php");
             break;
         default:
