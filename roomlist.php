@@ -106,6 +106,11 @@
                         <input type="hidden" name="number" class="modifying-room-number-meta" />
                         <input type="submit" value="删除房间" class="dangerous" id="delete-room-button" />
                     </form>
+                    <form action="process.php" method="post" class="inline" onsubmit="return secondConfirm()">
+                        <input type="hidden" name="type" value="remove-all-living-people" />
+                        <input type="hidden" name="number" class="modifying-room-number-meta" />
+                        <input type="submit" value="清空居住人" class="dangerous" />
+                    </form>
                     <div class="flex">
                         <div>
                             <header>更改房间状态</header>
@@ -148,11 +153,6 @@
                             <div id="room-living-people-list" class="light-bg">
 
                             </div>
-                            <form action="process.php" method="post" onsubmit="return secondConfirm()">
-                                <input type="hidden" name="type" value="remove-all-living-people" />
-                                <input type="hidden" name="number" class="modifying-room-number-meta" />
-                                <input type="submit" value="清空居住人" class="dangerous" />
-                            </form>
                         </div>
                     </div>
                 </div>
